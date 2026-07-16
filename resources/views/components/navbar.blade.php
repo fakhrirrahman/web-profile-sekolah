@@ -1,17 +1,17 @@
 @php
     $navLinks = [
-        ['label' => 'Beranda', 'href' => '#beranda'],
-        ['label' => 'Profil', 'href' => '#profil'],
-        ['label' => 'Berita', 'href' => '#berita'],
-        ['label' => 'PPDB', 'href' => '#ppdb'],
-        ['label' => 'Galeri', 'href' => '#galeri'],
-        ['label' => 'Kontak', 'href' => '#kontak'],
+        ['label' => 'Beranda', 'href' => url('/'), 'active' => request()->is('/')],
+        ['label' => 'Profil', 'href' => url('/profile'), 'active' => request()->is('profile')],
+        ['label' => 'Berita', 'href' => url('/#berita'), 'active' => false],
+        ['label' => 'PPDB', 'href' => url('/#ppdb'), 'active' => false],
+        ['label' => 'Galeri', 'href' => url('/#galeri'), 'active' => false],
+        ['label' => 'Kontak', 'href' => url('/#kontak'), 'active' => false],
     ];
 @endphp
 
 <header data-site-header class="sticky top-0 z-50 border-b-2 border-primary/12 bg-surface/95 text-primary shadow-sm backdrop-blur transition duration-300 data-[scrolled]:bg-surface data-[scrolled]:shadow-[0_4px_0_rgba(31,92,69,.12)]">
     <div class="section-shell flex h-18 items-center justify-between gap-4 py-3">
-        <a href="#beranda" class="flex min-w-0 items-center gap-3 focus-ring rounded-lg">
+        <a href="{{ url('/') }}" class="flex min-w-0 items-center gap-3 focus-ring rounded-lg">
             <span class="neo-surface grid size-12 shrink-0 place-items-center rounded-lg bg-white text-sm font-black text-primary">
                 GS
             </span>
@@ -27,14 +27,14 @@
 
         <nav class="hidden items-center gap-8 lg:flex" aria-label="Navigasi utama">
             @foreach ($navLinks as $link)
-                <a href="{{ $link['href'] }}" class="rounded-md text-xs font-black uppercase tracking-[0.14em] text-primary/75 transition hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface">
+                <a href="{{ $link['href'] }}" class="rounded-md text-xs font-black uppercase tracking-[0.14em] transition hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface {{ $link['active'] ? 'text-primary' : 'text-primary/75' }}">
                     {{ $link['label'] }}
                 </a>
             @endforeach
         </nav>
 
         <div class="hidden items-center gap-3 lg:flex">
-            <x-ui.button href="#ppdb" variant="accent" size="sm">Daftar PPDB</x-ui.button>
+            <x-ui.button href="{{ url('/#ppdb') }}" variant="accent" size="sm">Daftar PPDB</x-ui.button>
             <x-ui.button href="#login" variant="muted" size="sm">Login</x-ui.button>
         </div>
 
@@ -55,7 +55,7 @@
                         </a>
                     @endforeach
                     <div class="grid gap-2 border-t border-slate-100 p-3">
-                        <x-ui.button href="#ppdb" variant="accent" class="w-full" size="sm">Daftar PPDB</x-ui.button>
+                        <x-ui.button href="{{ url('/#ppdb') }}" variant="accent" class="w-full" size="sm">Daftar PPDB</x-ui.button>
                         <x-ui.button href="#login" class="w-full" size="sm">Login</x-ui.button>
                     </div>
                 </nav>
