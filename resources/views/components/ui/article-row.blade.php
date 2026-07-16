@@ -2,17 +2,22 @@
     'title',
     'date' => '11 Juni 2026',
     'imageLabel' => null,
+    'category' => 'Sekolah',
+    'excerpt' => "Golden Sierra School terus mendukung siswa untuk berani tampil, bekerja sama, dan membangun prestasi melalui kegiatan akademik maupun non-akademik.",
 ])
 
-<article {{ $attributes->merge(['class' => 'grid gap-6 md:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] md:items-center']) }}>
-    <x-ui.media-placeholder :label="$imageLabel" class="min-h-48" />
+<article {{ $attributes->merge(['class' => 'grid gap-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-secondary/40 hover:shadow-md md:grid-cols-[240px_minmax(0,1fr)] md:items-center']) }}>
+    <x-ui.media-placeholder :label="$imageLabel" ratio="aspect-[4/3]" class="rounded-lg" />
 
     <div>
-        <h3 class="text-sm font-black text-school-navy">{{ $title }}</h3>
-        <p class="mt-1 text-[11px] font-bold text-slate-500">Publish : {{ $date }}</p>
-        <p class="mt-6 max-w-xl text-sm leading-7 text-slate-600">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley.
+        <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wide text-slate-500">
+            <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $category }}</span>
+            <span>Publish : {{ $date }}</span>
+        </div>
+        <h3 class="mt-3 text-lg font-black leading-snug text-primary">{{ $title }}</h3>
+        <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
+            {{ $excerpt }}
         </p>
-        <x-ui.button href="#" size="sm" class="mt-4">Baca Selengkapnya</x-ui.button>
+        <x-ui.button href="#" variant="ghost" size="sm" class="mt-4 -ml-4">Baca Selengkapnya</x-ui.button>
     </div>
 </article>

@@ -9,10 +9,10 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-white font-sans text-slate-700 antialiased">
+<body class="bg-surface font-sans text-slate-700 antialiased">
     <x-navbar />
 
-    <main>
+    <main class="overflow-hidden">
         @yield('content')
     </main>
 

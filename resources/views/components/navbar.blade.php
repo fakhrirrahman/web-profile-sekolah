@@ -9,27 +9,33 @@
     ];
 @endphp
 
-<header class="sticky top-0 z-50 border-b border-teal-900/10 bg-school-teal text-white shadow-sm">
-    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#beranda" class="flex min-w-0 items-center gap-3">
-            <span class="grid size-11 shrink-0 place-items-center rounded-full border-2 border-school-navy bg-school-gold/90 text-xs font-black text-school-navy shadow-inner">
-                GSS
+<header class="sticky top-0 z-50 border-b border-white/10 bg-primary/95 text-white shadow-sm backdrop-blur">
+    <div class="section-shell flex h-18 items-center justify-between gap-4 py-3">
+        <a href="#beranda" class="flex min-w-0 items-center gap-3 focus-ring rounded-lg">
+            <span class="grid size-12 shrink-0 place-items-center rounded-lg border border-white/20 bg-white text-sm font-black text-primary shadow-sm">
+                GS
             </span>
-            <span class="truncate font-serif text-lg font-semibold tracking-wide text-school-cream sm:text-xl">
-                Golden Sierra School
+            <span class="min-w-0">
+                <span class="block truncate font-serif text-lg font-bold leading-tight tracking-wide text-white sm:text-xl">
+                    Golden Sierra School
+                </span>
+                <span class="hidden text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:block">
+                    Learn. Lead. Serve.
+                </span>
             </span>
         </a>
 
         <nav class="hidden items-center gap-8 lg:flex" aria-label="Navigasi utama">
             @foreach ($navLinks as $link)
-                <a href="{{ $link['href'] }}" class="text-xs font-semibold uppercase tracking-[0.14em] text-white/90 transition hover:text-school-gold">
+                <a href="{{ $link['href'] }}" class="rounded-md text-xs font-bold uppercase tracking-[0.14em] text-white/80 transition hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary">
                     {{ $link['label'] }}
                 </a>
             @endforeach
         </nav>
 
         <div class="hidden items-center gap-3 lg:flex">
-            <x-ui.button href="#login" variant="cream" size="sm">Login</x-ui.button>
+            <x-ui.button href="#ppdb" variant="accent" size="sm">Daftar PPDB</x-ui.button>
+            <x-ui.button href="#login" variant="muted" size="sm">Login</x-ui.button>
         </div>
 
         <details class="group relative lg:hidden">
@@ -41,15 +47,16 @@
                 </span>
             </summary>
 
-            <div class="absolute right-0 mt-3 w-64 overflow-hidden rounded-lg border border-teal-900/10 bg-white text-slate-800 shadow-xl">
+            <div class="absolute right-0 mt-3 w-72 overflow-hidden rounded-lg border border-slate-200 bg-white text-slate-800 shadow-xl">
                 <nav class="grid py-2" aria-label="Navigasi mobile">
                     @foreach ($navLinks as $link)
-                        <a href="{{ $link['href'] }}" class="px-4 py-3 text-sm font-semibold uppercase tracking-wide transition hover:bg-slate-50 hover:text-school-teal">
+                        <a href="{{ $link['href'] }}" class="px-4 py-3 text-sm font-semibold uppercase tracking-wide transition hover:bg-slate-50 hover:text-secondary">
                             {{ $link['label'] }}
                         </a>
                     @endforeach
-                    <div class="border-t border-slate-100 p-3">
-                        <x-ui.button href="#login" class="w-full justify-center" size="sm">Login</x-ui.button>
+                    <div class="grid gap-2 border-t border-slate-100 p-3">
+                        <x-ui.button href="#ppdb" variant="accent" class="w-full" size="sm">Daftar PPDB</x-ui.button>
+                        <x-ui.button href="#login" class="w-full" size="sm">Login</x-ui.button>
                     </div>
                 </nav>
             </div>

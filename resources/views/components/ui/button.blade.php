@@ -5,19 +5,21 @@
 ])
 
 @php
-    $base = 'inline-flex items-center gap-2 rounded-md font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-school-gold focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+    $base = 'inline-flex items-center justify-center gap-2 rounded-lg font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
 
     $variants = [
-        'primary' => 'bg-school-teal text-white shadow-sm hover:bg-school-teal-dark',
-        'cream' => 'bg-school-cream text-school-navy shadow-sm hover:bg-white',
-        'outline' => 'border border-school-teal bg-white text-school-teal hover:bg-school-teal hover:text-white',
-        'ghost' => 'text-school-teal hover:bg-school-teal/10',
+        'primary' => 'bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary-dark',
+        'secondary' => 'bg-secondary text-secondary-foreground shadow-sm shadow-secondary/20 hover:bg-secondary-dark',
+        'muted' => 'bg-accent-muted text-accent-foreground shadow-sm hover:bg-white',
+        'accent' => 'bg-accent text-accent-foreground shadow-sm hover:bg-accent-muted',
+        'outline' => 'border border-primary/15 bg-white text-primary shadow-sm hover:border-primary hover:bg-primary hover:text-primary-foreground',
+        'ghost' => 'text-secondary hover:bg-secondary/10',
     ];
 
     $sizes = [
-        'sm' => 'h-9 px-5 text-xs uppercase tracking-wide',
+        'sm' => 'h-9 px-4 text-xs uppercase tracking-wide',
         'md' => 'h-10 px-5 text-sm',
-        'lg' => 'h-12 px-7 text-sm',
+        'lg' => 'h-12 px-6 text-sm',
     ];
 
     $classes = $base . ' ' . ($variants[$variant] ?? $variants['primary']) . ' ' . ($sizes[$size] ?? $sizes['md']);

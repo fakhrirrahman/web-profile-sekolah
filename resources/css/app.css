@@ -9,21 +9,86 @@
     --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
     --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 
-    --color-school-teal: #286f7c;
-    --color-school-teal-dark: #1f5a65;
-    --color-school-teal-light: #68aab4;
-    --color-school-navy: #07315c;
-    --color-school-gold: #e6d46b;
-    --color-school-cream: #f7efcb;
+    --color-primary: #07315c;
+    --color-primary-dark: #102033;
+    --color-primary-foreground: #ffffff;
+
+    --color-secondary: #286f7c;
+    --color-secondary-dark: #1f5a65;
+    --color-secondary-muted: #d9eef1;
+    --color-secondary-foreground: #ffffff;
+
+    --color-accent: #e6d46b;
+    --color-accent-muted: #f7efcb;
+    --color-accent-foreground: #07315c;
+
+    --color-surface: #f7f9fb;
+    --color-foreground: #102033;
 }
 
 @layer base {
     ::selection {
-        background: var(--color-school-gold);
-        color: var(--color-school-navy);
+        background: var(--color-accent);
+        color: var(--color-primary);
     }
 
     html {
         text-rendering: optimizeLegibility;
+    }
+
+    body {
+        background: var(--color-surface);
+    }
+}
+
+@layer components {
+    .section-shell {
+        width: min(100% - 2rem, 72rem);
+        margin-inline: auto;
+    }
+
+    @media (min-width: 1024px) {
+        .section-shell {
+            width: min(100% - 4rem, 72rem);
+        }
+    }
+
+    .focus-ring {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+    }
+
+    .focus-ring:focus-visible {
+        outline-color: var(--color-accent);
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                color-mix(in oklab, var(--color-primary) 92%, transparent),
+                color-mix(in oklab, var(--color-primary) 62%, transparent) 48%,
+                color-mix(in oklab, var(--color-foreground) 25%, transparent)
+            ),
+            linear-gradient(
+                0deg,
+                color-mix(in oklab, var(--color-foreground) 88%, transparent),
+                color-mix(in oklab, var(--color-foreground) 8%, transparent) 42%
+            );
+    }
+
+    .media-placeholder-bg {
+        background:
+            linear-gradient(
+                135deg,
+                color-mix(in oklab, var(--color-primary) 10%, transparent),
+                color-mix(in oklab, var(--color-secondary) 20%, transparent)
+            ),
+            radial-gradient(
+                circle at 20% 20%,
+                color-mix(in oklab, var(--color-accent) 35%, transparent),
+                transparent 32%
+            ),
+            var(--color-secondary-muted);
     }
 }
