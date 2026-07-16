@@ -2,10 +2,10 @@
     $navLinks = [
         ['label' => 'Beranda', 'href' => url('/'), 'active' => request()->is('/')],
         ['label' => 'Profil', 'href' => url('/profile'), 'active' => request()->is('profile')],
-        ['label' => 'Berita', 'href' => url('/#berita'), 'active' => false],
-        ['label' => 'PPDB', 'href' => url('/#ppdb'), 'active' => false],
-        ['label' => 'Galeri', 'href' => url('/#galeri'), 'active' => false],
-        ['label' => 'Kontak', 'href' => url('/#kontak'), 'active' => false],
+        ['label' => 'Berita', 'href' => url('/berita'), 'active' => request()->is('berita')],
+        ['label' => 'PPDB', 'href' => url('/ppdb'), 'active' => request()->is('ppdb')],
+        ['label' => 'Galeri', 'href' => url('/galeri'), 'active' => request()->is('galeri')],
+        ['label' => 'Kontak', 'href' => url('/kontak'), 'active' => request()->is('kontak')],
     ];
 @endphp
 
@@ -34,7 +34,7 @@
         </nav>
 
         <div class="hidden items-center gap-3 lg:flex">
-            <x-ui.button href="{{ url('/#ppdb') }}" variant="accent" size="sm">Daftar PPDB</x-ui.button>
+            <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="sm">Daftar PPDB</x-ui.button>
             <x-ui.button href="#login" variant="muted" size="sm">Login</x-ui.button>
         </div>
 
@@ -50,12 +50,12 @@
             <div class="absolute right-0 mt-3 w-72 overflow-hidden rounded-lg border border-slate-200 bg-white text-slate-800 shadow-xl">
                 <nav class="grid py-2" aria-label="Navigasi mobile">
                     @foreach ($navLinks as $link)
-                        <a href="{{ $link['href'] }}" class="px-4 py-3 text-sm font-semibold uppercase tracking-wide transition hover:bg-slate-50 hover:text-secondary">
+                        <a href="{{ $link['href'] }}" class="px-4 py-3 text-sm font-semibold uppercase tracking-wide transition hover:bg-slate-50 hover:text-secondary {{ $link['active'] ? 'bg-secondary-muted text-primary' : '' }}">
                             {{ $link['label'] }}
                         </a>
                     @endforeach
                     <div class="grid gap-2 border-t border-slate-100 p-3">
-                        <x-ui.button href="{{ url('/#ppdb') }}" variant="accent" class="w-full" size="sm">Daftar PPDB</x-ui.button>
+                        <x-ui.button href="{{ url('/ppdb') }}" variant="accent" class="w-full" size="sm">Daftar PPDB</x-ui.button>
                         <x-ui.button href="#login" class="w-full" size="sm">Login</x-ui.button>
                     </div>
                 </nav>

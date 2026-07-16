@@ -2,10 +2,10 @@
 
 @php
     $quickLinks = [
-        ['title' => 'Profil Sekolah', 'copy' => 'Kenali visi, misi, dan budaya belajar Golden Sierra.', 'href' => '#profil', 'icon' => '01'],
-        ['title' => 'PPDB 2026', 'copy' => 'Informasi jadwal, alur pendaftaran, dan persyaratan.', 'href' => '#ppdb', 'icon' => '02'],
+        ['title' => 'Profil Sekolah', 'copy' => 'Kenali visi, misi, dan budaya belajar Golden Sierra.', 'href' => url('/profile'), 'icon' => '01'],
+        ['title' => 'PPDB 2026', 'copy' => 'Informasi jadwal, alur pendaftaran, dan persyaratan.', 'href' => url('/ppdb'), 'icon' => '02'],
         ['title' => 'Prestasi', 'copy' => 'Lihat pencapaian siswa di bidang akademik dan minat bakat.', 'href' => '#prestasi', 'icon' => '03'],
-        ['title' => 'Galeri', 'copy' => 'Dokumentasi kegiatan belajar, lomba, dan keseharian sekolah.', 'href' => '#galeri', 'icon' => '04'],
+        ['title' => 'Galeri', 'copy' => 'Dokumentasi kegiatan belajar, lomba, dan keseharian sekolah.', 'href' => url('/galeri'), 'icon' => '04'],
     ];
 
     $announcements = [
@@ -58,18 +58,15 @@
                 </p>
 
                 <div class="js-hero-item mt-8 flex flex-col gap-3 sm:flex-row">
-                    <x-ui.button href="#ppdb" variant="accent" size="lg">Daftar PPDB</x-ui.button>
-                    <x-ui.button href="#profil" variant="muted" size="lg">Lihat Profil Sekolah</x-ui.button>
+                    <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="lg">Daftar PPDB</x-ui.button>
+                    <x-ui.button href="{{ url('/profile') }}" variant="muted" size="lg">Lihat Profil Sekolah</x-ui.button>
                 </div>
 
                 <form action="#" class="js-hero-item mt-8 flex max-w-2xl overflow-hidden rounded-lg border-2 border-primary/45 bg-white shadow-[6px_6px_0_rgba(217,180,92,.24)]">
                     <label for="school-search" class="sr-only">Cari informasi sekolah</label>
                     <input id="school-search" type="search" placeholder="Cari pengumuman, berita, atau kegiatan sekolah" class="min-w-0 flex-1 border-0 bg-transparent px-5 py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400">
                     <button type="submit" class="grid w-14 place-items-center bg-primary text-white transition hover:bg-primary-dark" aria-label="Cari">
-                        <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path d="m21 21-4.35-4.35"></path>
-                            <circle cx="11" cy="11" r="7"></circle>
-                        </svg>
+                        <x-ui.icon name="search" class="size-5" />
                     </button>
                 </form>
             </div>
@@ -106,7 +103,7 @@
                 <a href="{{ $link['href'] }}" class="motion-card js-card neo-surface-soft group rounded-lg bg-white p-5 transition hover:border-secondary/50">
                     <div class="flex items-start justify-between gap-4">
                         <span class="grid size-10 place-items-center rounded-lg bg-secondary-muted text-xs font-black text-secondary">{{ $link['icon'] }}</span>
-                        <span class="text-secondary transition group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
+                        <x-ui.icon name="arrow-right" class="size-5 text-secondary transition group-hover:translate-x-1" />
                     </div>
                     <h2 class="mt-5 text-base font-black text-primary">{{ $link['title'] }}</h2>
                     <p class="mt-2 text-sm leading-6 text-slate-600">{{ $link['copy'] }}</p>
@@ -210,7 +207,7 @@
                     Tampilkan dokumentasi kegiatan belajar, lomba, pentas seni, kunjungan, dan momen penting sekolah di area ini.
                 </x-ui.section-heading>
                 <div class="flex justify-start lg:justify-end">
-                    <x-ui.button href="#" variant="outline">Buka Galeri</x-ui.button>
+                    <x-ui.button href="{{ url('/galeri') }}" variant="outline">Buka Galeri</x-ui.button>
                 </div>
             </div>
 
@@ -242,7 +239,7 @@
             </div>
 
             <div class="mt-10 flex justify-center">
-                <x-ui.button href="#" variant="outline">Lihat Semua Berita</x-ui.button>
+                <x-ui.button href="{{ url('/berita') }}" variant="outline">Lihat Semua Berita</x-ui.button>
             </div>
         </div>
     </section>
@@ -257,7 +254,7 @@
                         Hubungi admin sekolah untuk konsultasi kelas, jadwal kunjungan, dan alur pendaftaran terbaru.
                     </p>
                 </div>
-                <x-ui.button href="#kontak" variant="accent" size="lg">Hubungi Sekolah</x-ui.button>
+                <x-ui.button href="{{ url('/kontak') }}" variant="accent" size="lg">Hubungi Sekolah</x-ui.button>
             </div>
         </div>
     </section>

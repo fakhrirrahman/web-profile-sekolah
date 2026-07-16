@@ -197,7 +197,7 @@
                         Hubungi sekolah untuk jadwal kunjungan, konsultasi kelas, dan informasi penerimaan siswa baru.
                     </p>
                 </div>
-                <x-ui.button href="{{ url('/#kontak') }}" variant="accent" size="lg">Hubungi Sekolah</x-ui.button>
+                <x-ui.button href="{{ url('/kontak') }}" variant="accent" size="lg">Hubungi Sekolah</x-ui.button>
             </div>
         </div>
     </section>
