@@ -148,9 +148,10 @@ const setupGsapMotion = () => {
     gsap.utils.toArray('.motion-card').forEach((card) => {
         card.addEventListener('mouseenter', () => {
             gsap.to(card, {
+                x: -2,
                 y: -6,
                 scale: 1.01,
-                boxShadow: '0 24px 60px rgba(7, 49, 92, 0.16)',
+                boxShadow: '8px 8px 0 rgba(122, 166, 141, 0.18)',
                 duration: 0.28,
                 overwrite: 'auto',
             });
@@ -158,40 +159,11 @@ const setupGsapMotion = () => {
 
         card.addEventListener('mouseleave', () => {
             gsap.to(card, {
+                x: 0,
                 y: 0,
                 scale: 1,
-                boxShadow: '0 1px 3px rgba(15, 23, 42, 0.10)',
+                boxShadow: '5px 5px 0 rgba(122, 166, 141, 0.14)',
                 duration: 0.32,
-                overwrite: 'auto',
-            });
-        });
-    });
-
-    gsap.utils.toArray('.motion-button').forEach((button) => {
-        button.addEventListener('mouseenter', () => {
-            gsap.to(button, {
-                y: -2,
-                scale: 1.03,
-                duration: 0.22,
-                overwrite: 'auto',
-            });
-        });
-
-        button.addEventListener('mouseleave', () => {
-            gsap.to(button, {
-                y: 0,
-                scale: 1,
-                duration: 0.24,
-                overwrite: 'auto',
-            });
-        });
-
-        button.addEventListener('pointerdown', () => {
-            gsap.to(button, {
-                scale: 0.98,
-                duration: 0.1,
-                yoyo: true,
-                repeat: 1,
                 overwrite: 'auto',
             });
         });

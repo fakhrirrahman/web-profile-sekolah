@@ -47,7 +47,7 @@
 
         <div class="section-shell grid min-h-[560px] items-center gap-10 pb-28 pt-14 md:min-h-[620px] lg:min-h-[660px] lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-32 lg:pt-16">
             <div class="max-w-3xl">
-                <p class="js-hero-item inline-flex rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-accent backdrop-blur">
+                <p class="js-hero-item inline-flex rounded-lg border-2 border-primary/35 bg-white/90 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(95,143,121,.22)]">
                     PPDB 2026/2027 sudah dibuka
                 </p>
                 <h1 class="js-hero-item mt-6 text-4xl font-black leading-tight text-white md:text-5xl xl:text-6xl">
@@ -58,14 +58,14 @@
                 </p>
 
                 <div class="js-hero-item mt-8 flex flex-col gap-3 sm:flex-row">
-                    <x-ui.button href="#ppdb" variant="accent" size="lg">Daftar PPDB</x-ui.button>
+                    <x-ui.button href="#ppdb" variant="primary" size="lg">Daftar PPDB</x-ui.button>
                     <x-ui.button href="#profil" variant="muted" size="lg">Lihat Profil Sekolah</x-ui.button>
                 </div>
 
-                <form action="#" class="js-hero-item mt-8 flex max-w-2xl overflow-hidden rounded-lg border border-white/15 bg-white shadow-xl">
+                <form action="#" class="js-hero-item mt-8 flex max-w-2xl overflow-hidden rounded-lg border-2 border-primary/45 bg-white shadow-[6px_6px_0_rgba(122,166,141,.22)]">
                     <label for="school-search" class="sr-only">Cari informasi sekolah</label>
                     <input id="school-search" type="search" placeholder="Cari pengumuman, berita, atau kegiatan sekolah" class="min-w-0 flex-1 border-0 bg-transparent px-5 py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400">
-                    <button type="submit" class="grid w-14 place-items-center bg-accent text-primary transition hover:bg-accent-muted" aria-label="Cari">
+                    <button type="submit" class="grid w-14 place-items-center bg-primary text-white transition hover:bg-primary-dark" aria-label="Cari">
                         <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="m21 21-4.35-4.35"></path>
                             <circle cx="11" cy="11" r="7"></circle>
@@ -74,8 +74,8 @@
                 </form>
             </div>
 
-            <div class="js-hero-panel hidden rounded-lg border border-white/15 bg-white/10 p-5 backdrop-blur lg:block">
-                <p class="text-xs font-black uppercase tracking-[0.18em] text-accent">Info Hari Ini</p>
+            <div class="js-hero-panel hidden rounded-lg border-2 border-white/35 bg-white/20 p-5 shadow-[6px_6px_0_rgba(244,217,94,.20)] backdrop-blur lg:block">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-white">Info Hari Ini</p>
                 <div class="mt-5 grid gap-4">
                     <div class="rounded-lg bg-white p-4 text-foreground">
                         <p class="text-sm font-black text-primary">Jalur pendaftaran reguler</p>
@@ -103,7 +103,7 @@
     <section class="relative z-10 bg-surface py-10">
         <div class="js-stagger section-shell -mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($quickLinks as $link)
-                <a href="{{ $link['href'] }}" class="motion-card js-card group rounded-lg border border-slate-200 bg-white p-5 shadow-lg shadow-primary/5 transition hover:border-secondary/40">
+                <a href="{{ $link['href'] }}" class="motion-card js-card neo-surface-soft group rounded-lg bg-white p-5 transition hover:border-secondary/50">
                     <div class="flex items-start justify-between gap-4">
                         <span class="grid size-10 place-items-center rounded-lg bg-secondary-muted text-xs font-black text-secondary">{{ $link['icon'] }}</span>
                         <span class="text-secondary transition group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
@@ -124,7 +124,7 @@
 
                 <div class="mt-10 grid gap-6 md:grid-cols-2">
                     <x-ui.media-placeholder label="Tentang Golden Sierra" ratio="aspect-[4/3]" />
-                    <div class="motion-card js-card rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="motion-card js-card neo-surface-soft rounded-lg bg-white p-6">
                         <h3 class="text-lg font-black text-primary">Belajar dengan ritme yang jelas.</h3>
                         <p class="mt-4 text-sm leading-7 text-slate-600">
                             Golden Sierra School menyusun kegiatan akademik, pembiasaan karakter, dan eksplorasi minat dalam alur harian yang mudah diikuti siswa.
@@ -134,12 +134,12 @@
                 </div>
             </div>
 
-            <aside id="ppdb" class="motion-card js-card rounded-lg border border-primary/10 bg-white p-6 shadow-sm">
+            <aside id="ppdb" class="motion-card js-card neo-surface-soft rounded-lg bg-white p-6">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman</p>
                 <h2 class="mt-3 text-2xl font-black leading-tight text-primary">Informasi penting untuk orang tua dan siswa.</h2>
                 <div class="mt-6 grid gap-4">
                     @foreach ($announcements as $item)
-                        <article class="rounded-lg border border-slate-200 p-4">
+                        <article class="rounded-lg border-2 border-primary/10 bg-surface p-4">
                             <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wide">
                                 <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $item['type'] }}</span>
                                 <span class="text-slate-500">{{ $item['date'] }}</span>
@@ -159,7 +159,7 @@
 
             <div class="js-stagger mt-12 grid gap-5 md:grid-cols-3">
                 @foreach ($features as $feature)
-                    <article class="motion-card js-card rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                    <article class="motion-card js-card neo-surface-soft rounded-lg bg-white p-6">
                         <div class="h-1.5 w-14 rounded-full bg-accent"></div>
                         <h3 class="mt-6 text-lg font-black text-primary">{{ $feature['title'] }}</h3>
                         <p class="mt-3 text-sm leading-7 text-slate-600">{{ $feature['copy'] }}</p>
@@ -169,9 +169,9 @@
         </div>
     </section>
 
-    <section id="prestasi" class="js-reveal bg-primary py-16 text-white md:py-24">
+    <section id="prestasi" class="js-reveal bg-surface py-16 text-slate-700 md:py-24">
         <div class="section-shell">
-            <x-ui.section-heading eyebrow="Prestasi Terbaru" title="Ruang apresiasi untuk keberanian dan kerja keras siswa." light>
+            <x-ui.section-heading eyebrow="Prestasi Terbaru" title="Ruang apresiasi untuk keberanian dan kerja keras siswa.">
                 Prestasi kami tampilkan sebagai catatan proses, bukan hanya hasil akhir. Setiap lomba adalah kesempatan belajar.
             </x-ui.section-heading>
 
@@ -182,7 +182,7 @@
             </div>
 
             <div class="mt-10 flex justify-center">
-                <x-ui.button href="#" variant="accent">Lihat Semua Prestasi</x-ui.button>
+                <x-ui.button href="#" variant="primary">Lihat Semua Prestasi</x-ui.button>
             </div>
         </div>
     </section>
@@ -193,7 +193,7 @@
 
             <div class="js-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($extracurriculars as $item)
-                    <article class="motion-card js-card group rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-secondary/40">
+                    <article class="motion-card js-card neo-surface-soft group rounded-lg bg-white p-4 transition hover:border-secondary/50">
                         <x-ui.media-placeholder :label="$item['title']" ratio="aspect-[4/3]" class="rounded-lg" />
                         <h3 class="mt-5 text-base font-black text-primary">{{ $item['title'] }}</h3>
                         <p class="mt-2 text-sm leading-6 text-slate-600">{{ $item['copy'] }}</p>
@@ -216,7 +216,7 @@
 
             <div class="js-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 <div class="lg:col-span-2 lg:row-span-2">
-                    <div class="motion-card js-card group relative aspect-[4/3] h-full overflow-hidden rounded-lg">
+                    <div class="motion-card js-card neo-surface-soft group relative aspect-[4/3] h-full overflow-hidden rounded-lg">
                         <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah Golden Sierra" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
                         <div class="absolute inset-x-5 bottom-5 rounded-lg bg-white/90 p-4 shadow-sm backdrop-blur">
                             <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Highlight</p>
@@ -248,16 +248,16 @@
     </section>
 
     <section class="bg-white py-16">
-        <div class="motion-card js-reveal section-shell rounded-lg bg-secondary p-8 text-white shadow-sm md:p-10">
+        <div class="motion-card js-reveal section-shell rounded-lg border-2 border-primary/15 bg-gradient-to-br from-white via-surface to-secondary-muted p-8 text-primary shadow-[6px_6px_0_rgba(49,88,70,.10)] md:p-10">
             <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
                 <div>
-                    <p class="text-xs font-black uppercase tracking-[0.18em] text-accent">PPDB Golden Sierra</p>
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">PPDB Golden Sierra</p>
                     <h2 class="mt-3 text-2xl font-black leading-tight md:text-4xl">Siapkan langkah pertama anak bersama Golden Sierra School.</h2>
-                    <p class="mt-4 max-w-2xl text-sm leading-7 text-white/78">
+                    <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
                         Hubungi admin sekolah untuk konsultasi kelas, jadwal kunjungan, dan alur pendaftaran terbaru.
                     </p>
                 </div>
-                <x-ui.button href="#kontak" variant="accent" size="lg">Hubungi Sekolah</x-ui.button>
+                <x-ui.button href="#kontak" variant="primary" size="lg">Hubungi Sekolah</x-ui.button>
             </div>
         </div>
     </section>
