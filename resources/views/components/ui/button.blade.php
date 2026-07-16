@@ -5,7 +5,7 @@
 ])
 
 @php
-    $base = 'inline-flex items-center justify-center gap-2 rounded-lg font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+    $base = 'motion-button inline-flex items-center justify-center gap-2 rounded-lg font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
 
     $variants = [
         'primary' => 'bg-primary text-primary-foreground shadow-sm shadow-primary/20 hover:bg-primary-dark',

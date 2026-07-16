@@ -91,4 +91,17 @@
             ),
             var(--color-secondary-muted);
     }
+
+    .js-hero-image,
+    .motion-card,
+    .motion-button,
+    .motion-media {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+
+    .js-hero-image {
+        transform-origin: center;
+        will-change: transform, filter;
+    }
 }

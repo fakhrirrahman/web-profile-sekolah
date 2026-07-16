@@ -6,7 +6,7 @@
     'excerpt' => "Golden Sierra School terus mendukung siswa untuk berani tampil, bekerja sama, dan membangun prestasi melalui kegiatan akademik maupun non-akademik.",
 ])
 
-<article {{ $attributes->merge(['class' => 'grid gap-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-secondary/40 hover:shadow-md md:grid-cols-[240px_minmax(0,1fr)] md:items-center']) }}>
+<article {{ $attributes->merge(['class' => 'motion-card js-card grid gap-6 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-secondary/40 md:grid-cols-[240px_minmax(0,1fr)] md:items-center']) }}>
     <x-ui.media-placeholder :label="$imageLabel" ratio="aspect-[4/3]" class="rounded-lg" />
 
     <div>

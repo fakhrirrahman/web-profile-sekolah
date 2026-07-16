@@ -9,7 +9,7 @@
     ];
 @endphp
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-primary/95 text-white shadow-sm backdrop-blur">
+<header data-site-header class="sticky top-0 z-50 border-b border-white/10 bg-primary/95 text-white shadow-sm backdrop-blur transition duration-300 data-[scrolled]:bg-primary data-[scrolled]:shadow-lg data-[scrolled]:shadow-primary/20">
     <div class="section-shell flex h-18 items-center justify-between gap-4 py-3">
         <a href="#beranda" class="flex min-w-0 items-center gap-3 focus-ring rounded-lg">
             <span class="grid size-12 shrink-0 place-items-center rounded-lg border border-white/20 bg-white text-sm font-black text-primary shadow-sm">
@@ -38,7 +38,7 @@
             <x-ui.button href="#login" variant="muted" size="sm">Login</x-ui.button>
         </div>
 
-        <details class="group relative lg:hidden">
+        <details data-mobile-menu class="group relative lg:hidden">
             <summary class="grid size-10 cursor-pointer list-none place-items-center rounded-md border border-white/20 text-white transition hover:bg-white/10 [&::-webkit-details-marker]:hidden" aria-label="Buka menu">
                 <span class="relative block h-3.5 w-5">
                     <span class="absolute left-0 top-0 h-0.5 w-5 rounded bg-current transition group-open:top-1.5 group-open:rotate-45"></span>

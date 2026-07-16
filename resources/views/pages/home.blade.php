@@ -42,27 +42,27 @@
 
 @section('content')
     <section id="beranda" class="relative isolate bg-primary text-white">
-        <img src="{{ asset('images/home.jpg') }}" alt="Gedung Golden Sierra School" class="absolute inset-0 -z-20 h-full w-full object-cover">
+        <img src="{{ asset('images/home.jpg') }}" alt="Gedung Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
         <div class="hero-overlay absolute inset-0 -z-10"></div>
 
-        <div class="section-shell grid min-h-[calc(100svh-72px)] items-center gap-12 py-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:py-20">
+        <div class="section-shell grid min-h-[560px] items-center gap-10 pb-28 pt-14 md:min-h-[620px] lg:min-h-[660px] lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-32 lg:pt-16">
             <div class="max-w-3xl">
-                <p class="inline-flex rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-accent backdrop-blur">
+                <p class="js-hero-item inline-flex rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-accent backdrop-blur">
                     PPDB 2026/2027 sudah dibuka
                 </p>
-                <h1 class="mt-6 text-4xl font-black leading-tight text-white md:text-6xl">
+                <h1 class="js-hero-item mt-6 text-4xl font-black leading-tight text-white md:text-5xl xl:text-6xl">
                     Sekolah yang membantu anak belajar percaya diri, tertib, dan berani bertumbuh.
                 </h1>
-                <p class="mt-6 max-w-2xl text-base leading-8 text-white/78 md:text-lg">
+                <p class="js-hero-item mt-6 max-w-2xl text-base leading-8 text-white/78 md:text-lg">
                     Golden Sierra School menghadirkan pengalaman belajar yang hangat, terarah, dan dekat dengan kebutuhan siswa serta orang tua.
                 </p>
 
-                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div class="js-hero-item mt-8 flex flex-col gap-3 sm:flex-row">
                     <x-ui.button href="#ppdb" variant="accent" size="lg">Daftar PPDB</x-ui.button>
                     <x-ui.button href="#profil" variant="muted" size="lg">Lihat Profil Sekolah</x-ui.button>
                 </div>
 
-                <form action="#" class="mt-8 flex max-w-2xl overflow-hidden rounded-lg border border-white/15 bg-white shadow-xl">
+                <form action="#" class="js-hero-item mt-8 flex max-w-2xl overflow-hidden rounded-lg border border-white/15 bg-white shadow-xl">
                     <label for="school-search" class="sr-only">Cari informasi sekolah</label>
                     <input id="school-search" type="search" placeholder="Cari pengumuman, berita, atau kegiatan sekolah" class="min-w-0 flex-1 border-0 bg-transparent px-5 py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400">
                     <button type="submit" class="grid w-14 place-items-center bg-accent text-primary transition hover:bg-accent-muted" aria-label="Cari">
@@ -74,7 +74,7 @@
                 </form>
             </div>
 
-            <div class="rounded-lg border border-white/15 bg-white/10 p-5 backdrop-blur">
+            <div class="js-hero-panel hidden rounded-lg border border-white/15 bg-white/10 p-5 backdrop-blur lg:block">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-accent">Info Hari Ini</p>
                 <div class="mt-5 grid gap-4">
                     <div class="rounded-lg bg-white p-4 text-foreground">
@@ -100,10 +100,10 @@
         </div>
     </section>
 
-    <section class="bg-white py-8">
-        <div class="section-shell grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section class="relative z-10 bg-surface py-10">
+        <div class="js-stagger section-shell -mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($quickLinks as $link)
-                <a href="{{ $link['href'] }}" class="group rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-secondary/40 hover:shadow-md">
+                <a href="{{ $link['href'] }}" class="motion-card js-card group rounded-lg border border-slate-200 bg-white p-5 shadow-lg shadow-primary/5 transition hover:border-secondary/40">
                     <div class="flex items-start justify-between gap-4">
                         <span class="grid size-10 place-items-center rounded-lg bg-secondary-muted text-xs font-black text-secondary">{{ $link['icon'] }}</span>
                         <span class="text-secondary transition group-hover:translate-x-1" aria-hidden="true">-&gt;</span>
@@ -115,7 +115,7 @@
         </div>
     </section>
 
-    <section id="profil" class="bg-surface py-16 md:py-24">
+    <section id="profil" class="js-reveal bg-surface py-16 md:py-24">
         <div class="section-shell grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)] lg:items-start">
             <div>
                 <x-ui.section-heading eyebrow="Profil Sekolah" title="Lingkungan belajar yang rapi, hangat, dan berorientasi pada karakter." align="left">
@@ -124,7 +124,7 @@
 
                 <div class="mt-10 grid gap-6 md:grid-cols-2">
                     <x-ui.media-placeholder label="Tentang Golden Sierra" ratio="aspect-[4/3]" />
-                    <div class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="motion-card js-card rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
                         <h3 class="text-lg font-black text-primary">Belajar dengan ritme yang jelas.</h3>
                         <p class="mt-4 text-sm leading-7 text-slate-600">
                             Golden Sierra School menyusun kegiatan akademik, pembiasaan karakter, dan eksplorasi minat dalam alur harian yang mudah diikuti siswa.
@@ -134,7 +134,7 @@
                 </div>
             </div>
 
-            <aside id="ppdb" class="rounded-lg border border-primary/10 bg-white p-6 shadow-sm">
+            <aside id="ppdb" class="motion-card js-card rounded-lg border border-primary/10 bg-white p-6 shadow-sm">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman</p>
                 <h2 class="mt-3 text-2xl font-black leading-tight text-primary">Informasi penting untuk orang tua dan siswa.</h2>
                 <div class="mt-6 grid gap-4">
@@ -153,13 +153,13 @@
         </div>
     </section>
 
-    <section class="bg-white py-16 md:py-24">
+    <section class="js-reveal bg-white py-16 md:py-24">
         <div class="section-shell">
             <x-ui.section-heading eyebrow="Kenapa Golden Sierra" title="Detail kecil yang membuat kegiatan sekolah terasa nyaman." />
 
-            <div class="mt-12 grid gap-5 md:grid-cols-3">
+            <div class="js-stagger mt-12 grid gap-5 md:grid-cols-3">
                 @foreach ($features as $feature)
-                    <article class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                    <article class="motion-card js-card rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="h-1.5 w-14 rounded-full bg-accent"></div>
                         <h3 class="mt-6 text-lg font-black text-primary">{{ $feature['title'] }}</h3>
                         <p class="mt-3 text-sm leading-7 text-slate-600">{{ $feature['copy'] }}</p>
@@ -169,13 +169,13 @@
         </div>
     </section>
 
-    <section id="prestasi" class="bg-primary py-16 text-white md:py-24">
+    <section id="prestasi" class="js-reveal bg-primary py-16 text-white md:py-24">
         <div class="section-shell">
             <x-ui.section-heading eyebrow="Prestasi Terbaru" title="Ruang apresiasi untuk keberanian dan kerja keras siswa." light>
                 Prestasi kami tampilkan sebagai catatan proses, bukan hanya hasil akhir. Setiap lomba adalah kesempatan belajar.
             </x-ui.section-heading>
 
-            <div class="mt-12 grid gap-5">
+            <div class="js-stagger mt-12 grid gap-5">
                 @foreach ($achievements as $achievement)
                     <x-ui.article-row :title="$achievement['title']" :date="$achievement['date']" :category="$achievement['category']" image-label="Prestasi" />
                 @endforeach
@@ -187,13 +187,13 @@
         </div>
     </section>
 
-    <section class="bg-surface py-16 md:py-24">
+    <section class="js-reveal bg-surface py-16 md:py-24">
         <div class="section-shell">
             <x-ui.section-heading eyebrow="Ekstrakurikuler" title="Pilihan kegiatan untuk menemukan minat dan membangun percaya diri." />
 
-            <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="js-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach ($extracurriculars as $item)
-                    <article class="group rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-secondary/40 hover:shadow-md">
+                    <article class="motion-card js-card group rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-secondary/40">
                         <x-ui.media-placeholder :label="$item['title']" ratio="aspect-[4/3]" class="rounded-lg" />
                         <h3 class="mt-5 text-base font-black text-primary">{{ $item['title'] }}</h3>
                         <p class="mt-2 text-sm leading-6 text-slate-600">{{ $item['copy'] }}</p>
@@ -203,7 +203,7 @@
         </div>
     </section>
 
-    <section id="galeri" class="bg-white py-16 md:py-24">
+    <section id="galeri" class="js-reveal bg-white py-16 md:py-24">
         <div class="section-shell">
             <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
                 <x-ui.section-heading eyebrow="Galeri Sekolah" title="Potongan keseharian Golden Sierra School." align="left">
@@ -214,10 +214,10 @@
                 </div>
             </div>
 
-            <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="js-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 <div class="lg:col-span-2 lg:row-span-2">
-                    <div class="relative aspect-[4/3] h-full overflow-hidden rounded-lg">
-                        <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah Golden Sierra" class="h-full w-full object-cover">
+                    <div class="motion-card js-card group relative aspect-[4/3] h-full overflow-hidden rounded-lg">
+                        <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah Golden Sierra" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
                         <div class="absolute inset-x-5 bottom-5 rounded-lg bg-white/90 p-4 shadow-sm backdrop-blur">
                             <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Highlight</p>
                             <h3 class="mt-2 text-lg font-black text-primary">Lingkungan sekolah yang terbuka dan aktif.</h3>
@@ -225,17 +225,17 @@
                     </div>
                 </div>
                 @foreach ($gallery as $item)
-                    <x-ui.media-placeholder :label="$item" ratio="aspect-[4/3]" />
+                    <x-ui.media-placeholder class="js-card" :label="$item" ratio="aspect-[4/3]" />
                 @endforeach
             </div>
         </div>
     </section>
 
-    <section id="berita" class="bg-surface py-16 md:py-24">
+    <section id="berita" class="js-reveal bg-surface py-16 md:py-24">
         <div class="section-shell">
             <x-ui.section-heading eyebrow="Berita Terbaru" title="Kabar terbaru dari kegiatan dan prestasi sekolah." />
 
-            <div class="mt-12 grid gap-5">
+            <div class="js-stagger mt-12 grid gap-5">
                 @foreach ($news as $item)
                     <x-ui.article-row :title="$item['title']" :date="$item['date']" :category="$item['category']" image-label="Berita" />
                 @endforeach
@@ -248,7 +248,7 @@
     </section>
 
     <section class="bg-white py-16">
-        <div class="section-shell rounded-lg bg-secondary p-8 text-white shadow-sm md:p-10">
+        <div class="motion-card js-reveal section-shell rounded-lg bg-secondary p-8 text-white shadow-sm md:p-10">
             <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
                 <div>
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-accent">PPDB Golden Sierra</p>
