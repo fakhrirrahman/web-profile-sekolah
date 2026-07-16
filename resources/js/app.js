@@ -151,7 +151,7 @@ const setupGsapMotion = () => {
                 x: -2,
                 y: -6,
                 scale: 1.01,
-                boxShadow: '8px 8px 0 rgba(122, 166, 141, 0.18)',
+                boxShadow: '8px 8px 0 rgba(31, 92, 69, 0.14)',
                 duration: 0.28,
                 overwrite: 'auto',
             });
@@ -162,7 +162,7 @@ const setupGsapMotion = () => {
                 x: 0,
                 y: 0,
                 scale: 1,
-                boxShadow: '5px 5px 0 rgba(122, 166, 141, 0.14)',
+                boxShadow: '5px 5px 0 rgba(31, 92, 69, 0.10)',
                 duration: 0.32,
                 overwrite: 'auto',
             });

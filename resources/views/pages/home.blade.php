@@ -47,7 +47,7 @@
 
         <div class="section-shell grid min-h-[560px] items-center gap-10 pb-28 pt-14 md:min-h-[620px] lg:min-h-[660px] lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-32 lg:pt-16">
             <div class="max-w-3xl">
-                <p class="js-hero-item inline-flex rounded-lg border-2 border-primary/35 bg-white/90 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(95,143,121,.22)]">
+                <p class="js-hero-item inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">
                     PPDB 2026/2027 sudah dibuka
                 </p>
                 <h1 class="js-hero-item mt-6 text-4xl font-black leading-tight text-white md:text-5xl xl:text-6xl">
@@ -58,11 +58,11 @@
                 </p>
 
                 <div class="js-hero-item mt-8 flex flex-col gap-3 sm:flex-row">
-                    <x-ui.button href="#ppdb" variant="primary" size="lg">Daftar PPDB</x-ui.button>
+                    <x-ui.button href="#ppdb" variant="accent" size="lg">Daftar PPDB</x-ui.button>
                     <x-ui.button href="#profil" variant="muted" size="lg">Lihat Profil Sekolah</x-ui.button>
                 </div>
 
-                <form action="#" class="js-hero-item mt-8 flex max-w-2xl overflow-hidden rounded-lg border-2 border-primary/45 bg-white shadow-[6px_6px_0_rgba(122,166,141,.22)]">
+                <form action="#" class="js-hero-item mt-8 flex max-w-2xl overflow-hidden rounded-lg border-2 border-primary/45 bg-white shadow-[6px_6px_0_rgba(217,180,92,.24)]">
                     <label for="school-search" class="sr-only">Cari informasi sekolah</label>
                     <input id="school-search" type="search" placeholder="Cari pengumuman, berita, atau kegiatan sekolah" class="min-w-0 flex-1 border-0 bg-transparent px-5 py-4 text-sm text-slate-700 outline-none placeholder:text-slate-400">
                     <button type="submit" class="grid w-14 place-items-center bg-primary text-white transition hover:bg-primary-dark" aria-label="Cari">
@@ -74,8 +74,8 @@
                 </form>
             </div>
 
-            <div class="js-hero-panel hidden rounded-lg border-2 border-white/35 bg-white/20 p-5 shadow-[6px_6px_0_rgba(244,217,94,.20)] backdrop-blur lg:block">
-                <p class="text-xs font-black uppercase tracking-[0.18em] text-white">Info Hari Ini</p>
+            <div class="js-hero-panel hidden rounded-lg border-2 border-white/45 bg-primary/35 p-5 shadow-[6px_6px_0_rgba(217,180,92,.20)] backdrop-blur lg:block">
+                <p class="inline-flex rounded-md border border-primary/25 bg-accent px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.16)]">Info Hari Ini</p>
                 <div class="mt-5 grid gap-4">
                     <div class="rounded-lg bg-white p-4 text-foreground">
                         <p class="text-sm font-black text-primary">Jalur pendaftaran reguler</p>
@@ -248,7 +248,7 @@
     </section>
 
     <section class="bg-white py-16">
-        <div class="motion-card js-reveal section-shell rounded-lg border-2 border-primary/15 bg-gradient-to-br from-white via-surface to-secondary-muted p-8 text-primary shadow-[6px_6px_0_rgba(49,88,70,.10)] md:p-10">
+        <div class="motion-card js-reveal section-shell rounded-lg border-2 border-primary/15 bg-gradient-to-br from-white via-surface to-secondary-muted p-8 text-primary shadow-[6px_6px_0_rgba(31,92,69,.10)] md:p-10">
             <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
                 <div>
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">PPDB Golden Sierra</p>
@@ -257,7 +257,7 @@
                         Hubungi admin sekolah untuk konsultasi kelas, jadwal kunjungan, dan alur pendaftaran terbaru.
                     </p>
                 </div>
-                <x-ui.button href="#kontak" variant="primary" size="lg">Hubungi Sekolah</x-ui.button>
+                <x-ui.button href="#kontak" variant="accent" size="lg">Hubungi Sekolah</x-ui.button>
             </div>
         </div>
     </section>

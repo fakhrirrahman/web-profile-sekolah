@@ -9,26 +9,26 @@
     --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
     --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 
-    --color-primary: #315846;
-    --color-primary-dark: #243f33;
+    --color-primary: #1f5c45;
+    --color-primary-dark: #174634;
     --color-primary-foreground: #ffffff;
 
-    --color-secondary: #7aa68d;
-    --color-secondary-dark: #5f846f;
-    --color-secondary-muted: #eef7f0;
+    --color-secondary: #2b7357;
+    --color-secondary-dark: #1f5c45;
+    --color-secondary-muted: #eef5ef;
     --color-secondary-foreground: #ffffff;
 
-    --color-accent: #5f8f79;
-    --color-accent-muted: #edf6f0;
-    --color-accent-foreground: #315846;
+    --color-accent: #d9b45c;
+    --color-accent-muted: #f3e3bd;
+    --color-accent-foreground: #1f5c45;
 
-    --color-surface: #ffffff;
-    --color-foreground: #243447;
+    --color-surface: #f7f5ef;
+    --color-foreground: #25362f;
 }
 
 @layer base {
     ::selection {
-        background: var(--color-secondary-muted);
+        background: var(--color-accent-muted);
         color: var(--color-primary);
     }
 
@@ -70,13 +70,13 @@
     }
 
     .brand-wordmark .brand-accent {
-        color: var(--color-secondary);
+        color: var(--color-primary);
     }
 
     .brand-tagline {
         display: block;
         margin-top: 0.32rem;
-        color: var(--color-secondary);
+        color: color-mix(in oklab, var(--color-primary) 72%, white);
         font-size: 0.64rem;
         font-weight: 900;
         letter-spacing: 0.22em;
