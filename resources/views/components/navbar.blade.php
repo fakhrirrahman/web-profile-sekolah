@@ -35,7 +35,7 @@
 
         <div class="hidden items-center gap-3 lg:flex">
             <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="sm">Daftar PPDB</x-ui.button>
-            <x-ui.button href="#login" variant="muted" size="sm">Login</x-ui.button>
+            <x-ui.button href="{{ route('login') }}" variant="muted" size="sm">Login</x-ui.button>
         </div>
 
         <details data-mobile-menu class="group relative lg:hidden">
@@ -56,7 +56,7 @@
                     @endforeach
                     <div class="grid gap-2 border-t border-slate-100 p-3">
                         <x-ui.button href="{{ url('/ppdb') }}" variant="accent" class="w-full" size="sm">Daftar PPDB</x-ui.button>
-                        <x-ui.button href="#login" class="w-full" size="sm">Login</x-ui.button>
+                        <x-ui.button href="{{ route('login') }}" class="w-full" size="sm">Login</x-ui.button>
                     </div>
                 </nav>
             </div>
