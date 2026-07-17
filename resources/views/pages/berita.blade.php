@@ -18,7 +18,7 @@
                 @endif
                 <label for="news-search" class="sr-only">Cari berita</label>
                 <div class="flex overflow-hidden rounded-lg border-2 border-primary/20 bg-surface">
-                    <input id="news-search" type="search" name="search" value="{{ $search }}" placeholder="Cari berita atau pengumuman" class="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-slate-400">
+                    <input id="news-search" type="search" name="search" value="{{ $search }}" placeholder="Cari berita atau pengumuman" class="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-slate-700 outline-none placeholder:text-slate-400">
                     <button type="submit" class="bg-primary px-5 text-sm font-black text-white transition hover:bg-primary-dark">Cari</button>
                 </div>
             </form>
