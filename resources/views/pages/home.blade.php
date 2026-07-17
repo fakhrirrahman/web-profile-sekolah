@@ -20,11 +20,6 @@
         ['title' => 'Pendampingan Dekat', 'copy' => 'Wali kelas dan guru membimbing perkembangan akademik maupun sosial siswa secara berkala.'],
     ];
 
-    $achievements = [
-        ['title' => 'Juara 1 Lomba LKBB', 'date' => '11 Juni 2026', 'category' => 'Prestasi'],
-        ['title' => 'Juara 1 Lomba Sandi Morse', 'date' => '11 Juni 2026', 'category' => 'Prestasi'],
-    ];
-
     $extracurriculars = [
         ['title' => 'Pramuka', 'copy' => 'Melatih kemandirian, kepemimpinan, dan kerja sama.'],
         ['title' => 'Basket', 'copy' => 'Mengasah sportivitas, strategi, dan stamina siswa.'],
@@ -167,13 +162,25 @@
             </x-ui.section-heading>
 
             <div class="js-stagger mt-12 grid gap-5">
-                @foreach ($achievements as $achievement)
-                    <x-ui.article-row :title="$achievement['title']" :date="$achievement['date']" :category="$achievement['category']" image-label="Prestasi" />
-                @endforeach
+                @forelse ($achievements as $achievement)
+                    <x-ui.article-row
+                        :title="$achievement->title"
+                        :date="$achievement->date"
+                        :category="$achievement->category"
+                        :excerpt="$achievement->copy"
+                        :image-url="$achievement->image_url"
+                        image-label="Prestasi"
+                        :href="route('berita.show', $achievement->slug)"
+                    />
+                @empty
+                    <article class="motion-card js-card neo-surface-soft rounded-lg bg-white p-6 text-center">
+                        <p class="text-sm font-semibold text-slate-600">Belum ada prestasi yang dipublikasikan.</p>
+                    </article>
+                @endforelse
             </div>
 
             <div class="mt-10 flex justify-center">
-                <x-ui.button href="#" variant="primary">Lihat Semua Prestasi</x-ui.button>
+                <x-ui.button href="{{ route('berita', ['category' => 'Prestasi']) }}" variant="primary">Lihat Semua Prestasi</x-ui.button>
             </div>
         </div>
     </section>

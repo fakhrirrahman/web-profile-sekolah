@@ -22,6 +22,14 @@ class HomeController extends Controller
             ->get();
         $this->appendNewsImageUrls($news);
 
+        $achievements = News::query()
+            ->where('is_active', true)
+            ->where('category', 'Prestasi')
+            ->latest()
+            ->take(2)
+            ->get();
+        $this->appendNewsImageUrls($achievements);
+
         $galleryItems = GalleryItem::query()
             ->where('is_active', true)
             ->latest()
@@ -30,7 +38,7 @@ class HomeController extends Controller
 
         $this->appendGalleryImageUrls($galleryItems);
 
-        return view('pages.home', compact('news', 'galleryItems'));
+        return view('pages.home', compact('news', 'achievements', 'galleryItems'));
     }
 
     public function profile(): View
