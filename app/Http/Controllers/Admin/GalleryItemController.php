@@ -13,9 +13,18 @@ class GalleryItemController extends Controller
 {
     public function index(): View
     {
-        return view('pages.admin.gallery.index', [
-            'galleryItems' => GalleryItem::query()->latest()->get(),
-        ]);
+        $galleryItems = GalleryItem::query()
+            ->latest()
+            ->get()
+            ->map(function ($item) {
+                $item->image_url = $item->image
+                    ? Storage::disk('public')->url($item->image)
+                    : null;
+
+                return $item;
+            });
+
+        return view('pages.admin.gallery.index', compact('galleryItems'));
     }
 
     public function create(): View
