@@ -1,35 +1,3 @@
-@props([
-    'id' => 'news-create-modal',
-    'news' => null,
-    'triggerLabel' => null,
-    'buttonVariant' => null,
-])
-
-@php
-    $isEdit = filled($news?->getKey());
-    $modalTitle = $isEdit ? 'Edit Berita' : 'Tambah Berita Baru';
-    $submitLabel = $isEdit ? 'Simpan Perubahan' : 'Tambah Berita';
-    $triggerLabel ??= $isEdit ? 'Edit' : '+ Tambah Berita';
-    $buttonVariant ??= $isEdit ? 'outline' : 'accent';
-    $action = $isEdit
-        ? route('admin.news.update', $news)
-        : route('admin.news.store');
-    $fieldPrefix = str_replace(['.', '[', ']'], '-', $id);
-    $titleId = $fieldPrefix . '-title';
-    $categoryId = $fieldPrefix . '-category';
-    $dateId = $fieldPrefix . '-date';
-    $imageId = $fieldPrefix . '-image';
-    $dropzoneId = $fieldPrefix . '-dropzone';
-    $dzIconId = $fieldPrefix . '-dz-icon';
-    $dzPreviewId = $fieldPrefix . '-dz-preview';
-    $dzTextId = $fieldPrefix . '-dz-text';
-    $dzMetaId = $fieldPrefix . '-dz-meta';
-    $btnRemoveId = $fieldPrefix . '-btn-remove';
-    $removeImageId = $fieldPrefix . '-remove-image';
-    $copyId = $fieldPrefix . '-copy';
-    $currentImageUrl = $news?->image_url;
-@endphp
-
 <x-ui.modal :id="$id">
     @slot('trigger')
         <x-ui.button @click="open = true" :variant="$buttonVariant" size="sm" class="w-full sm:w-auto">
@@ -63,10 +31,9 @@
                     <label for="{{ $categoryId }}" class="text-xs font-black uppercase tracking-wide text-primary/70">Kategori</label>
                     <select id="{{ $categoryId }}" name="category"
                         class="mt-1.5 h-10 w-full rounded-lg border-2 border-primary/15 bg-surface px-3 text-sm font-semibold outline-none transition focus:border-primary focus:bg-white">
-                        <option value="Prestasi" @selected(old('category', $news?->category) === 'Prestasi')>Prestasi</option>
-                        <option value="Kegiatan" @selected(old('category', $news?->category) === 'Kegiatan')>Kegiatan</option>
-                        <option value="Akademik" @selected(old('category', $news?->category) === 'Akademik')>Akademik</option>
-                        <option value="Info Orang Tua" @selected(old('category', $news?->category) === 'Info Orang Tua')>Info Orang Tua</option>
+                        @foreach ($categoryOptions as $category)
+                            <option value="{{ $category }}" @selected(old('category', $news?->category) === $category)>{{ $category }}</option>
+                        @endforeach
                     </select>
                     @error('category')
                         <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
@@ -75,7 +42,7 @@
 
                 <div>
                     <label for="{{ $dateId }}" class="text-xs font-black uppercase tracking-wide text-primary/70">Tanggal Tampil</label>
-                    <input id="{{ $dateId }}" name="date" value="{{ old('date', $news?->date ?? now()->isoFormat('D MMMM Y')) }}" placeholder="Contoh: 11 Juni 2026"
+                    <input id="{{ $dateId }}" name="date" value="{{ old('date', $defaultDate) }}" placeholder="Contoh: 11 Juni 2026"
                         class="mt-1.5 h-10 w-full rounded-lg border-2 border-primary/15 bg-surface px-3 text-sm font-semibold outline-none transition focus:border-primary focus:bg-white">
                     @error('date')
                         <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
@@ -107,7 +74,7 @@
                             @endif
                         </p>
                         <p id="{{ $dzMetaId }}" class="{{ $currentImageUrl ? '' : 'hidden' }} truncate text-[11px] font-semibold text-slate-400">
-                            {{ $currentImageUrl ? basename($news->image) : '' }}
+                            {{ $currentImageName }}
                         </p>
                     </div>
 
