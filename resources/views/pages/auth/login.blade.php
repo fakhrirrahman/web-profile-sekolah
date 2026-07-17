@@ -86,15 +86,5 @@
             <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Jam Layanan</p>
             <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">Senin - Jumat, 08.00 - 15.00 WIB</p>
         </div>
-
-        <div class="flex flex-col gap-3 bg-secondary-muted p-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-                <p class="text-sm font-black text-primary">Belum punya akun?</p>
-                <p class="mt-1 text-sm leading-6 text-slate-600">Halaman register disiapkan memakai layout auth ini.</p>
-            </div>
-            <span class="w-fit rounded-md bg-accent px-3 py-2 text-xs font-black uppercase tracking-wide text-primary">
-                Segera
-            </span>
-        </div>
     </div>
 @endsection
