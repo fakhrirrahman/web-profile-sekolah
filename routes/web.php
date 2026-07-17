@@ -2,18 +2,22 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('pages.home');
+    $news = \App\Models\News::query()->where('is_active', true)->latest()->take(2)->get();
+    $galleryItems = \App\Models\GalleryItem::query()->where('is_active', true)->latest()->take(4)->get();
+    return view('pages.home', compact('news', 'galleryItems'));
 });
 
 Route::get('/profile', function () {
     return view('pages.profile');
 })->name('profile');
 
-Route::view('/berita', 'pages.berita')->name('berita');
-Route::view('/galeri', 'pages.galeri')->name('galeri');
+Route::get('/berita', [NewsController::class, 'index'])->name('berita');
+Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri');
 Route::view('/ppdb', 'pages.ppdb')->name('ppdb');
 Route::view('/kontak', 'pages.kontak')->name('kontak');
 
@@ -32,4 +36,6 @@ Route::redirect('/dashboard', '/admin')
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
+    Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
+    Route::resource('gallery-items', \App\Http\Controllers\Admin\GalleryItemController::class);
 });

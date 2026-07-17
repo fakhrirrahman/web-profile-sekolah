@@ -24,15 +24,15 @@
                 </a>
 
                 <nav class="mt-6 grid gap-2 text-sm font-black lg:mt-10" aria-label="Navigasi admin">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 rounded-lg border-2 border-white/18 bg-white px-4 py-3 text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]">
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.dashboard') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
                         <x-ui.icon name="layout-dashboard" class="size-5" />
                         Dashboard
                     </a>
-                    <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-white/84 transition hover:bg-white/10 hover:text-white">
+                    <a href="{{ route('admin.news.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.news.*') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
                         <x-ui.icon name="newspaper" class="size-5" />
                         Berita
                     </a>
-                    <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-white/84 transition hover:bg-white/10 hover:text-white">
+                    <a href="{{ route('admin.gallery-items.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.gallery-items.*') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
                         <x-ui.icon name="image" class="size-5" />
                         Galeri
                     </a>

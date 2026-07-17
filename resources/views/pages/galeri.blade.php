@@ -1,18 +1,5 @@
 @extends('layouts.app', ['title' => 'Galeri - Golden Sierra School'])
 
-@php
-    $albums = [
-        ['title' => 'Kegiatan Belajar', 'count' => '18 Foto', 'copy' => 'Dokumentasi suasana kelas, diskusi, dan pembelajaran aktif.'],
-        ['title' => 'Prestasi Siswa', 'count' => '12 Foto', 'copy' => 'Momen lomba, penyerahan penghargaan, dan apresiasi siswa.'],
-        ['title' => 'Ekstrakurikuler', 'count' => '24 Foto', 'copy' => 'Kegiatan minat bakat yang membantu siswa berani mencoba.'],
-        ['title' => 'Lingkungan Sekolah', 'count' => '16 Foto', 'copy' => 'Area sekolah, fasilitas, dan ruang belajar sehari-hari.'],
-    ];
-
-    $gallery = [
-        'Upacara Pagi', 'Kelas Interaktif', 'Perpustakaan', 'Lapangan Sekolah', 'Laboratorium', 'Ekskul Basket', 'Kegiatan Literasi', 'Pentas Seni',
-    ];
-@endphp
-
 @section('content')
     <section class="bg-surface py-14 md:py-20">
         <div class="section-shell grid gap-10 lg:grid-cols-[1fr_360px] lg:items-end">
@@ -26,11 +13,11 @@
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Total Dokumentasi</p>
                 <div class="mt-4 grid grid-cols-2 gap-3">
                     <div class="rounded-lg bg-surface p-4">
-                        <p class="text-3xl font-black text-primary">70</p>
+                        <p class="text-3xl font-black text-primary">{{ $totalPhotos }}</p>
                         <p class="text-xs font-black uppercase text-secondary">Foto</p>
                     </div>
                     <div class="rounded-lg bg-accent p-4 text-primary">
-                        <p class="text-3xl font-black">4</p>
+                        <p class="text-3xl font-black">{{ $totalAlbums }}</p>
                         <p class="text-xs font-black uppercase">Album</p>
                     </div>
                 </div>
@@ -44,14 +31,14 @@
 
             <div class="js-stagger mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
                 @foreach ($albums as $album)
-                    <article class="motion-card js-card rounded-lg border-2 border-primary/15 bg-surface p-5 shadow-[4px_4px_0_rgba(31,92,69,.08)]">
+                    <a href="{{ route('galeri', ['album' => $album['active'] ? null : $album['title']]) }}" class="motion-card js-card rounded-lg border-2 p-5 shadow-[4px_4px_0_rgba(31,92,69,.08)] block transition {{ $album['active'] ? 'border-primary bg-primary/5 shadow-[4px_4px_0_rgba(31,92,69,.12)]' : 'border-primary/15 bg-surface text-primary hover:bg-secondary-muted' }}">
                         <div class="flex items-start justify-between gap-4">
                             <span class="rounded-md bg-white px-3 py-1 text-xs font-black uppercase text-secondary">{{ $album['count'] }}</span>
-                            <x-ui.icon name="arrow-right" class="size-5 text-primary" />
+                            <x-ui.icon name="arrow-right" class="size-5 text-primary transition duration-300 {{ $album['active'] ? 'rotate-90' : '' }}" />
                         </div>
                         <h2 class="mt-8 text-xl font-black text-primary">{{ $album['title'] }}</h2>
                         <p class="mt-3 text-sm leading-7 text-slate-600">{{ $album['copy'] }}</p>
-                    </article>
+                    </a>
                 @endforeach
             </div>
 
@@ -59,9 +46,13 @@
                 <div class="motion-card js-reveal overflow-hidden rounded-lg border-2 border-primary/15 bg-white shadow-[5px_5px_0_rgba(31,92,69,.10)] sm:col-span-2 lg:row-span-2">
                     <img src="{{ asset('images/home.jpg') }}" alt="Lingkungan Golden Sierra School" class="h-full min-h-[360px] w-full object-cover">
                 </div>
-                @foreach ($gallery as $item)
-                    <x-ui.media-placeholder :label="$item" ratio="aspect-[4/3]" class="motion-card" />
-                @endforeach
+                @forelse ($galleryItems as $item)
+                    <x-ui.media-placeholder :label="$item->title" ratio="aspect-[4/3]" class="motion-card" />
+                @empty
+                    <div class="col-span-full rounded-lg border-2 border-dashed border-primary/20 p-8 text-center text-slate-500 font-semibold">
+                        Tidak ada foto dalam album ini.
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

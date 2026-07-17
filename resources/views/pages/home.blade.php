@@ -32,12 +32,6 @@
         ['title' => 'Robotik', 'copy' => 'Mengenalkan logika, eksperimen, dan pemecahan masalah.'],
     ];
 
-    $gallery = ['Kelas Interaktif', 'Perpustakaan', 'Lapangan Sekolah', 'Laboratorium'];
-
-    $news = [
-        ['title' => 'Siswa Golden Sierra Raih Juara LKBB Tingkat Kota', 'date' => '11 Juni 2026', 'category' => 'Berita'],
-        ['title' => 'Kegiatan Literasi Pagi Dorong Budaya Membaca', 'date' => '9 Juni 2026', 'category' => 'Kegiatan'],
-    ];
 @endphp
 
 @section('content')
@@ -221,8 +215,8 @@
                         </div>
                     </div>
                 </div>
-                @foreach ($gallery as $item)
-                    <x-ui.media-placeholder class="js-card" :label="$item" ratio="aspect-[4/3]" />
+                @foreach ($galleryItems as $item)
+                    <x-ui.media-placeholder class="js-card" :label="$item->title" ratio="aspect-[4/3]" />
                 @endforeach
             </div>
         </div>
@@ -234,7 +228,7 @@
 
             <div class="js-stagger mt-12 grid gap-5">
                 @foreach ($news as $item)
-                    <x-ui.article-row :title="$item['title']" :date="$item['date']" :category="$item['category']" image-label="Berita" />
+                    <x-ui.article-row :title="$item->title" :date="$item->date" :category="$item->category" image-label="Berita" />
                 @endforeach
             </div>
 

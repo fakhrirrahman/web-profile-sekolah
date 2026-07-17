@@ -1,23 +1,5 @@
 @extends('layouts.app', ['title' => 'Berita - Golden Sierra School'])
 
-@php
-    $categories = ['Semua', 'Prestasi', 'Kegiatan', 'Akademik', 'Info Orang Tua'];
-
-    $featured = [
-        'title' => 'Siswa Golden Sierra Raih Juara LKBB Tingkat Kota',
-        'date' => '11 Juni 2026',
-        'category' => 'Prestasi',
-        'copy' => 'Tim siswa Golden Sierra menunjukkan disiplin, kekompakan, dan keberanian saat mengikuti lomba tingkat kota.',
-    ];
-
-    $articles = [
-        ['title' => 'Kegiatan Literasi Pagi Dorong Budaya Membaca', 'date' => '9 Juni 2026', 'category' => 'Kegiatan', 'copy' => 'Program literasi pagi membantu siswa membangun kebiasaan membaca secara ringan dan konsisten.'],
-        ['title' => 'Jadwal Asesmen Tengah Semester Telah Dibagikan', 'date' => '22 Juli 2026', 'category' => 'Akademik', 'copy' => 'Orang tua dapat melihat jadwal asesmen melalui wali kelas dan kanal komunikasi sekolah.'],
-        ['title' => 'Pengambilan Seragam dan Buku Paket', 'date' => '27 Juli 2026', 'category' => 'Info Orang Tua', 'copy' => 'Sekolah menyiapkan jadwal pengambilan bertahap agar proses tetap tertib dan nyaman.'],
-        ['title' => 'Ekskul Robotik Memulai Proyek Semester Baru', 'date' => '3 Agustus 2026', 'category' => 'Kegiatan', 'copy' => 'Siswa belajar mengenal logika, rangkaian sederhana, dan kebiasaan menyelesaikan masalah.'],
-    ];
-@endphp
-
 @section('content')
     <section class="bg-surface py-14 md:py-20">
         <div class="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
@@ -27,10 +9,13 @@
                 <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">Temukan pengumuman, agenda, dan cerita kegiatan sekolah dalam format yang mudah dipindai oleh siswa maupun orang tua.</p>
             </div>
 
-            <form action="#" class="motion-card js-card rounded-lg border-2 border-primary/15 bg-white p-4 shadow-[6px_6px_0_rgba(31,92,69,.10)]">
+            <form action="{{ route('berita') }}" method="GET" class="motion-card js-card rounded-lg border-2 border-primary/15 bg-white p-4 shadow-[6px_6px_0_rgba(31,92,69,.10)]">
+                @if(request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
                 <label for="news-search" class="sr-only">Cari berita</label>
                 <div class="flex overflow-hidden rounded-lg border-2 border-primary/20 bg-surface">
-                    <input id="news-search" type="search" placeholder="Cari berita atau pengumuman" class="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-slate-400">
+                    <input id="news-search" type="search" name="search" value="{{ $search }}" placeholder="Cari berita atau pengumuman" class="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-slate-400">
                     <button type="submit" class="bg-primary px-5 text-sm font-black text-white transition hover:bg-primary-dark">Cari</button>
                 </div>
             </form>
@@ -41,18 +26,24 @@
         <div class="section-shell">
             <div class="js-stagger flex flex-wrap gap-3">
                 @foreach ($categories as $category)
-                    <button type="button" class="js-card rounded-lg border-2 px-4 py-2 text-xs font-black uppercase tracking-wide transition {{ $loop->first ? 'border-primary bg-primary text-white shadow-[3px_3px_0_rgba(217,180,92,.35)]' : 'border-primary/15 bg-surface text-primary hover:bg-secondary-muted' }}">{{ $category }}</button>
+                    <a href="{{ route('berita', ['category' => $category, 'search' => $search]) }}" class="js-card rounded-lg border-2 px-4 py-2 text-xs font-black uppercase tracking-wide transition {{ $activeCategory === $category ? 'border-primary bg-primary text-white shadow-[3px_3px_0_rgba(217,180,92,.35)]' : 'border-primary/15 bg-surface text-primary hover:bg-secondary-muted' }}">{{ $category }}</a>
                 @endforeach
             </div>
 
             <div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
-                <article class="motion-card js-reveal rounded-lg border-2 border-primary/15 bg-surface p-6 shadow-[6px_6px_0_rgba(31,92,69,.10)] md:p-8">
-                    <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">{{ $featured['category'] }}</p>
-                    <h2 class="mt-4 text-3xl font-black leading-tight text-primary">{{ $featured['title'] }}</h2>
-                    <p class="mt-3 text-sm font-bold uppercase tracking-wide text-slate-500">{{ $featured['date'] }}</p>
-                    <p class="mt-5 text-base leading-8 text-slate-600">{{ $featured['copy'] }}</p>
-                    <x-ui.button href="#" variant="accent" class="mt-7">Baca Berita Utama</x-ui.button>
-                </article>
+                @if ($featured)
+                    <article class="motion-card js-reveal rounded-lg border-2 border-primary/15 bg-surface p-6 shadow-[6px_6px_0_rgba(31,92,69,.10)] md:p-8">
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">{{ $featured->category }}</p>
+                        <h2 class="mt-4 text-3xl font-black leading-tight text-primary">{{ $featured->title }}</h2>
+                        <p class="mt-3 text-sm font-bold uppercase tracking-wide text-slate-500">{{ $featured->date }}</p>
+                        <p class="mt-5 text-base leading-8 text-slate-600">{{ $featured->copy }}</p>
+                        <x-ui.button href="#" variant="accent" class="mt-7">Baca Berita Utama</x-ui.button>
+                    </article>
+                @else
+                    <div class="rounded-lg border-2 border-dashed border-primary/20 p-12 text-center text-slate-500 font-semibold">
+                        Belum ada berita utama yang tersedia.
+                    </div>
+                @endif
 
                 <aside class="rounded-lg border-2 border-primary/15 bg-white p-6 shadow-[5px_5px_0_rgba(31,92,69,.08)]">
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman Cepat</p>
@@ -70,22 +61,26 @@
             </div>
 
             <div class="js-stagger mt-10 grid gap-5">
-                @foreach ($articles as $article)
+                @forelse ($articles as $article)
                     <article class="motion-card js-card rounded-lg border-2 border-primary/12 bg-white p-5 shadow-[4px_4px_0_rgba(31,92,69,.08)] transition">
                         <div class="grid gap-5 md:grid-cols-[180px_minmax(0,1fr)_auto] md:items-center">
                             <div class="media-placeholder-bg aspect-[4/3] rounded-lg"></div>
                             <div>
                                 <div class="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-wide">
-                                    <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $article['category'] }}</span>
-                                    <span class="text-slate-500">{{ $article['date'] }}</span>
+                                    <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $article->category }}</span>
+                                    <span class="text-slate-500">{{ $article->date }}</span>
                                 </div>
-                                <h3 class="mt-3 text-xl font-black leading-tight text-primary">{{ $article['title'] }}</h3>
-                                <p class="mt-3 text-sm leading-7 text-slate-600">{{ $article['copy'] }}</p>
+                                <h3 class="mt-3 text-xl font-black leading-tight text-primary">{{ $article->title }}</h3>
+                                <p class="mt-3 text-sm leading-7 text-slate-600">{{ $article->copy }}</p>
                             </div>
                             <x-ui.button href="#" variant="outline" size="sm">Detail</x-ui.button>
                         </div>
                     </article>
-                @endforeach
+                @empty
+                    <div class="rounded-lg border-2 border-dashed border-primary/20 p-8 text-center text-slate-500 font-semibold">
+                        Tidak ada berita lain yang ditemukan.
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

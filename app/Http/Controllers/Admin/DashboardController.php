@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
+use App\Models\GalleryItem;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -11,14 +13,14 @@ class DashboardController extends Controller
     {
         $stats = [
             ['label' => 'Pengumuman Aktif', 'value' => '3', 'tone' => 'primary'],
-            ['label' => 'Berita Terbit', 'value' => '2', 'tone' => 'secondary'],
-            ['label' => 'Galeri Ditampilkan', 'value' => '5', 'tone' => 'accent'],
+            ['label' => 'Berita Terbit', 'value' => (string) News::query()->where('is_active', true)->count(), 'tone' => 'secondary'],
+            ['label' => 'Galeri Ditampilkan', 'value' => (string) GalleryItem::query()->where('is_active', true)->count(), 'tone' => 'accent'],
             ['label' => 'Pesan Masuk', 'value' => '0', 'tone' => 'neutral'],
         ];
 
         $modules = [
-            ['title' => 'Berita', 'copy' => 'Kelola kabar sekolah, kategori, dan tanggal publikasi.', 'icon' => 'newspaper', 'href' => '#'],
-            ['title' => 'Galeri', 'copy' => 'Atur dokumentasi kegiatan dan highlight halaman utama.', 'icon' => 'image', 'href' => '#'],
+            ['title' => 'Berita', 'copy' => 'Kelola berita, pengumuman, dan artikel dinamis sekolah.', 'icon' => 'newspaper', 'href' => route('admin.news.index')],
+            ['title' => 'Galeri', 'copy' => 'Atur foto-foto dokumentasi kegiatan dan fasilitas sekolah.', 'icon' => 'image', 'href' => route('admin.gallery-items.index')],
             ['title' => 'PPDB', 'copy' => 'Siapkan jadwal, alur pendaftaran, dan info administrasi.', 'icon' => 'calendar', 'href' => '#'],
             ['title' => 'Profil Sekolah', 'copy' => 'Perbarui visi, misi, budaya, dan struktur sekolah.', 'icon' => 'users', 'href' => '#'],
         ];
