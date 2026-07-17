@@ -103,6 +103,40 @@ class HomeController extends Controller
         ]);
     }
 
+    public function beritaShow(News $news): View
+    {
+        abort_unless($news->is_active, 404);
+
+        $this->appendNewsImageUrls(collect([$news]));
+
+        $relatedNews = News::query()
+            ->where('is_active', true)
+            ->where('id', '!=', $news->id)
+            ->where('category', $news->category)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        if ($relatedNews->count() < 3) {
+            $fallbackNews = News::query()
+                ->where('is_active', true)
+                ->where('id', '!=', $news->id)
+                ->whereNotIn('id', $relatedNews->pluck('id'))
+                ->latest()
+                ->take(3 - $relatedNews->count())
+                ->get();
+
+            $relatedNews = $relatedNews->concat($fallbackNews);
+        }
+
+        $this->appendNewsImageUrls($relatedNews);
+
+        return view('pages.berita-detail', [
+            'news' => $news,
+            'relatedNews' => $relatedNews,
+        ]);
+    }
+
     public function ppdb(): View
     {
         return view('pages.ppdb');

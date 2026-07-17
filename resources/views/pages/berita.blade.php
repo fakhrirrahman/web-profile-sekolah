@@ -44,6 +44,7 @@
                         <h2 class="mt-4 text-3xl font-black leading-tight text-primary">{{ $featured->title }}</h2>
                         <p class="mt-3 text-sm font-bold uppercase tracking-wide text-slate-500">{{ $featured->date }}</p>
                         <p class="mt-5 text-base leading-8 text-slate-600">{{ $featured->copy }}</p>
+                        <x-ui.button href="{{ route('berita.show', $featured->slug) }}" variant="accent" class="mt-7">Baca Selengkapnya</x-ui.button>
                     </article>
                 @else
                     <div class="rounded-lg border-2 border-dashed border-primary/20 p-12 text-center text-slate-500 font-semibold">
@@ -55,11 +56,11 @@
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman Cepat</p>
                     <div class="mt-5 grid gap-4">
                         @forelse ($quickAnnouncements as $announcement)
-                            <article class="rounded-lg {{ $loop->odd ? 'bg-surface' : 'bg-accent text-primary' }} p-4">
+                            <a href="{{ route('berita.show', $announcement->slug) }}" class="block rounded-lg {{ $loop->odd ? 'bg-surface' : 'bg-accent text-primary' }} p-4 transition hover:-translate-y-0.5">
                                 <p class="text-[11px] font-black uppercase tracking-wide {{ $loop->odd ? 'text-secondary' : 'text-primary/70' }}">{{ $announcement->category }}</p>
                                 <h3 class="mt-2 text-sm font-black text-primary">{{ $announcement->title }}</h3>
                                 <p class="mt-2 text-sm {{ $loop->odd ? 'text-slate-600' : 'font-semibold text-primary/80' }} leading-6">{{ $announcement->date }}</p>
-                            </article>
+                            </a>
                         @empty
                             <div class="rounded-lg border-2 border-dashed border-primary/15 bg-surface p-4 text-sm font-semibold leading-6 text-slate-500">
                                 Belum ada pengumuman tambahan untuk filter ini.
@@ -87,6 +88,7 @@
                                 </div>
                                 <h3 class="mt-3 text-xl font-black leading-tight text-primary">{{ $article->title }}</h3>
                                 <p class="mt-3 text-sm leading-7 text-slate-600">{{ $article->copy }}</p>
+                                <x-ui.button href="{{ route('berita.show', $article->slug) }}" variant="outline" size="sm" class="mt-4">Detail</x-ui.button>
                             </div>
                         </div>
                     </article>

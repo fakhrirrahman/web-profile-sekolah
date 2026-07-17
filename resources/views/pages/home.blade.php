@@ -246,7 +246,15 @@
 
             <div class="js-stagger mt-12 grid gap-5">
                 @foreach ($news as $item)
-                    <x-ui.article-row :title="$item->title" :date="$item->date" :category="$item->category" image-label="Berita" />
+                    <x-ui.article-row
+                        :title="$item->title"
+                        :date="$item->date"
+                        :category="$item->category"
+                        :excerpt="$item->copy"
+                        :image-url="$item->image_url"
+                        image-label="Berita"
+                        :href="route('berita.show', $item->slug)"
+                    />
                 @endforeach
             </div>
 

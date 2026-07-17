@@ -9,6 +9,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::get('/berita', [HomeController::class, 'berita'])->name('berita');
+Route::get('/berita/{news:slug}', [HomeController::class, 'beritaShow'])->name('berita.show');
 Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 Route::get('/ppdb', [HomeController::class, 'ppdb'])->name('ppdb');
 Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak');
