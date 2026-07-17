@@ -37,7 +37,7 @@
                 <p class="mt-5 max-w-2xl text-base leading-8 text-white/80">Halaman ini merangkum alur, jadwal, dan persyaratan pendaftaran agar orang tua dapat mengambil keputusan dengan tenang.</p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <x-ui.button href="#form-ppdb" variant="accent" size="lg">Isi Formulir</x-ui.button>
-                    <x-ui.button href="#alur-ppdb" variant="muted" size="lg">Lihat Alur</x-ui.button>
+                    <x-ui.button href="{{ route('ppdb.status') }}" variant="muted" size="lg">Cek Status</x-ui.button>
                 </div>
             </div>
 
@@ -66,6 +66,8 @@
                     <div class="mt-6 rounded-lg border-2 border-green-200 bg-green-50 p-4 text-green-700">
                         <p class="text-xs font-black uppercase tracking-wide">Pendaftaran terkirim</p>
                         <p class="mt-2 text-sm font-bold">Nomor pendaftaran: {{ session('registration_number') }}</p>
+                        <p class="mt-1 text-xs font-semibold">Simpan nomor ini untuk mengecek status pendaftaran.</p>
+                        <x-ui.button href="{{ route('ppdb.status') }}" variant="outline" size="sm" class="mt-4">Cek Status</x-ui.button>
                     </div>
                 @endif
 

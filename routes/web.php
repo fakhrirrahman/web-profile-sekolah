@@ -14,6 +14,7 @@ Route::get('/berita/{news:slug}', [HomeController::class, 'beritaShow'])->name('
 Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 Route::get('/ppdb', [HomeController::class, 'ppdb'])->name('ppdb');
 Route::post('/ppdb', [PpdbRegistrationController::class, 'store'])->name('ppdb.store');
+Route::get('/ppdb/status', [PpdbRegistrationController::class, 'status'])->name('ppdb.status');
 Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak');
 
 Route::middleware('guest')->group(function () {
