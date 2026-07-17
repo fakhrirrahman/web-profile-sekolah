@@ -30,22 +30,25 @@
 @endphp
 
 @section('content')
-    <section class="bg-surface py-14 md:py-20">
+    <section class="relative isolate bg-primary py-14 text-white md:py-20">
+        <img src="{{ asset('images/kegiatan-literasi.png') }}" alt="Kegiatan literasi Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
+        <div class="hero-overlay absolute inset-0 -z-10"></div>
+
         <div class="section-shell">
             <div class="js-reveal grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
                 <div>
-                    <p class="inline-flex rounded-lg border-2 border-primary/20 bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.10)]">
+                    <p class="inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">
                         Profil Sekolah
                     </p>
-                    <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">
+                    <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">
                         Mengenal Golden Sierra School lebih dekat.
                     </h1>
-                    <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">
+                    <p class="mt-5 max-w-2xl text-base leading-8 text-white/80">
                         Golden Sierra School hadir sebagai lingkungan belajar yang tertata, hangat, dan membantu anak tumbuh percaya diri bersama keluarga.
                     </p>
                 </div>
 
-                <div class="motion-card js-card rounded-lg border-2 border-primary/15 bg-white p-5 shadow-[6px_6px_0_rgba(31,92,69,.10)]">
+                <div class="motion-card js-card rounded-lg border-2 border-white/40 bg-white/90 p-5 shadow-[6px_6px_0_rgba(217,180,92,.18)] backdrop-blur">
                     <div class="grid gap-3 sm:grid-cols-3">
                         <div class="rounded-lg bg-surface p-4">
                             <p class="text-3xl font-black text-primary">24</p>

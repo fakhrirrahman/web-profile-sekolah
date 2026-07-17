@@ -1,15 +1,18 @@
 @extends('layouts.app', ['title' => 'Berita - Golden Sierra School'])
 
 @section('content')
-    <section class="bg-surface py-14 md:py-20">
+    <section class="relative isolate bg-primary py-14 text-white md:py-20">
+        <img src="{{ asset('images/berita.png') }}" alt="Berita Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
+        <div class="hero-overlay absolute inset-0 -z-10"></div>
+
         <div class="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div class="js-reveal">
-                <p class="inline-flex rounded-lg border-2 border-primary/20 bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.10)]">Berita Sekolah</p>
-                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">Kabar terbaru dari kegiatan dan prestasi Golden Sierra.</h1>
-                <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">Temukan pengumuman, agenda, dan cerita kegiatan sekolah dalam format yang mudah dipindai oleh siswa maupun orang tua.</p>
+                <p class="inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">Berita Sekolah</p>
+                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Kabar terbaru dari kegiatan dan prestasi Golden Sierra.</h1>
+                <p class="mt-5 max-w-2xl text-base leading-8 text-white/80">Temukan pengumuman, agenda, dan cerita kegiatan sekolah dalam format yang mudah dipindai oleh siswa maupun orang tua.</p>
             </div>
 
-            <form action="{{ route('berita') }}" method="GET" class="motion-card js-card rounded-lg border-2 border-primary/15 bg-white p-4 shadow-[6px_6px_0_rgba(31,92,69,.10)]">
+            <form action="{{ route('berita') }}" method="GET" class="motion-card js-card rounded-lg border-2 border-white/40 bg-white/90 p-4 shadow-[6px_6px_0_rgba(217,180,92,.18)] backdrop-blur">
                 @if(request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
