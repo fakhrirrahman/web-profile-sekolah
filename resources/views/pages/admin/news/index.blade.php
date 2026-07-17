@@ -7,9 +7,7 @@
                 <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Berita & Kegiatan</p>
                 <h2 class="mt-1 text-2xl font-black text-primary">Daftar Berita</h2>
             </div>
-            <x-ui.button href="{{ route('admin.news.create') }}" variant="accent" size="sm">
-                + Tambah Berita
-            </x-ui.button>
+            <x-news.create-modal />
         </div>
 
         <div class="mt-6 overflow-x-auto rounded-lg border-2 border-primary/10">
@@ -46,9 +44,7 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex justify-end gap-2">
-                                    <x-ui.button href="{{ route('admin.news.edit', $news) }}" variant="outline" size="sm">
-                                        Edit
-                                    </x-ui.button>
+                                    <x-news.create-modal :news="$news" :id="'news-edit-modal-' . $news->id" />
                                     <form method="POST" action="{{ route('admin.news.destroy', $news) }}"
                                         data-confirm
                                         data-confirm-title="Hapus berita?"

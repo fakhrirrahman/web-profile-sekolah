@@ -33,11 +33,17 @@
             <div class="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
                 @if ($featured)
                     <article class="motion-card js-reveal rounded-lg border-2 border-primary/15 bg-surface p-6 shadow-[6px_6px_0_rgba(31,92,69,.10)] md:p-8">
-                        <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">{{ $featured->category }}</p>
+                        <div class="overflow-hidden rounded-lg border-2 border-primary/10 bg-white">
+                            @if ($featured->image_url)
+                                <img src="{{ $featured->image_url }}" alt="{{ $featured->title }}" class="aspect-[16/9] w-full object-cover">
+                            @else
+                                <div class="media-placeholder-bg aspect-[16/9]"></div>
+                            @endif
+                        </div>
+                        <p class="mt-6 text-xs font-black uppercase tracking-[0.18em] text-secondary">{{ $featured->category }}</p>
                         <h2 class="mt-4 text-3xl font-black leading-tight text-primary">{{ $featured->title }}</h2>
                         <p class="mt-3 text-sm font-bold uppercase tracking-wide text-slate-500">{{ $featured->date }}</p>
                         <p class="mt-5 text-base leading-8 text-slate-600">{{ $featured->copy }}</p>
-                        <x-ui.button href="#" variant="accent" class="mt-7">Baca Berita Utama</x-ui.button>
                     </article>
                 @else
                     <div class="rounded-lg border-2 border-dashed border-primary/20 p-12 text-center text-slate-500 font-semibold">
@@ -48,14 +54,17 @@
                 <aside class="rounded-lg border-2 border-primary/15 bg-white p-6 shadow-[5px_5px_0_rgba(31,92,69,.08)]">
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman Cepat</p>
                     <div class="mt-5 grid gap-4">
-                        <div class="rounded-lg bg-surface p-4">
-                            <p class="text-sm font-black text-primary">PPDB 2026/2027</p>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">Pendaftaran reguler dibuka setiap hari kerja.</p>
-                        </div>
-                        <div class="rounded-lg bg-accent p-4 text-primary">
-                            <p class="text-sm font-black">Konsultasi Orang Tua</p>
-                            <p class="mt-2 text-sm font-semibold leading-6">Hubungi admin sekolah untuk jadwal kunjungan.</p>
-                        </div>
+                        @forelse ($quickAnnouncements as $announcement)
+                            <article class="rounded-lg {{ $loop->odd ? 'bg-surface' : 'bg-accent text-primary' }} p-4">
+                                <p class="text-[11px] font-black uppercase tracking-wide {{ $loop->odd ? 'text-secondary' : 'text-primary/70' }}">{{ $announcement->category }}</p>
+                                <h3 class="mt-2 text-sm font-black text-primary">{{ $announcement->title }}</h3>
+                                <p class="mt-2 text-sm {{ $loop->odd ? 'text-slate-600' : 'font-semibold text-primary/80' }} leading-6">{{ $announcement->date }}</p>
+                            </article>
+                        @empty
+                            <div class="rounded-lg border-2 border-dashed border-primary/15 bg-surface p-4 text-sm font-semibold leading-6 text-slate-500">
+                                Belum ada pengumuman tambahan untuk filter ini.
+                            </div>
+                        @endforelse
                     </div>
                 </aside>
             </div>
@@ -63,8 +72,14 @@
             <div class="js-stagger mt-10 grid gap-5">
                 @forelse ($articles as $article)
                     <article class="motion-card js-card rounded-lg border-2 border-primary/12 bg-white p-5 shadow-[4px_4px_0_rgba(31,92,69,.08)] transition">
-                        <div class="grid gap-5 md:grid-cols-[180px_minmax(0,1fr)_auto] md:items-center">
-                            <div class="media-placeholder-bg aspect-[4/3] rounded-lg"></div>
+                        <div class="grid gap-5 md:grid-cols-[180px_minmax(0,1fr)] md:items-center">
+                            <div class="overflow-hidden rounded-lg border-2 border-primary/10 bg-surface">
+                                @if ($article->image_url)
+                                    <img src="{{ $article->image_url }}" alt="{{ $article->title }}" class="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-105">
+                                @else
+                                    <div class="media-placeholder-bg aspect-[4/3]"></div>
+                                @endif
+                            </div>
                             <div>
                                 <div class="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-wide">
                                     <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $article->category }}</span>
@@ -73,7 +88,6 @@
                                 <h3 class="mt-3 text-xl font-black leading-tight text-primary">{{ $article->title }}</h3>
                                 <p class="mt-3 text-sm leading-7 text-slate-600">{{ $article->copy }}</p>
                             </div>
-                            <x-ui.button href="#" variant="outline" size="sm">Detail</x-ui.button>
                         </div>
                     </article>
                 @empty

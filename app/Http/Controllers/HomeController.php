@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -19,6 +20,7 @@ class HomeController extends Controller
             ->latest()
             ->take(2)
             ->get();
+        $this->appendNewsImageUrls($news);
 
         $galleryItems = GalleryItem::query()
             ->where('is_active', true)
@@ -38,7 +40,16 @@ class HomeController extends Controller
 
     public function berita(Request $request): View
     {
-        $categories = ['Semua', 'Prestasi', 'Kegiatan', 'Akademik', 'Info Orang Tua'];
+        $categories = collect(['Semua'])
+            ->merge(
+                News::query()
+                    ->where('is_active', true)
+                    ->distinct()
+                    ->orderBy('category')
+                    ->pluck('category')
+            )
+            ->values()
+            ->all();
 
         $search = $request->input('search');
         $activeCategory = $request->input('category', 'Semua');
@@ -68,12 +79,26 @@ class HomeController extends Controller
         if ($featured) {
             $articlesQuery->where('id', '!=', $featured->id);
         }
+        $articles = $articlesQuery->latest()->get();
+
+        $quickAnnouncementsQuery = clone $query;
+        if ($featured) {
+            $quickAnnouncementsQuery->where('id', '!=', $featured->id);
+        }
+        $quickAnnouncements = $quickAnnouncementsQuery->latest()->take(2)->get();
+
+        $newsItems = collect($articles->all());
+        if ($featured) {
+            $newsItems = $newsItems->push($featured);
+        }
+        $this->appendNewsImageUrls($newsItems);
 
         return view('pages.berita', [
             'categories' => $categories,
             'activeCategory' => $activeCategory,
             'featured' => $featured,
-            'articles' => $articlesQuery->latest()->get(),
+            'articles' => $articles,
+            'quickAnnouncements' => $quickAnnouncements,
             'search' => $search,
         ]);
     }
@@ -141,6 +166,17 @@ class HomeController extends Controller
             $item->image_url = $item->image
                 ? Storage::disk('public')->url($item->image)
                 : null;
+        });
+    }
+
+    private function appendNewsImageUrls(Collection $newsItems): void
+    {
+        $newsItems->each(function (News $item) {
+            $item->image_url = match (true) {
+                blank($item->image) => null,
+                Str::startsWith($item->image, ['http://', 'https://', '/']) => $item->image,
+                default => Storage::disk('public')->url($item->image),
+            };
         });
     }
 }
