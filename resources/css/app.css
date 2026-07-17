@@ -27,6 +27,10 @@
 }
 
 @layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
     ::selection {
         background: var(--color-accent-muted);
         color: var(--color-primary);

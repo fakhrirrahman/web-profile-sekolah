@@ -7,9 +7,7 @@
                 <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Galeri & Dokumentasi</p>
                 <h2 class="mt-1 text-2xl font-black text-primary">Daftar Foto Galeri</h2>
             </div>
-            <x-ui.button href="{{ route('admin.gallery-items.create') }}" variant="accent" size="sm">
-                + Tambah Foto
-            </x-ui.button>
+            <x-gallery.create-modal />
         </div>
 
         @if (session('status'))
