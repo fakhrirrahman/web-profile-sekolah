@@ -43,7 +43,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <div class="flex justify-end gap-2">
+                                <x-admin.action-menu>
                                     <x-news.create-modal :news="$news" :id="'news-edit-modal-' . $news->id" />
                                     <form method="POST" action="{{ route('admin.news.destroy', $news) }}"
                                         data-confirm
@@ -51,11 +51,11 @@
                                         data-confirm-text="Berita {{ $news->title }} akan dihapus dari daftar berita.">
                                         @csrf
                                         @method('DELETE')
-                                        <x-ui.button type="submit" variant="muted" size="sm" class="hover:border-red-200 hover:bg-red-50 hover:text-red-700">
+                                        <x-ui.button type="submit" variant="muted" size="sm" class="w-full hover:border-red-200 hover:bg-red-50 hover:text-red-700">
                                             Hapus
                                         </x-ui.button>
                                     </form>
-                                </div>
+                                </x-admin.action-menu>
                             </td>
                         </tr>
                     @empty

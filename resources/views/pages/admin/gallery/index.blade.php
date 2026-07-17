@@ -54,7 +54,7 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <div class="flex justify-end gap-2">
+                                <x-admin.action-menu>
                                     <x-gallery.create-modal :gallery-item="$item" :id="'gallery-edit-modal-' . $item->id" />
                                     <form method="POST" action="{{ route('admin.gallery-items.destroy', $item) }}"
                                         data-confirm
@@ -63,11 +63,11 @@
                                         @csrf
                                         @method('DELETE')
                                         <x-ui.button type="submit" variant="muted" size="sm"
-                                            class="hover:border-red-200 hover:bg-red-50 hover:text-red-700">
+                                            class="w-full hover:border-red-200 hover:bg-red-50 hover:text-red-700">
                                             Hapus
                                         </x-ui.button>
                                     </form>
-                                </div>
+                                </x-admin.action-menu>
                             </td>
                         </tr>
                     @empty

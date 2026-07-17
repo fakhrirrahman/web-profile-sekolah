@@ -60,6 +60,12 @@
             <path d="M21 12H9"></path>
             @break
 
+        @case('more-vertical')
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="12" cy="5" r="1"></circle>
+            <circle cx="12" cy="19" r="1"></circle>
+            @break
+
         @case('arrow-right')
         @default
             <path d="M5 12h14"></path>

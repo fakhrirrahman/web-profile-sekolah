@@ -71,17 +71,17 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <div class="flex min-w-56 flex-col gap-2">
-                                    <form method="POST" action="{{ route('admin.ppdb-registrations.update', $registration) }}" class="flex gap-2">
+                                <x-admin.action-menu>
+                                    <form method="POST" action="{{ route('admin.ppdb-registrations.update', $registration) }}" class="grid gap-2">
                                         @csrf
                                         @method('PUT')
                                         <label class="sr-only" for="status-{{ $registration->id }}">Status PPDB</label>
-                                        <select id="status-{{ $registration->id }}" name="status" class="min-w-0 flex-1 rounded-lg border-2 border-primary/15 bg-white px-3 py-2 text-xs font-bold text-primary outline-none focus:border-primary">
+                                        <select id="status-{{ $registration->id }}" name="status" class="w-full rounded-lg border-2 border-primary/15 bg-white px-3 py-2 text-xs font-bold text-primary outline-none focus:border-primary">
                                             @foreach ($statuses as $value => $label)
                                                 <option value="{{ $value }}" @selected($registration->status === $value)>{{ $label }}</option>
                                             @endforeach
                                         </select>
-                                        <x-ui.button type="submit" variant="outline" size="sm">Simpan</x-ui.button>
+                                        <x-ui.button type="submit" variant="outline" size="sm" class="w-full">Simpan</x-ui.button>
                                     </form>
 
                                     <form method="POST" action="{{ route('admin.ppdb-registrations.destroy', $registration) }}"
@@ -94,7 +94,7 @@
                                             Hapus
                                         </x-ui.button>
                                     </form>
-                                </div>
+                                </x-admin.action-menu>
                             </td>
                         </tr>
                     @empty
