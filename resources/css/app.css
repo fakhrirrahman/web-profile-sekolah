@@ -127,6 +127,29 @@
         will-change: transform, filter;
     }
 
+    .js .js-reveal:not(.is-revealed),
+    .js .js-stagger .js-card:not(.is-revealed) {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .js .js-reveal:not(.is-revealed) {
+        transform: translateY(36px);
+    }
+
+    .js .js-stagger .js-card:not(.is-revealed) {
+        transform: translateY(28px) scale(0.985);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .js .js-reveal:not(.is-revealed),
+        .js .js-stagger .js-card:not(.is-revealed) {
+            opacity: 1;
+            transform: none;
+            visibility: visible;
+        }
+    }
+
     .neo-surface {
         border: 2px solid color-mix(in oklab, var(--color-primary) 75%, black);
         box-shadow: 5px 5px 0 color-mix(in oklab, var(--color-primary) 14%, transparent);

@@ -111,11 +111,13 @@ const setupGsapMotion = () => {
     const heroPanel = document.querySelector('.js-hero-panel');
     const heroImage = document.querySelector('.js-hero-image');
     const heroSection = document.querySelector('#beranda');
+    const revealTargets = gsap.utils.toArray('.js-reveal');
+    const staggerGroups = gsap.utils.toArray('.js-stagger');
 
     if (prefersReducedMotion) {
         const reducedTargets = [
             ...heroItems,
-            ...gsap.utils.toArray('.js-reveal'),
+            ...revealTargets,
             ...gsap.utils.toArray('.js-card'),
         ];
 
@@ -124,6 +126,7 @@ const setupGsapMotion = () => {
         }
 
         if (reducedTargets.length) {
+            reducedTargets.forEach((target) => target.classList.add('is-revealed'));
             gsap.set(reducedTargets, {
                 autoAlpha: 1,
                 clearProps: 'all',
@@ -208,17 +211,51 @@ const setupGsapMotion = () => {
         });
     }
 
-    const revealOnce = (element, animation) => {
-        ScrollTrigger.create({
-            trigger: element,
-            start: 'top 88%',
-            once: true,
-            onEnter: () => animation(),
+    if (revealTargets.length) {
+        gsap.set(revealTargets, {
+            autoAlpha: 0,
+            y: 36,
         });
+    }
+
+    staggerGroups.forEach((container) => {
+        const cards = container.querySelectorAll('.js-card');
+
+        if (cards.length) {
+            gsap.set(cards, {
+                autoAlpha: 0,
+                y: 28,
+                scale: 0.985,
+            });
+        }
+    });
+
+    const revealOnce = (element, animation) => {
+        if (!('IntersectionObserver' in window)) {
+            animation();
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                observer.unobserve(element);
+                animation();
+            });
+        }, {
+            rootMargin: '0px 0px -12% 0px',
+            threshold: 0,
+        });
+
+        observer.observe(element);
     };
 
-    gsap.utils.toArray('.js-reveal').forEach((section) => {
+    revealTargets.forEach((section) => {
         revealOnce(section, () => {
+            section.classList.add('is-revealed');
             gsap.fromTo(section, {
                 autoAlpha: 0,
                 y: 36,
@@ -231,7 +268,7 @@ const setupGsapMotion = () => {
         });
     });
 
-    gsap.utils.toArray('.js-stagger').forEach((container) => {
+    staggerGroups.forEach((container) => {
         const cards = container.querySelectorAll('.js-card');
 
         if (!cards.length) {
@@ -239,6 +276,7 @@ const setupGsapMotion = () => {
         }
 
         revealOnce(container, () => {
+            cards.forEach((card) => card.classList.add('is-revealed'));
             gsap.fromTo(cards, {
                 autoAlpha: 0,
                 y: 28,
