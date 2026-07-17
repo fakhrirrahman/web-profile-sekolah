@@ -39,8 +39,8 @@
 
     <!-- Modal Header -->
     <div class="mb-5 border-b-2 border-primary/8 pb-4">
-        <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Galeri & Dokumentasi</p>
-        <h2 class="mt-1 text-xl font-black text-primary">{{ $modalTitle }}</h2>
+        <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary text-start">Galeri & Dokumentasi</p>
+        <h2 class="mt-1 text-xl font-black text-primary text-start">{{ $modalTitle }}</h2>
     </div>
 
     <!-- Form -->
