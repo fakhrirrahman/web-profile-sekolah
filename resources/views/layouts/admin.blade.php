@@ -48,7 +48,7 @@
                         <x-ui.icon name="image" class="size-5" />
                         Galeri
                     </a>
-                    <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-white/84 transition hover:bg-white/10 hover:text-white">
+                    <a href="{{ route('admin.ppdb-registrations.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.ppdb-registrations.*') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
                         <x-ui.icon name="calendar" class="size-5" />
                         PPDB
                     </a>
