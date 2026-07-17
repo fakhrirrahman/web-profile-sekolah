@@ -10,13 +10,6 @@
             <x-gallery.create-modal />
         </div>
 
-        @if (session('status'))
-            <div
-                class="mt-6 rounded-lg border-2 border-secondary/20 bg-secondary-muted px-4 py-3 text-sm font-semibold text-primary">
-                {{ session('status') }}
-            </div>
-        @endif
-
         <div class="mt-6 overflow-x-auto rounded-lg border-2 border-primary/10">
             <table class="w-full border-collapse text-left text-sm text-slate-600">
                 <thead
@@ -64,7 +57,9 @@
                                 <div class="flex justify-end gap-2">
                                     <x-gallery.create-modal :gallery-item="$item" :id="'gallery-edit-modal-' . $item->id" />
                                     <form method="POST" action="{{ route('admin.gallery-items.destroy', $item) }}"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus foto galeri ini?')">
+                                        data-confirm
+                                        data-confirm-title="Hapus foto galeri?"
+                                        data-confirm-text="Foto {{ $item->title }} akan dihapus dari daftar galeri.">
                                         @csrf
                                         @method('DELETE')
                                         <x-ui.button type="submit" variant="muted" size="sm"

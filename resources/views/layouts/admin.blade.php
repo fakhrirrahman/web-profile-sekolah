@@ -8,6 +8,18 @@
     <title>{{ $title ?? 'Admin - '.config('app.name', 'Golden Sierra School') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .gs-confirm-popup{width:min(100% - 2rem,32rem)!important;padding:1.5rem!important;border:2px solid rgba(31,92,69,.16)!important;border-radius:.5rem!important;background:#fff!important;color:#25362f!important;font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;box-shadow:8px 8px 0 rgba(31,92,69,.14)!important}
+        .gs-confirm-title{margin:0!important;color:#1f5c45!important;font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-size:1.35rem!important;font-weight:900!important;line-height:1.2!important}
+        .gs-confirm-html{margin:.75rem 0 0!important;color:#647067!important;font-size:.92rem!important;font-weight:650!important;line-height:1.7!important;text-align:left!important}
+        .gs-confirm-badge{display:inline-flex;align-items:center;margin-bottom:.9rem;border-left:4px solid #d9b45c;background:#f7f5ef;padding:.55rem .75rem;color:#2b7357;font-size:.68rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+        .gs-confirm-actions{margin-top:1.4rem!important;gap:.7rem!important}
+        .gs-confirm-button,.gs-cancel-button{min-width:6.75rem!important;height:2.5rem!important;margin:0!important;border:2px solid!important;border-radius:.5rem!important;box-shadow:3px 3px 0 rgba(31,92,69,.14)!important;font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-size:.78rem!important;font-weight:900!important;text-transform:uppercase!important;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease!important}
+        .gs-confirm-button{border-color:#7f1d1d!important;background:#dc2626!important;color:#fff!important}
+        .gs-cancel-button{border-color:rgba(31,92,69,.55)!important;background:#fff!important;color:#1f5c45!important}
+        .gs-confirm-button:hover,.gs-cancel-button:hover{transform:translate(-1px,-1px)!important;box-shadow:5px 5px 0 rgba(31,92,69,.12)!important}
+        .gs-confirm-button:focus-visible,.gs-cancel-button:focus-visible{outline:2px solid #d9b45c!important;outline-offset:2px!important}
+    </style>
 </head>
 <body class="bg-surface font-sans text-slate-700 antialiased">
     <div class="min-h-dvh lg:grid lg:grid-cols-[280px_minmax(0,1fr)]">
@@ -81,5 +93,88 @@
             </main>
         </div>
     </div>
+    <script>
+        (() => {
+            const scriptUrl = '{{ asset('vendor/flasher/sweetalert2.min.js') }}';
+            const styleUrl = '{{ asset('vendor/flasher/sweetalert2.min.css') }}';
+            let sweetAlertPromise = null;
+
+            function loadSweetAlert() {
+                if (window.Swal) {
+                    return Promise.resolve(window.Swal);
+                }
+
+                if (!document.querySelector(`link[href="${styleUrl}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = styleUrl;
+                    document.head.appendChild(link);
+                }
+
+                sweetAlertPromise ??= new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = scriptUrl;
+                    script.onload = () => resolve(window.Swal);
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+
+                return sweetAlertPromise;
+            }
+
+            function escapeHtml(value) {
+                return value.replace(/[&<>"']/g, (character) => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;',
+                })[character]);
+            }
+
+            document.addEventListener('submit', async (event) => {
+                const form = event.target;
+
+                if (!(form instanceof HTMLFormElement) || !form.matches('[data-confirm]') || form.dataset.confirmed) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                try {
+                    const Swal = await loadSweetAlert();
+                    const message = form.dataset.confirmText || 'Aksi ini tidak bisa dibatalkan.';
+                    const result = await Swal.fire({
+                        title: form.dataset.confirmTitle || 'Lanjutkan aksi?',
+                        html: `
+                            <div class="gs-confirm-badge">Konfirmasi</div>
+                            <p>${escapeHtml(message)}</p>
+                        `,
+                        showCancelButton: true,
+                        confirmButtonText: form.dataset.confirmButton || 'Ya, hapus',
+                        cancelButtonText: form.dataset.cancelButton || 'Batal',
+                        reverseButtons: true,
+                        focusCancel: true,
+                        buttonsStyling: false,
+                        customClass: {
+                            popup: 'gs-confirm-popup',
+                            title: 'gs-confirm-title',
+                            htmlContainer: 'gs-confirm-html',
+                            actions: 'gs-confirm-actions',
+                            confirmButton: 'gs-confirm-button',
+                            cancelButton: 'gs-cancel-button',
+                        },
+                    });
+
+                    if (result.isConfirmed) {
+                        form.dataset.confirmed = 'true';
+                        form.submit();
+                    }
+                } catch (error) {
+                    console.error('Gagal memuat SweetAlert.', error);
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

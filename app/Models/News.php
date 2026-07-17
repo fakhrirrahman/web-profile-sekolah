@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-#[Fillable(['title', 'slug', 'copy', 'category', 'is_featured', 'is_active'])]
+#[Fillable(['title', 'slug', 'date', 'copy', 'category', 'image', 'is_featured', 'is_active'])]
 #[Table('news')]
 
 class News extends Model

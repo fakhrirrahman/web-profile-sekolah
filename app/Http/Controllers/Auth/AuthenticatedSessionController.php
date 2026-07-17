@@ -40,6 +40,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('status', 'Anda sudah keluar dari portal admin.');
+        flash()->info('Anda sudah keluar dari portal admin.');
+
+        return redirect()->route('login');
     }
 }

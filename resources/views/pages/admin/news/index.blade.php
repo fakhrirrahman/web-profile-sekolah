@@ -12,12 +12,6 @@
             </x-ui.button>
         </div>
 
-        @if (session('status'))
-            <div class="mt-6 rounded-lg border-2 border-secondary/20 bg-secondary-muted px-4 py-3 text-sm font-semibold text-primary">
-                {{ session('status') }}
-            </div>
-        @endif
-
         <div class="mt-6 overflow-x-auto rounded-lg border-2 border-primary/10">
             <table class="w-full border-collapse text-left text-sm text-slate-600">
                 <thead class="bg-surface text-xs font-black uppercase tracking-wider text-primary border-b-2 border-primary/10">
@@ -55,7 +49,10 @@
                                     <x-ui.button href="{{ route('admin.news.edit', $news) }}" variant="outline" size="sm">
                                         Edit
                                     </x-ui.button>
-                                    <form method="POST" action="{{ route('admin.news.destroy', $news) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
+                                    <form method="POST" action="{{ route('admin.news.destroy', $news) }}"
+                                        data-confirm
+                                        data-confirm-title="Hapus berita?"
+                                        data-confirm-text="Berita {{ $news->title }} akan dihapus dari daftar berita.">
                                         @csrf
                                         @method('DELETE')
                                         <x-ui.button type="submit" variant="muted" size="sm" class="hover:border-red-200 hover:bg-red-50 hover:text-red-700">

@@ -20,12 +20,6 @@
         </div>
     @endif
 
-    @if (session('status'))
-        <div class="mt-6 rounded-lg border-2 border-secondary/20 bg-secondary-muted px-4 py-3 text-sm font-semibold leading-6 text-primary">
-            {{ session('status') }}
-        </div>
-    @endif
-
     <form method="POST" action="{{ route('login.store') }}" class="mt-8 grid gap-5">
         @csrf
 

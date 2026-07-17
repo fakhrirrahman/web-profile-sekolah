@@ -52,10 +52,11 @@ class GalleryItemController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ]);
 
-        return redirect()
-            ->route('admin.gallery-items.index')
-            ->with('status', 'Foto galeri berhasil ditambahkan.');
+        flash()->success('Foto galeri berhasil ditambahkan.');
+
+        return redirect()->route('admin.gallery-items.index');
     }
+
     public function edit(GalleryItem $galleryItem): View
     {
         return view('pages.admin.gallery.edit', compact('galleryItem'));
@@ -92,17 +93,17 @@ class GalleryItemController extends Controller
             'is_active' => $request->boolean('is_active'),
         ]);
 
-        return redirect()
-            ->route('admin.gallery-items.index')
-            ->with('status', 'Foto galeri berhasil diperbarui.');
+        flash()->success('Foto galeri berhasil diperbarui.');
+
+        return redirect()->route('admin.gallery-items.index');
     }
 
     public function destroy(GalleryItem $galleryItem): RedirectResponse
     {
         $galleryItem->delete();
 
-        return redirect()
-            ->route('admin.gallery-items.index')
-            ->with('status', 'Foto galeri berhasil dihapus.');
+        flash()->success('Foto galeri berhasil dihapus.');
+
+        return redirect()->route('admin.gallery-items.index');
     }
 }

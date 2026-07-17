@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad874bdf2dc08c4892f8a96cdea87203",
+    "content-hash": "1ad69cde11d399f8103d0104faa4feae",
     "packages": [
         {
             "name": "brick/math",
@@ -2539,6 +2539,280 @@
                 }
             ],
             "time": "2026-02-16T23:10:27+00:00"
+        },
+        {
+            "name": "php-flasher/flasher",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher.git",
+                "reference": "3ddc073a6dafeaa924b64dc0eca3b990b22b8bcd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/3ddc073a6dafeaa924b64dc0eca3b990b22b8bcd",
+                "reference": "3ddc073a6dafeaa924b64dc0eca3b990b22b8bcd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "yoeunes/regex-parser": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "functions.php",
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Flasher\\Prime\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The foundational PHP library for PHPFlasher, enabling the creation of framework-agnostic flash notifications. Ideal for building custom integrations or for use in PHP projects.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "custom-integrations",
+                "flash-notifications",
+                "flasher-core",
+                "framework-agnostic",
+                "open-source",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-13T08:48:01+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-laravel",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-laravel.git",
+                "reference": "8cfa3b334352c713455ca3d6fc935cc2e181c873"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-laravel/zipball/8cfa3b334352c713455ca3d6fc935cc2e181c873",
+                "reference": "8cfa3b334352c713455ca3d6fc935cc2e181c873",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": ">=8.2",
+                "php-flasher/flasher": "^2.6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Flasher": "Flasher\\Laravel\\Facade\\Flasher"
+                    },
+                    "providers": [
+                        "Flasher\\Laravel\\FlasherServiceProvider"
+                    ]
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flasher\\Laravel\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Seamlessly integrate flash notifications into your Laravel applications with PHPFlasher. Enhance user feedback and engagement with minimal setup.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "flash-notifications",
+                "laravel",
+                "open-source",
+                "php",
+                "phpflasher",
+                "user-feedback"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-13T08:48:01+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-sweetalert",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-sweetalert.git",
+                "reference": "a8b102a29fd41da315c3fb2bbc8fe93273faa731"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-sweetalert/zipball/a8b102a29fd41da315c3fb2bbc8fe93273faa731",
+                "reference": "a8b102a29fd41da315c3fb2bbc8fe93273faa731",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "php-flasher/flasher": "^2.6.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "functions.php",
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Flasher\\SweetAlert\\Prime\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHPFlasher - A powerful & easy-to-use package for adding flash messages to Laravel or Symfony projects. Provides feedback to users, improves engagement & enhances user experience. Intuitive design for beginners & experienced developers. A reliable, flexible solution.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "customizable-alerts-php",
+                "flash-messages",
+                "interactive-web-notifications",
+                "laravel-notification",
+                "php-messaging-library",
+                "php-notification-system",
+                "php-user-interface",
+                "symfony-notification",
+                "user-engagement-php",
+                "user-feedback-tools",
+                "web-application-notifications"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-13T08:48:01+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-sweetalert-laravel",
+            "version": "v2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-sweetalert-laravel.git",
+                "reference": "9fda21d8b84baf52343509521878c623cfddd520"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-sweetalert-laravel/zipball/9fda21d8b84baf52343509521878c623cfddd520",
+                "reference": "9fda21d8b84baf52343509521878c623cfddd520",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "php-flasher/flasher-laravel": "^2.6.1",
+                "php-flasher/flasher-sweetalert": "^2.6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "SweetAlert": "Flasher\\SweetAlert\\Laravel\\Facade\\SweetAlert"
+                    },
+                    "providers": [
+                        "Flasher\\SweetAlert\\Laravel\\FlasherSweetAlertServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flasher\\SweetAlert\\Laravel\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/younes--ennaji/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Incorporate SweetAlert's interactive notifications into Laravel applications with PHPFlasher. Enhance user dialogs with SweetAlert and Laravel.",
+            "homepage": "https://php-flasher.io",
+            "keywords": [
+                "dynamic-notifications",
+                "flash-notifications",
+                "laravel",
+                "open-source",
+                "phpflasher",
+                "sweetalert",
+                "sweetalert 2",
+                "user-feedback"
+            ],
+            "support": {
+                "issues": "https://github.com/php-flasher/php-flasher/issues",
+                "source": "https://github.com/php-flasher/php-flasher"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-04-13T08:48:01+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -5995,6 +6269,94 @@
                 }
             ],
             "time": "2026-04-26T05:33:54+00:00"
+        },
+        {
+            "name": "yoeunes/regex-parser",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yoeunes/regex-parser.git",
+                "reference": "770d1142c3c62195fbde7be6e5277da90b65d3a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yoeunes/regex-parser/zipball/770d1142c3c62195fbde7be6e5277da90b65d3a2",
+                "reference": "770d1142c3c62195fbde7be6e5277da90b65d3a2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "suggest": {
+                "phpstan/extension-installer": "To automatically enable the PHPStan rule for regex validation.",
+                "phpstan/phpstan": "To run static analysis and detect invalid regex patterns.",
+                "psr/cache": "To share AST cache via PSR-6 pools.",
+                "psr/simple-cache": "To share AST cache via PSR-16 caches."
+            },
+            "bin": [
+                "bin/regex"
+            ],
+            "type": "library",
+            "extra": {
+                "ide": {
+                    "regex.dist.json": "./regex.schema.json"
+                },
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-main": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Automata/LegacyAliases.php"
+                ],
+                "psr-4": {
+                    "RegexParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Younes ENNAJI",
+                    "email": "younes.ennaji.pro@gmail.com",
+                    "homepage": "https://www.linkedin.com/in/yoeunes/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A powerful PCRE regex parser with lexer, AST builder, validation, ReDoS analysis, and syntax highlighting. Zero dependencies, blazing fast, and production-ready.",
+            "homepage": "https://github.com/yoeunes/regex-parser",
+            "keywords": [
+                "PCRE",
+                "ast",
+                "cli",
+                "lexer",
+                "parser",
+                "php",
+                "redos",
+                "regex",
+                "security",
+                "syntax-highlighting",
+                "validation"
+            ],
+            "support": {
+                "docs": "https://github.com/yoeunes/regex-parser#readme",
+                "issues": "https://github.com/yoeunes/regex-parser/issues",
+                "source": "https://github.com/yoeunes/regex-parser"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/yoeunes",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-01-12T20:49:05+00:00"
         }
     ],
     "packages-dev": [
