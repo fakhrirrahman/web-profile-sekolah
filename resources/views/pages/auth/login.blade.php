@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <form method="POST" action="#" class="mt-8 grid gap-5">
+    <form method="POST" action="{{ route('login.store') }}" class="mt-8 grid gap-5">
         @csrf
 
         <div>
