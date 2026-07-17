@@ -52,9 +52,9 @@
                         <x-ui.icon name="calendar" class="size-5" />
                         PPDB
                     </a>
-                    <a href="#" class="flex items-center gap-3 rounded-lg px-4 py-3 text-white/84 transition hover:bg-white/10 hover:text-white">
-                        <x-ui.icon name="settings" class="size-5" />
-                        Pengaturan
+                    <a href="{{ route('admin.contact-messages.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.contact-messages.*') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
+                        <x-ui.icon name="mail" class="size-5" />
+                        Pesan
                     </a>
                 </nav>
 

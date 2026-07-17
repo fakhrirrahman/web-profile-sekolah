@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PpdbRegistrationController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ Route::get('/ppdb', [HomeController::class, 'ppdb'])->name('ppdb');
 Route::post('/ppdb', [PpdbRegistrationController::class, 'store'])->name('ppdb.store');
 Route::get('/ppdb/status', [PpdbRegistrationController::class, 'status'])->name('ppdb.status');
 Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak');
+Route::post('/kontak', [ContactMessageController::class, 'store'])->name('kontak.store');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -35,5 +37,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
     Route::resource('gallery-items', \App\Http\Controllers\Admin\GalleryItemController::class);
     Route::resource('ppdb-registrations', \App\Http\Controllers\Admin\PpdbRegistrationController::class)
+        ->only(['index', 'update', 'destroy']);
+    Route::resource('contact-messages', \App\Http\Controllers\Admin\ContactMessageController::class)
         ->only(['index', 'update', 'destroy']);
 });
