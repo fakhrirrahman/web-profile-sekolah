@@ -28,21 +28,18 @@ class GalleryItemController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'album' => ['required', 'string', 'max:255'],
-            'image' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'max:2048'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        $imagePaths = [];
-        if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $image) {
-                $imagePaths[] = $image->store('gallery', 'public');
-            }
-        }
+        $imagePath = $request->hasFile('image')
+            ? $request->file('image')->store('gallery', 'public')
+            : null;
 
         GalleryItem::create([
             'title' => $request->input('title'),
             'album' => $request->input('album'),
-            'image' => $imagePaths,
+            'image' => $imagePath,
             'is_active' => $request->boolean('is_active', true),
         ]);
 
@@ -60,28 +57,29 @@ class GalleryItemController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'album' => ['required', 'string', 'max:255'],
-            'image' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'max:2048'],
+            'remove_image' => ['nullable', 'boolean'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        $imagePaths = $galleryItem->image ?? [];
+        $imagePath = $galleryItem->image;
 
         if ($request->hasFile('image')) {
             // hapus gambar lama biar tidak numpuk file sampah di storage
-            foreach ($imagePaths as $oldImage) {
-                Storage::disk('public')->delete($oldImage);
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
             }
 
-            $imagePaths = [];
-            foreach ($request->file('image') as $image) {
-                $imagePaths[] = $image->store('gallery', 'public');
-            }
+            $imagePath = $request->file('image')->store('gallery', 'public');
+        } elseif ($request->boolean('remove_image') && $imagePath) {
+            Storage::disk('public')->delete($imagePath);
+            $imagePath = null;
         }
 
         $galleryItem->update([
             'title' => $request->input('title'),
             'album' => $request->input('album'),
-            'image' => $imagePaths,
+            'image' => $imagePath,
             'is_active' => $request->boolean('is_active'),
         ]);
 

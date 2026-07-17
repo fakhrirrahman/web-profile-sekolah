@@ -48,9 +48,7 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex justify-end gap-2">
-                                    <x-ui.button href="{{ route('admin.gallery-items.edit', $item) }}" variant="outline" size="sm">
-                                        Edit
-                                    </x-ui.button>
+                                    <x-gallery.create-modal :gallery-item="$item" :id="'gallery-edit-modal-' . $item->id" />
                                     <form method="POST" action="{{ route('admin.gallery-items.destroy', $item) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus foto galeri ini?')">
                                         @csrf
                                         @method('DELETE')

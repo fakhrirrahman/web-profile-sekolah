@@ -2,24 +2,16 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    $news = \App\Models\News::query()->where('is_active', true)->latest()->take(2)->get();
-    $galleryItems = \App\Models\GalleryItem::query()->where('is_active', true)->latest()->take(4)->get();
-    return view('pages.home', compact('news', 'galleryItems'));
-});
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/profile', function () {
-    return view('pages.profile');
-})->name('profile');
-
-Route::get('/berita', [NewsController::class, 'index'])->name('berita');
-Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri');
-Route::view('/ppdb', 'pages.ppdb')->name('ppdb');
-Route::view('/kontak', 'pages.kontak')->name('kontak');
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+Route::get('/berita', [HomeController::class, 'berita'])->name('berita');
+Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
+Route::get('/ppdb', [HomeController::class, 'ppdb'])->name('ppdb');
+Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');

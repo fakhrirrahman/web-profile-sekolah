@@ -43,11 +43,25 @@
             </div>
 
             <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="motion-card js-reveal overflow-hidden rounded-lg border-2 border-primary/15 bg-white shadow-[5px_5px_0_rgba(31,92,69,.10)] sm:col-span-2 lg:row-span-2">
-                    <img src="{{ asset('images/home.jpg') }}" alt="Lingkungan Golden Sierra School" class="h-full min-h-[360px] w-full object-cover">
-                </div>
                 @forelse ($galleryItems as $item)
-                    <x-ui.media-placeholder :label="$item->title" ratio="aspect-[4/3]" class="motion-card" />
+                    @php
+                        $isFeatured = $loop->first;
+                    @endphp
+
+                    <article class="motion-card js-reveal group overflow-hidden rounded-lg border-2 border-primary/15 bg-white shadow-[5px_5px_0_rgba(31,92,69,.10)] {{ $isFeatured ? 'sm:col-span-2 lg:row-span-2' : '' }}">
+                        <div class="relative {{ $isFeatured ? 'h-full min-h-[360px]' : 'aspect-[4/3]' }}">
+                            @if ($item->image_url)
+                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                            @else
+                                <div class="h-full w-full motion-media media-placeholder-bg"></div>
+                            @endif
+
+                            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/85 via-primary/45 to-transparent p-4 text-white">
+                                <span class="inline-flex rounded-md bg-white/90 px-2.5 py-1 text-[11px] font-black uppercase text-primary">{{ $item->album }}</span>
+                                <h2 class="mt-2 text-base font-black {{ $isFeatured ? 'md:text-2xl' : '' }}">{{ $item->title }}</h2>
+                            </div>
+                        </div>
+                    </article>
                 @empty
                     <div class="col-span-full rounded-lg border-2 border-dashed border-primary/20 p-8 text-center text-slate-500 font-semibold">
                         Tidak ada foto dalam album ini.

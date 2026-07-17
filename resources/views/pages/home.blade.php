@@ -206,18 +206,36 @@
             </div>
 
             <div class="js-stagger mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="lg:col-span-2 lg:row-span-2">
-                    <div class="motion-card js-card neo-surface-soft group relative aspect-[4/3] h-full overflow-hidden rounded-lg">
-                        <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah Golden Sierra" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
-                        <div class="absolute inset-x-5 bottom-5 rounded-lg bg-white/90 p-4 shadow-sm backdrop-blur">
-                            <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Highlight</p>
-                            <h3 class="mt-2 text-lg font-black text-primary">Lingkungan sekolah yang terbuka dan aktif.</h3>
+                @forelse ($galleryItems as $item)
+                    @php
+                        $isFeatured = $loop->first;
+                    @endphp
+
+                    <article class="{{ $isFeatured ? 'lg:col-span-2 lg:row-span-2' : '' }}">
+                        <div class="motion-card js-card neo-surface-soft group relative {{ $isFeatured ? 'aspect-[4/3] h-full' : 'aspect-[4/3]' }} overflow-hidden rounded-lg">
+                            @if ($item->image_url)
+                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                            @else
+                                <div class="h-full w-full motion-media media-placeholder-bg"></div>
+                            @endif
+
+                            <div class="absolute inset-x-5 bottom-5 rounded-lg bg-white/90 p-4 shadow-sm backdrop-blur">
+                                <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">{{ $isFeatured ? 'Highlight' : $item->album }}</p>
+                                <h3 class="mt-2 text-lg font-black text-primary">{{ $item->title }}</h3>
+                            </div>
+                        </div>
+                    </article>
+                @empty
+                    <div class="lg:col-span-2 lg:row-span-2">
+                        <div class="motion-card js-card neo-surface-soft group relative aspect-[4/3] h-full overflow-hidden rounded-lg">
+                            <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah Golden Sierra" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                            <div class="absolute inset-x-5 bottom-5 rounded-lg bg-white/90 p-4 shadow-sm backdrop-blur">
+                                <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Highlight</p>
+                                <h3 class="mt-2 text-lg font-black text-primary">Lingkungan sekolah yang terbuka dan aktif.</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                @foreach ($galleryItems as $item)
-                    <x-ui.media-placeholder class="js-card" :label="$item->title" ratio="aspect-[4/3]" />
-                @endforeach
+                @endforelse
             </div>
         </div>
     </section>
