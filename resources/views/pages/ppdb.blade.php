@@ -24,19 +24,22 @@
 @endphp
 
 @section('content')
-    <section class="bg-surface py-14 md:py-20">
+    <section class="relative isolate bg-primary py-14 text-white md:py-20">
+        <img src="{{ asset('images/kelas-interaktif.png') }}" alt="Kelas interaktif Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
+        <div class="hero-overlay absolute inset-0 -z-10"></div>
+
         <div class="section-shell grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center">
             <div class="js-reveal">
-                <p class="inline-flex rounded-lg border-2 border-primary/20 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.12)]">PPDB 2026/2027</p>
-                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">Siapkan langkah pertama anak bersama Golden Sierra School.</h1>
-                <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">Halaman ini merangkum alur, jadwal, dan persyaratan pendaftaran agar orang tua dapat mengambil keputusan dengan tenang.</p>
+                <p class="inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">PPDB 2026/2027</p>
+                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Siapkan langkah pertama anak bersama Golden Sierra School.</h1>
+                <p class="mt-5 max-w-2xl text-base leading-8 text-white/80">Halaman ini merangkum alur, jadwal, dan persyaratan pendaftaran agar orang tua dapat mengambil keputusan dengan tenang.</p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <x-ui.button href="{{ url('/kontak') }}" variant="accent" size="lg">Hubungi Admin</x-ui.button>
                     <x-ui.button href="#alur-ppdb" variant="muted" size="lg">Lihat Alur</x-ui.button>
                 </div>
             </div>
 
-            <aside class="motion-card js-card rounded-lg border-2 border-primary/15 bg-white p-6 shadow-[6px_6px_0_rgba(31,92,69,.10)]">
+            <aside class="motion-card js-card rounded-lg border-2 border-white/40 bg-white/90 p-6 shadow-[6px_6px_0_rgba(217,180,92,.18)] backdrop-blur">
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Status Pendaftaran</p>
                 <h2 class="mt-3 text-2xl font-black leading-tight text-primary">Pendaftaran reguler sedang dibuka.</h2>
                 <p class="mt-4 text-sm leading-7 text-slate-600">Layanan konsultasi tersedia hari kerja pukul 08.00 - 15.00 WIB.</p>
