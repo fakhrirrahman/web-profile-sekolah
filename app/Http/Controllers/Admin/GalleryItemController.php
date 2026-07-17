@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GalleryItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class GalleryItemController extends Controller
@@ -24,22 +25,31 @@ class GalleryItemController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
+        $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'album' => ['required', 'string', 'max:255'],
             'image' => ['nullable', 'string', 'max:255'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        $validated['is_active'] = $request->boolean('is_active', true);
+        $imagePaths = [];
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                $imagePaths[] = $image->store('gallery', 'public');
+            }
+        }
 
-        GalleryItem::create($validated);
+        GalleryItem::create([
+            'title' => $request->input('title'),
+            'album' => $request->input('album'),
+            'image' => $imagePaths,
+            'is_active' => $request->boolean('is_active', true),
+        ]);
 
         return redirect()
             ->route('admin.gallery-items.index')
             ->with('status', 'Foto galeri berhasil ditambahkan.');
     }
-
     public function edit(GalleryItem $galleryItem): View
     {
         return view('pages.admin.gallery.edit', compact('galleryItem'));
@@ -47,16 +57,33 @@ class GalleryItemController extends Controller
 
     public function update(Request $request, GalleryItem $galleryItem): RedirectResponse
     {
-        $validated = $request->validate([
+        $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'album' => ['required', 'string', 'max:255'],
             'image' => ['nullable', 'string', 'max:255'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        $validated['is_active'] = $request->boolean('is_active');
+        $imagePaths = $galleryItem->image ?? [];
 
-        $galleryItem->update($validated);
+        if ($request->hasFile('image')) {
+            // hapus gambar lama biar tidak numpuk file sampah di storage
+            foreach ($imagePaths as $oldImage) {
+                Storage::disk('public')->delete($oldImage);
+            }
+
+            $imagePaths = [];
+            foreach ($request->file('image') as $image) {
+                $imagePaths[] = $image->store('gallery', 'public');
+            }
+        }
+
+        $galleryItem->update([
+            'title' => $request->input('title'),
+            'album' => $request->input('album'),
+            'image' => $imagePaths,
+            'is_active' => $request->boolean('is_active'),
+        ]);
 
         return redirect()
             ->route('admin.gallery-items.index')

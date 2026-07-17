@@ -15,7 +15,6 @@ class NewsController extends Controller
         $search = $request->input('search');
         $activeCategory = $request->input('category', 'Semua');
 
-        // Main articles query
         $query = News::query()->where('is_active', true);
 
         if ($search) {

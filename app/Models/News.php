@@ -2,26 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+#[Fillable(['title', 'slug', 'copy', 'category', 'is_featured', 'is_active'])]
+#[Table('news')]
+
 class News extends Model
 {
     use HasFactory;
-
-    protected $table = 'news';
-
-    protected $fillable = [
-        'title',
-        'slug',
-        'date',
-        'category',
-        'copy',
-        'image',
-        'is_featured',
-        'is_active',
-    ];
 
     protected $casts = [
         'is_featured' => 'boolean',
