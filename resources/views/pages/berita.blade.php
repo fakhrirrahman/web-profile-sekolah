@@ -59,7 +59,7 @@
                     <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman Cepat</p>
                     <div class="mt-5 grid gap-4">
                         @forelse ($quickAnnouncements as $announcement)
-                            <a href="{{ route('berita.show', $announcement->slug) }}" class="block rounded-lg {{ $loop->odd ? 'bg-surface' : 'bg-accent text-primary' }} p-4 transition hover:-translate-y-0.5">
+                            <a href="{{ route('pengumuman.show', $announcement->slug) }}" class="block rounded-lg {{ $loop->odd ? 'bg-surface' : 'bg-accent text-primary' }} p-4 transition hover:-translate-y-0.5">
                                 <p class="text-[11px] font-black uppercase tracking-wide {{ $loop->odd ? 'text-secondary' : 'text-primary/70' }}">{{ $announcement->category }}</p>
                                 <h3 class="mt-2 text-sm font-black text-primary">{{ $announcement->title }}</h3>
                                 <p class="mt-2 text-sm {{ $loop->odd ? 'text-slate-600' : 'font-semibold text-primary/80' }} leading-6">{{ $announcement->date }}</p>

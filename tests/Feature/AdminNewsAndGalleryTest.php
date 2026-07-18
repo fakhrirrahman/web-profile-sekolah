@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Announcement;
 use App\Models\News;
 use App\Models\GalleryItem;
 use App\Models\User;
@@ -30,6 +31,20 @@ test('public berita page searches news by title', function () {
         ->assertDontSee('Siswa Golden Sierra Raih Juara LKBB Tingkat Kota');
 });
 
+test('public pengumuman page renders announcements from database', function () {
+    $this->get('/pengumuman')
+        ->assertOk()
+        ->assertSee('PPDB Tahun Ajaran 2026/2027')
+        ->assertSee('Jadwal Asesmen Tengah Semester');
+});
+
+test('public pengumuman page filters announcements by category', function () {
+    $this->get('/pengumuman?category=Pendaftaran')
+        ->assertOk()
+        ->assertSee('PPDB Tahun Ajaran 2026/2027')
+        ->assertDontSee('Pengambilan Seragam dan Buku Paket');
+});
+
 test('public galeri page renders gallery items and albums', function () {
     $this->get('/galeri')
         ->assertOk()
@@ -49,6 +64,7 @@ test('homepage renders dynamic news and gallery', function () {
     $this->get('/')
         ->assertOk()
         ->assertSee('Siswa Golden Sierra Raih Juara LKBB Tingkat Kota')
+        ->assertSee('PPDB Tahun Ajaran 2026/2027')
         ->assertSee('Kelas Interaktif');
 });
 
@@ -105,6 +121,56 @@ test('admin can manage news articles', function () {
 
     $this->assertDatabaseMissing('news', [
         'id' => $news->id,
+    ]);
+});
+
+test('admin can manage announcements', function () {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->get(route('admin.announcements.index'))
+        ->assertOk()
+        ->assertSee('PPDB Tahun Ajaran 2026/2027');
+
+    $this->actingAs($user)
+        ->post(route('admin.announcements.store'), [
+            'title' => 'Pengumuman Baru Sekolah',
+            'category' => 'Info Orang Tua',
+            'date' => '17 Juli 2026',
+            'copy' => 'Ini adalah konten pengumuman baru sekolah.',
+            'is_active' => '1',
+        ])
+        ->assertRedirect(route('admin.announcements.index'));
+
+    $this->assertDatabaseHas('announcements', [
+        'title' => 'Pengumuman Baru Sekolah',
+        'category' => 'Info Orang Tua',
+    ]);
+
+    $announcement = Announcement::where('title', 'Pengumuman Baru Sekolah')->firstOrFail();
+
+    $this->actingAs($user)
+        ->put(route('admin.announcements.update', $announcement), [
+            'title' => 'Pengumuman Baru Sekolah Update',
+            'category' => 'Akademik',
+            'date' => '18 Juli 2026',
+            'copy' => 'Ini adalah konten pengumuman baru sekolah yang diupdate.',
+            'is_active' => '0',
+        ])
+        ->assertRedirect(route('admin.announcements.index'));
+
+    $this->assertDatabaseHas('announcements', [
+        'title' => 'Pengumuman Baru Sekolah Update',
+        'category' => 'Akademik',
+        'is_active' => false,
+    ]);
+
+    $this->actingAs($user)
+        ->delete(route('admin.announcements.destroy', $announcement))
+        ->assertRedirect(route('admin.announcements.index'));
+
+    $this->assertDatabaseMissing('announcements', [
+        'id' => $announcement->id,
     ]);
 });
 

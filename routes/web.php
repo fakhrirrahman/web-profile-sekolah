@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\Admin\AnnouncementController as AdminAnnouncementController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ContactMessageController;
@@ -11,6 +13,8 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::get('/berita', [HomeController::class, 'berita'])->name('berita');
 Route::get('/berita/{news:slug}', [HomeController::class, 'beritaShow'])->name('berita.show');
+Route::get('/pengumuman', [AnnouncementController::class, 'index'])->name('pengumuman.index');
+Route::get('/pengumuman/{announcement:slug}', [AnnouncementController::class, 'show'])->name('pengumuman.show');
 Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 Route::get('/ppdb', [HomeController::class, 'ppdb'])->name('ppdb');
 Route::post('/ppdb', [PpdbRegistrationController::class, 'store'])->name('ppdb.store');
@@ -34,6 +38,7 @@ Route::redirect('/dashboard', '/admin')
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
+    Route::resource('announcements', AdminAnnouncementController::class)->except(['create', 'show', 'edit']);
     Route::resource('gallery-items', \App\Http\Controllers\Admin\GalleryItemController::class);
     Route::resource('ppdb-registrations', \App\Http\Controllers\Admin\PpdbRegistrationController::class)
         ->only(['index', 'update', 'destroy']);

@@ -8,12 +8,6 @@
         ['title' => 'Galeri', 'copy' => 'Dokumentasi kegiatan belajar, lomba, dan keseharian sekolah.', 'href' => url('/galeri'), 'icon' => '04'],
     ];
 
-    $announcements = [
-        ['title' => 'PPDB Tahun Ajaran 2026/2027', 'date' => '16 Juli 2026', 'type' => 'Pendaftaran'],
-        ['title' => 'Jadwal Asesmen Tengah Semester', 'date' => '22 Juli 2026', 'type' => 'Akademik'],
-        ['title' => 'Pengambilan Seragam dan Buku Paket', 'date' => '27 Juli 2026', 'type' => 'Info Orang Tua'],
-    ];
-
     $features = [
         ['title' => 'Kelas Aktif', 'copy' => 'Pembelajaran dirancang interaktif agar siswa terbiasa bertanya, berdiskusi, dan menyampaikan ide.'],
         ['title' => 'Karakter Kuat', 'copy' => 'Rutinitas sekolah membantu siswa membangun disiplin, empati, dan tanggung jawab.'],
@@ -124,17 +118,21 @@
                 <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Pengumuman</p>
                 <h2 class="mt-3 text-2xl font-black leading-tight text-primary">Informasi penting untuk orang tua dan siswa.</h2>
                 <div class="mt-6 grid gap-4">
-                    @foreach ($announcements as $item)
-                        <article class="rounded-lg border-2 border-primary/10 bg-surface p-4">
+                    @forelse ($announcements as $item)
+                        <a href="{{ route('pengumuman.show', $item->slug) }}" class="block rounded-lg border-2 border-primary/10 bg-surface p-4 transition hover:-translate-y-0.5 hover:border-secondary/40">
                             <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wide">
-                                <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $item['type'] }}</span>
-                                <span class="text-slate-500">{{ $item['date'] }}</span>
+                                <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $item->category }}</span>
+                                <span class="text-slate-500">{{ $item->date }}</span>
                             </div>
-                            <h3 class="mt-3 text-sm font-black leading-6 text-primary">{{ $item['title'] }}</h3>
+                            <h3 class="mt-3 text-sm font-black leading-6 text-primary">{{ $item->title }}</h3>
+                        </a>
+                    @empty
+                        <article class="rounded-lg border-2 border-dashed border-primary/15 bg-surface p-4 text-sm font-semibold leading-6 text-slate-500">
+                            Belum ada pengumuman yang dipublikasikan.
                         </article>
-                    @endforeach
+                    @endforelse
                 </div>
-                <x-ui.button href="#" variant="secondary" class="mt-6 w-full">Lihat Semua Pengumuman</x-ui.button>
+                <x-ui.button href="{{ route('pengumuman.index') }}" variant="secondary" class="mt-6 w-full">Lihat Semua Pengumuman</x-ui.button>
             </aside>
         </div>
     </section>

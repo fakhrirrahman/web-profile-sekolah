@@ -44,6 +44,10 @@
                         <x-ui.icon name="newspaper" class="size-5" />
                         Berita
                     </a>
+                    <a href="{{ route('admin.announcements.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.announcements.*') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
+                        <x-ui.icon name="megaphone" class="size-5" />
+                        Pengumuman
+                    </a>
                     <a href="{{ route('admin.gallery-items.index') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 transition {{ request()->routeIs('admin.gallery-items.*') ? 'border-2 border-white/18 bg-white text-primary shadow-[4px_4px_0_rgba(0,0,0,.14)]' : 'text-white/84 hover:bg-white/10 hover:text-white' }}">
                         <x-ui.icon name="image" class="size-5" />
                         Galeri

@@ -29,6 +29,11 @@
             <path d="M7 16h6"></path>
             @break
 
+        @case('megaphone')
+            <path d="m3 11 18-5v12L3 14v-3Z"></path>
+            <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
+            @break
+
         @case('image')
             <rect width="18" height="18" x="3" y="3" rx="2"></rect>
             <circle cx="9" cy="9" r="2"></circle>

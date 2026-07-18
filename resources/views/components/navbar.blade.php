@@ -3,6 +3,7 @@
         ['label' => 'Beranda', 'href' => url('/'), 'active' => request()->is('/')],
         ['label' => 'Profil', 'href' => url('/profile'), 'active' => request()->is('profile')],
         ['label' => 'Berita', 'href' => url('/berita'), 'active' => request()->is('berita')],
+        ['label' => 'Pengumuman', 'href' => url('/pengumuman'), 'active' => request()->is('pengumuman*')],
         ['label' => 'PPDB', 'href' => url('/ppdb'), 'active' => request()->is('ppdb')],
         ['label' => 'Galeri', 'href' => url('/galeri'), 'active' => request()->is('galeri')],
         ['label' => 'Kontak', 'href' => url('/kontak'), 'active' => request()->is('kontak')],

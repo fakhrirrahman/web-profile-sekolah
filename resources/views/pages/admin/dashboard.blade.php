@@ -27,7 +27,7 @@
                 </span>
             </div>
 
-            <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
                 @foreach ($stats as $stat)
                     <article class="rounded-lg border-2 p-5 {{ $toneClasses[$stat['tone']] ?? $toneClasses['neutral'] }}">
                         <p class="text-3xl font-black">{{ $stat['value'] }}</p>
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
             @foreach ($modules as $module)
                 <a href="{{ $module['href'] }}" class="motion-card group rounded-lg border-2 border-primary/12 bg-white p-5 shadow-[5px_5px_0_rgba(31,92,69,.08)] transition hover:border-secondary/40">
                     <div class="flex items-start justify-between gap-4">

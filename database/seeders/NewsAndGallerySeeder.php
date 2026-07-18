@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Announcement;
 use App\Models\News;
 use App\Models\GalleryItem;
 use Illuminate\Database\Seeder;
@@ -33,22 +34,6 @@ class NewsAndGallerySeeder extends Seeder
                 'is_active' => true,
             ],
             [
-                'title' => 'Jadwal Asesmen Tengah Semester Telah Dibagikan',
-                'date' => '22 Juli 2026',
-                'category' => 'Akademik',
-                'copy' => 'Orang tua dapat melihat jadwal asesmen melalui wali kelas dan kanal komunikasi sekolah.',
-                'is_featured' => false,
-                'is_active' => true,
-            ],
-            [
-                'title' => 'Pengambilan Seragam dan Buku Paket',
-                'date' => '27 Juli 2026',
-                'category' => 'Info Orang Tua',
-                'copy' => 'Sekolah menyiapkan jadwal pengambilan bertahap agar proses tetap tertib dan nyaman.',
-                'is_featured' => false,
-                'is_active' => true,
-            ],
-            [
                 'title' => 'Ekskul Robotik Memulai Proyek Semester Baru',
                 'date' => '3 Agustus 2026',
                 'category' => 'Kegiatan',
@@ -62,6 +47,38 @@ class NewsAndGallerySeeder extends Seeder
             News::updateOrCreate(
                 ['slug' => Str::slug($news['title'])],
                 $news
+            );
+        }
+
+        // Seed Announcements
+        $announcements = [
+            [
+                'title' => 'PPDB Tahun Ajaran 2026/2027',
+                'date' => '16 Juli 2026',
+                'category' => 'Pendaftaran',
+                'copy' => 'Informasi pendaftaran peserta didik baru tahun ajaran 2026/2027 telah tersedia untuk orang tua dan calon siswa.',
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Jadwal Asesmen Tengah Semester',
+                'date' => '22 Juli 2026',
+                'category' => 'Akademik',
+                'copy' => 'Orang tua dapat melihat jadwal asesmen melalui wali kelas dan kanal komunikasi sekolah.',
+                'is_active' => true,
+            ],
+            [
+                'title' => 'Pengambilan Seragam dan Buku Paket',
+                'date' => '27 Juli 2026',
+                'category' => 'Info Orang Tua',
+                'copy' => 'Sekolah menyiapkan jadwal pengambilan bertahap agar proses tetap tertib dan nyaman.',
+                'is_active' => true,
+            ],
+        ];
+
+        foreach ($announcements as $announcement) {
+            Announcement::updateOrCreate(
+                ['slug' => Str::slug($announcement['title'])],
+                $announcement
             );
         }
 

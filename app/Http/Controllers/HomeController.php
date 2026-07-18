@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use App\Models\GalleryItem;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -38,7 +39,13 @@ class HomeController extends Controller
 
         $this->appendGalleryImageUrls($galleryItems);
 
-        return view('pages.home', compact('news', 'achievements', 'galleryItems'));
+        $announcements = Announcement::query()
+            ->where('is_active', true)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('pages.home', compact('news', 'achievements', 'galleryItems', 'announcements'));
     }
 
     public function profile(): View
@@ -89,11 +96,11 @@ class HomeController extends Controller
         }
         $articles = $articlesQuery->latest()->get();
 
-        $quickAnnouncementsQuery = clone $query;
-        if ($featured) {
-            $quickAnnouncementsQuery->where('id', '!=', $featured->id);
-        }
-        $quickAnnouncements = $quickAnnouncementsQuery->latest()->take(2)->get();
+        $quickAnnouncements = Announcement::query()
+            ->where('is_active', true)
+            ->latest()
+            ->take(2)
+            ->get();
 
         $newsItems = collect($articles->all());
         if ($featured) {
@@ -221,4 +228,5 @@ class HomeController extends Controller
             };
         });
     }
+
 }
