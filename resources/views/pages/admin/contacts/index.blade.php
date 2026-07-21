@@ -27,6 +27,7 @@
                         <th class="px-6 py-4">Pengirim</th>
                         <th class="px-6 py-4">Topik</th>
                         <th class="px-6 py-4">Pesan</th>
+                        <th class="px-6 py-4">Dibuat</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4 text-right">Aksi</th>
                     </tr>
@@ -37,13 +38,16 @@
                             <td class="px-6 py-4">
                                 <p class="font-black text-primary">{{ $message->name }}</p>
                                 <p class="mt-1 text-xs font-semibold text-slate-500">{{ $message->phone }}</p>
-                                <p class="mt-2 text-xs font-semibold text-slate-400">{{ $message->created_at->format('d M Y H:i') }}</p>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="rounded bg-secondary-muted px-2.5 py-1 text-xs font-bold text-secondary">{{ $message->topic }}</span>
                             </td>
                             <td class="px-6 py-4">
                                 <p class="max-w-xl text-sm leading-7 text-slate-600">{{ $message->message }}</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-semibold text-slate-700">{{ $message->created_at->format('d M Y') }}</p>
+                                <p class="mt-1 text-xs font-semibold text-slate-400">{{ $message->created_at->format('H:i') }}</p>
                             </td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex rounded-full px-2.5 py-1 text-xs font-black {{ $statusClasses[$message->status] ?? 'bg-slate-100 text-slate-700' }}">
@@ -79,7 +83,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-12 text-center font-semibold text-slate-400">
+                            <td colspan="6" class="px-6 py-12 text-center font-semibold text-slate-400">
                                 Belum ada pesan masuk.
                             </td>
                         </tr>

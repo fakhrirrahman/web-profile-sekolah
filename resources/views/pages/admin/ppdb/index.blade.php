@@ -85,6 +85,7 @@
                         <th class="px-6 py-4">Calon Siswa</th>
                         <th class="px-6 py-4">Jenjang</th>
                         <th class="px-6 py-4">Kontak</th>
+                        <th class="px-6 py-4">Dibuat</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4 text-right">Aksi</th>
                     </tr>
@@ -94,8 +95,6 @@
                         <tr class="align-top transition hover:bg-slate-50">
                             <td class="px-6 py-4">
                                 <p class="font-black text-primary">{{ $registration->registration_number }}</p>
-                                <p class="mt-1 text-xs font-semibold text-slate-500">
-                                    {{ $registration->created_at->format('d M Y H:i') }}</p>
                                 <p class="mt-3 text-xs font-black uppercase tracking-wide text-secondary">Orang tua</p>
                                 <p class="mt-1 font-bold text-slate-700">{{ $registration->parent_name }}</p>
                             </td>
@@ -124,6 +123,10 @@
                                     <p class="mt-3 max-w-xs rounded bg-surface p-3 text-xs leading-5 text-slate-600">
                                         {{ $registration->notes }}</p>
                                 @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-semibold text-slate-700">{{ $registration->created_at->format('d M Y') }}</p>
+                                <p class="mt-1 text-xs font-semibold text-slate-400">{{ $registration->created_at->format('H:i') }}</p>
                             </td>
                             <td class="px-6 py-4">
                                 <span
@@ -248,7 +251,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center font-semibold text-slate-400">
+                            <td colspan="7" class="px-6 py-12 text-center font-semibold text-slate-400">
                                 Belum ada pendaftar PPDB.
                             </td>
                         </tr>

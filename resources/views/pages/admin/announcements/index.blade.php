@@ -17,6 +17,7 @@
                         <th class="px-6 py-4">Judul</th>
                         <th class="px-6 py-4">Kategori</th>
                         <th class="px-6 py-4">Tanggal</th>
+                        <th class="px-6 py-4">Dibuat</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4 text-right">Aksi</th>
                     </tr>
@@ -34,6 +35,10 @@
                                 <span class="rounded bg-secondary-muted px-2.5 py-1 text-xs font-bold text-secondary">{{ $announcement->category }}</span>
                             </td>
                             <td class="px-6 py-4 font-semibold">{{ $announcement->date }}</td>
+                            <td class="px-6 py-4">
+                                <p class="font-semibold text-slate-700">{{ $announcement->created_at->format('d M Y') }}</p>
+                                <p class="mt-1 text-xs font-semibold text-slate-400">{{ $announcement->created_at->format('H:i') }}</p>
+                            </td>
                             <td class="px-6 py-4">
                                 <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold {{ $announcement->is_active ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700' }}">
                                     <span class="size-1.5 rounded-full {{ $announcement->is_active ? 'bg-green-600' : 'bg-red-600' }}"></span>
@@ -58,7 +63,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-12 text-center text-slate-400 font-semibold">
+                            <td colspan="6" class="px-6 py-12 text-center text-slate-400 font-semibold">
                                 Belum ada pengumuman yang ditambahkan.
                             </td>
                         </tr>

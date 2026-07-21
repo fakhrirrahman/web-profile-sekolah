@@ -17,6 +17,7 @@
                     <tr>
                         <th class="px-6 py-4">Judul Foto / Dokumentasi</th>
                         <th class="px-6 py-4">Album</th>
+                        <th class="px-6 py-4">Dibuat</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4 text-right">Aksi</th>
                     </tr>
@@ -46,6 +47,10 @@
                                     class="rounded bg-secondary-muted px-2.5 py-1 text-xs font-bold text-secondary">{{ $item->album }}</span>
                             </td>
                             <td class="px-6 py-4">
+                                <p class="font-semibold text-slate-700">{{ $item->created_at->format('d M Y') }}</p>
+                                <p class="mt-1 text-xs font-semibold text-slate-400">{{ $item->created_at->format('H:i') }}</p>
+                            </td>
+                            <td class="px-6 py-4">
                                 <span
                                     class="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs font-semibold {{ $item->is_active ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700' }}">
                                     <span
@@ -72,7 +77,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-12 text-center text-slate-400 font-semibold">
+                            <td colspan="5" class="px-6 py-12 text-center text-slate-400 font-semibold">
                                 Belum ada foto galeri yang ditambahkan.
                             </td>
                         </tr>
