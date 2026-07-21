@@ -40,9 +40,14 @@
                             <div class="flex flex-wrap items-center gap-2 text-xs font-black uppercase tracking-wide">
                                 <span class="rounded-md bg-secondary-muted px-2.5 py-1 text-secondary">{{ $announcement->category }}</span>
                                 <span class="text-slate-500">{{ $announcement->date }}</span>
+                                @if ($announcement->is_pdf)
+                                    <span class="rounded-md bg-primary/10 px-2.5 py-1 text-primary">PDF</span>
+                                @endif
                             </div>
                             <h2 class="mt-4 text-xl font-black leading-tight text-primary">{{ $announcement->title }}</h2>
-                            <p class="mt-3 text-sm leading-7 text-slate-600">{{ $announcement->copy }}</p>
+                            <p class="mt-3 text-sm leading-7 text-slate-600">
+                                {{ $announcement->is_pdf ? 'Pengumuman tersedia dalam dokumen PDF.' : $announcement->copy }}
+                            </p>
                             <x-ui.button href="{{ route('pengumuman.show', $announcement->slug) }}" variant="outline" size="sm" class="mt-4">Detail</x-ui.button>
                         </article>
                     @empty

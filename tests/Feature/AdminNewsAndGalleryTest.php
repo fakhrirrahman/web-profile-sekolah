@@ -5,6 +5,8 @@ use App\Models\News;
 use App\Models\GalleryItem;
 use App\Models\User;
 use Database\Seeders\NewsAndGallerySeeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     $this->seed(NewsAndGallerySeeder::class);
@@ -172,6 +174,35 @@ test('admin can manage announcements', function () {
     $this->assertDatabaseMissing('announcements', [
         'id' => $announcement->id,
     ]);
+});
+
+test('admin can create pdf announcement and public detail embeds pdf', function () {
+    Storage::fake('public');
+
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->post(route('admin.announcements.store'), [
+            'title' => 'Pengumuman PDF Sekolah',
+            'category' => 'Akademik',
+            'date' => '21 Juli 2026',
+            'content_type' => 'pdf',
+            'pdf_file' => UploadedFile::fake()->create('pengumuman.pdf', 128, 'application/pdf'),
+            'is_active' => '1',
+        ])
+        ->assertRedirect(route('admin.announcements.index'));
+
+    $announcement = Announcement::where('title', 'Pengumuman PDF Sekolah')->firstOrFail();
+
+    expect($announcement->content_type)->toBe('pdf');
+    expect($announcement->pdf_path)->not->toBeNull();
+
+    Storage::disk('public')->assertExists($announcement->pdf_path);
+
+    $this->get(route('pengumuman.show', $announcement->slug))
+        ->assertOk()
+        ->assertSee($announcement->pdf_url)
+        ->assertSee('toolbar=0');
 });
 
 test('admin can manage gallery items', function () {

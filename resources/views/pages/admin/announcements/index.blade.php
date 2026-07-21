@@ -24,7 +24,12 @@
                 <tbody class="divide-y divide-primary/10 bg-white">
                     @forelse ($announcements as $announcement)
                         <tr class="hover:bg-slate-50 transition">
-                            <td class="px-6 py-4 font-black text-primary">{{ $announcement->title }}</td>
+                            <td class="px-6 py-4">
+                                <p class="font-black text-primary">{{ $announcement->title }}</p>
+                                <p class="mt-1 text-xs font-semibold {{ $announcement->is_pdf ? 'text-secondary' : 'text-slate-500' }}">
+                                    {{ $announcement->is_pdf ? 'Dokumen PDF' : 'Teks pengumuman' }}
+                                </p>
+                            </td>
                             <td class="px-6 py-4">
                                 <span class="rounded bg-secondary-muted px-2.5 py-1 text-xs font-bold text-secondary">{{ $announcement->category }}</span>
                             </td>

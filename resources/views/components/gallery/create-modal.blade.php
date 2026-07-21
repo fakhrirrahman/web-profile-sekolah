@@ -9,7 +9,7 @@
     $isEdit = filled($galleryItem?->getKey());
     $modalTitle = $isEdit ? 'Edit Foto' : 'Tambah Foto Baru';
     $submitLabel = $isEdit ? 'Simpan Perubahan' : 'Tambah Foto';
-    $triggerLabel ??= $isEdit ? 'Edit' : '+ Tambah Foto';
+    $triggerLabel ??= $isEdit ? 'Edit' : 'Tambah Foto';
     $buttonVariant ??= $isEdit ? 'outline' : 'accent';
     $action = $isEdit
         ? route('admin.gallery-items.update', $galleryItem)

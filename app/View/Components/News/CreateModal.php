@@ -42,7 +42,7 @@ class CreateModal extends Component
         $this->isEdit = filled($this->news?->getKey());
         $this->modalTitle = $this->isEdit ? 'Edit Berita' : 'Tambah Berita Baru';
         $this->submitLabel = $this->isEdit ? 'Simpan Perubahan' : 'Tambah Berita';
-        $this->triggerLabel = $triggerLabel ?? ($this->isEdit ? 'Edit' : '+ Tambah Berita');
+        $this->triggerLabel = $triggerLabel ?? ($this->isEdit ? 'Edit' : 'Tambah Berita');
         $this->buttonVariant = $buttonVariant ?? ($this->isEdit ? 'outline' : 'accent');
         $this->action = $this->isEdit
             ? route('admin.news.update', $this->news)

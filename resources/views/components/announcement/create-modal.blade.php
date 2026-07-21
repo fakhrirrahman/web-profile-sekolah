@@ -10,7 +10,7 @@
         <h2 class="mt-1 text-xl font-black text-primary text-start">{{ $modalTitle }}</h2>
     </div>
 
-    <form method="POST" action="{{ $action }}">
+    <form method="POST" action="{{ $action }}" enctype="multipart/form-data" x-data="{ contentType: '{{ old('content_type', $announcement?->content_type ?? 'text') }}' }">
         @csrf
         @if ($isEdit)
             @method('PUT')
@@ -51,10 +51,42 @@
             </div>
 
             <div>
+                <p id="{{ $contentTypeId }}" class="text-xs font-black uppercase tracking-wide text-primary/70">Bentuk Pengumuman</p>
+                <div class="mt-1.5 grid gap-2 sm:grid-cols-2" role="radiogroup" aria-labelledby="{{ $contentTypeId }}">
+                    <label class="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-primary/15 bg-surface px-3 py-2 text-sm font-black text-primary transition hover:border-primary/30 has-[:checked]:border-primary has-[:checked]:bg-secondary-muted">
+                        <input type="radio" name="content_type" value="text" x-model="contentType" class="size-4 border-2 border-primary/25 text-primary focus:ring-accent">
+                        <span>Tulis isi</span>
+                    </label>
+                    <label class="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-primary/15 bg-surface px-3 py-2 text-sm font-black text-primary transition hover:border-primary/30 has-[:checked]:border-primary has-[:checked]:bg-secondary-muted">
+                        <input type="radio" name="content_type" value="pdf" x-model="contentType" class="size-4 border-2 border-primary/25 text-primary focus:ring-accent">
+                        <span>Upload PDF</span>
+                    </label>
+                </div>
+                @error('content_type')
+                    <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div x-show="contentType === 'text'">
                 <label for="{{ $copyId }}" class="text-xs font-black uppercase tracking-wide text-primary/70">Isi Pengumuman</label>
                 <textarea id="{{ $copyId }}" name="copy" rows="6" placeholder="Tuliskan isi pengumuman di sini..."
-                    class="mt-1.5 w-full rounded-lg border-2 border-primary/15 bg-surface px-3 py-2 text-sm font-semibold leading-6 text-slate-700 outline-none transition focus:border-accent focus:bg-white">{{ old('copy', $announcement?->copy) }}</textarea>
+                    class="mt-1.5 w-full rounded-lg border-2 border-primary/15 bg-surface px-3 py-2 text-sm font-semibold leading-6 text-slate-700 outline-none transition focus:border-accent focus:bg-white"
+                    :required="contentType === 'text'">{{ old('copy', $announcement?->copy) }}</textarea>
                 @error('copy')
+                    <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div x-show="contentType === 'pdf'">
+                <label for="{{ $pdfId }}" class="text-xs font-black uppercase tracking-wide text-primary/70">File PDF</label>
+                <input id="{{ $pdfId }}" name="pdf_file" type="file" accept="application/pdf,.pdf"
+                    class="mt-1.5 w-full rounded-lg border-2 border-primary/15 bg-surface px-3 py-2 text-sm font-semibold text-slate-700 outline-none transition file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-2 file:text-xs file:font-black file:text-white focus:border-accent focus:bg-white"
+                    :required="contentType === 'pdf' && {{ $announcement?->pdf_path ? 'false' : 'true' }}">
+                <p class="mt-2 text-xs font-semibold leading-5 text-slate-500">PDF akan tampil sesuai file asli pada halaman detail pengumuman.</p>
+                @if ($announcement?->pdf_path)
+                    <a href="{{ $announcement->pdf_url }}" target="_blank" class="mt-2 inline-flex text-xs font-black text-secondary underline">Lihat PDF saat ini</a>
+                @endif
+                @error('pdf_file')
                     <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
                 @enderror
             </div>
