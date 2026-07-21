@@ -40,6 +40,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('news', \App\Http\Controllers\Admin\NewsController::class);
     Route::resource('announcements', AdminAnnouncementController::class)->except(['create', 'show', 'edit']);
     Route::resource('gallery-items', \App\Http\Controllers\Admin\GalleryItemController::class);
+    Route::get('ppdb-registrations/pdf', [\App\Http\Controllers\Admin\PpdbRegistrationController::class, 'exportPdf'])
+        ->name('ppdb-registrations.pdf');
     Route::resource('ppdb-registrations', \App\Http\Controllers\Admin\PpdbRegistrationController::class)
         ->only(['index', 'update', 'destroy']);
     Route::resource('contact-messages', \App\Http\Controllers\Admin\ContactMessageController::class)

@@ -24,6 +24,8 @@
         'diterima' => 'bg-green-500',
         'ditolak' => 'bg-red-500',
     ];
+
+    $activeFilters = array_filter($filters ?? [], fn ($value) => filled($value));
 @endphp
 
 @section('content')
@@ -37,6 +39,42 @@
                 {{ $registrations->count() }} Pendaftar
             </div>
         </div>
+
+        <form method="GET" action="{{ route('admin.ppdb-registrations.index') }}" class="mt-6 grid gap-3 rounded-lg border-2 border-primary/10 bg-surface p-4 lg:grid-cols-[minmax(14rem,1fr)_13rem_13rem_auto] lg:items-end">
+            <div>
+                <label for="search" class="text-xs font-black uppercase tracking-wide text-primary">Cari Data</label>
+                <input id="search" name="search" value="{{ $filters['search'] ?? '' }}" type="search" class="mt-2 w-full rounded-lg border-2 border-primary/15 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-primary" placeholder="Nama, nomor PPDB, orang tua, WA, email">
+            </div>
+
+            <div>
+                <label for="status" class="text-xs font-black uppercase tracking-wide text-primary">Status</label>
+                <select id="status" name="status" class="mt-2 w-full rounded-lg border-2 border-primary/15 bg-white px-4 py-3 text-sm font-semibold text-slate-700 outline-none transition focus:border-primary">
+                    <option value="">Semua status</option>
+                    @foreach ($statuses as $value => $label)
+                        <option value="{{ $value }}" @selected(($filters['status'] ?? '') === $value)>{{ $label }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <label for="grade" class="text-xs font-black uppercase tracking-wide text-primary">Jenjang</label>
+                <select id="grade" name="grade" class="mt-2 w-full rounded-lg border-2 border-primary/15 bg-white px-4 py-3 text-sm font-semibold text-slate-700 outline-none transition focus:border-primary">
+                    <option value="">Semua jenjang</option>
+                    @foreach ($grades as $grade)
+                        <option value="{{ $grade }}" @selected(($filters['grade'] ?? '') === $grade)>{{ $grade }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-2 sm:flex-row lg:justify-end">
+                <x-ui.button type="submit" variant="primary" size="md">Terapkan</x-ui.button>
+                <x-ui.button href="{{ route('admin.ppdb-registrations.index') }}" variant="muted" size="md">Reset</x-ui.button>
+                <x-ui.button href="{{ route('admin.ppdb-registrations.pdf', $activeFilters) }}" variant="accent" size="md">
+                    <x-ui.icon name="download" class="size-4" />
+                    Cetak PDF
+                </x-ui.button>
+            </div>
+        </form>
 
         <div class="mt-6 overflow-x-auto rounded-lg border-2 border-primary/10">
             <table class="w-full border-collapse text-left text-sm text-slate-600">

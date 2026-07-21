@@ -75,6 +75,12 @@
             <path d="m6 9 6 6 6-6"></path>
             @break
 
+        @case('download')
+            <path d="M12 15V3"></path>
+            <path d="m7 10 5 5 5-5"></path>
+            <path d="M20 21H4"></path>
+            @break
+
         @case('arrow-right')
         @default
             <path d="M5 12h14"></path>
