@@ -11,8 +11,8 @@
         body {
             color: #1f2937;
             font-family: DejaVu Sans, sans-serif;
-            font-size: 10px;
-            line-height: 1.45;
+            font-size: 9.5px;
+            line-height: 1.4;
         }
 
         h1,
@@ -38,7 +38,7 @@
 
         .title {
             color: #1f5c45;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             margin-top: 3px;
         }
@@ -56,16 +56,16 @@
         .data-table th {
             background: #1f5c45;
             color: #ffffff;
-            font-size: 8.5px;
+            font-size: 8px;
             letter-spacing: .7px;
-            padding: 7px 6px;
+            padding: 7px 5px;
             text-align: left;
             text-transform: uppercase;
         }
 
         .data-table td {
             border-bottom: 1px solid #d9e2dc;
-            padding: 7px 6px;
+            padding: 7px 5px;
             vertical-align: top;
         }
 
@@ -76,15 +76,15 @@
 
         .muted {
             color: #64748b;
-            font-size: 9px;
+            font-size: 8.5px;
         }
 
         .status {
             border-radius: 12px;
             display: inline-block;
-            font-size: 8.5px;
+            font-size: 8px;
             font-weight: 700;
-            padding: 3px 7px;
+            padding: 3px 6px;
         }
 
         .status-baru,
@@ -138,13 +138,12 @@
         <table class="data-table">
             <thead>
                 <tr>
-                    <th style="width: 12%;">No. PPDB</th>
-                    <th style="width: 18%;">Calon Siswa</th>
-                    <th style="width: 17%;">Orang Tua/Wali</th>
-                    <th style="width: 11%;">Jenjang</th>
-                    <th style="width: 20%;">Kontak</th>
-                    <th style="width: 13%;">Alamat</th>
-                    <th style="width: 9%;">Status</th>
+                    <th style="width: 19%;">No. PPDB</th>
+                    <th style="width: 23%;">Calon Siswa</th>
+                    <th style="width: 21%;">Orang Tua/Wali</th>
+                    <th style="width: 13%;">Jenjang</th>
+                    <th style="width: 14%;">WhatsApp</th>
+                    <th style="width: 10%;">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -157,23 +156,10 @@
                         <td>
                             <p class="number">{{ $registration->student_name }}</p>
                             <p class="muted">{{ $registration->gender }}</p>
-                            <p class="muted">{{ $registration->birth_place }}, {{ $registration->birth_date->format('d M Y') }}</p>
-                            @if ($registration->previous_school)
-                                <p class="muted">Asal: {{ $registration->previous_school }}</p>
-                            @endif
                         </td>
                         <td>{{ $registration->parent_name }}</td>
                         <td>{{ $registration->desired_grade }}</td>
-                        <td>
-                            <p>{{ $registration->phone }}</p>
-                            @if ($registration->email)
-                                <p class="muted">{{ $registration->email }}</p>
-                            @endif
-                            @if ($registration->notes)
-                                <p class="muted">Catatan: {{ $registration->notes }}</p>
-                            @endif
-                        </td>
-                        <td>{{ $registration->address }}</td>
+                        <td>{{ $registration->phone }}</td>
                         <td>
                             <span class="status status-{{ $registration->status }}">{{ $registration->status_label }}</span>
                         </td>

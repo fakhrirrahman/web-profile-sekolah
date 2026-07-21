@@ -42,7 +42,7 @@ class PpdbRegistrationController extends Controller
             'registrations' => $registrations,
             'statuses' => PpdbRegistration::STATUSES,
         ])
-            ->setPaper('a4', 'landscape')
+            ->setPaper('a4', 'portrait')
             ->download($filename);
     }
 
