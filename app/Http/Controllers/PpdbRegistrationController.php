@@ -11,8 +11,14 @@ class PpdbRegistrationController extends Controller
 {
     public function status(Request $request): View
     {
+        $lookupRegistrations = PpdbRegistration::query()
+            ->latest()
+            ->get(['registration_number', 'student_name', 'phone']);
+
         if (! $request->hasAny(['registration_number', 'phone'])) {
-            return view('pages.ppdb-status');
+            return view('pages.ppdb-status', [
+                'lookupRegistrations' => $lookupRegistrations,
+            ]);
         }
 
         $validated = $request->validateWithBag('statusLookup', [
@@ -26,6 +32,7 @@ class PpdbRegistrationController extends Controller
             ->first();
 
         return view('pages.ppdb-status', [
+            'lookupRegistrations' => $lookupRegistrations,
             'statusRegistration' => $registration,
             'statusSearch' => $validated,
         ]);

@@ -71,6 +71,10 @@
             <circle cx="12" cy="19" r="1"></circle>
             @break
 
+        @case('chevron-down')
+            <path d="m6 9 6 6 6-6"></path>
+            @break
+
         @case('arrow-right')
         @default
             <path d="M5 12h14"></path>

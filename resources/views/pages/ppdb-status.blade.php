@@ -5,6 +5,10 @@
         'baru' => 'Data sudah masuk. Admin akan menghubungi orang tua untuk konfirmasi awal.',
         'dihubungi' => 'Admin sudah menghubungi orang tua. Silakan lanjutkan komunikasi melalui kontak sekolah.',
         'observasi' => 'Pendaftaran masuk tahap observasi. Ikuti jadwal yang sudah diinformasikan admin.',
+        'lolos_berkas' => 'Berkas pendaftaran sudah sesuai. Silakan ikuti arahan admin untuk tahap berikutnya.',
+        'tidak_lolos_berkas' => 'Berkas pendaftaran belum memenuhi ketentuan. Mohon hubungi admin sekolah untuk informasi lebih lanjut.',
+        'tes_akademik' => 'Pendaftaran masuk tahap tes akademik. Ikuti jadwal dan arahan yang sudah diinformasikan admin.',
+        'wawancara' => 'Pendaftaran masuk tahap wawancara. Mohon mengikuti jadwal yang sudah diinformasikan admin.',
         'diterima' => 'Selamat, calon siswa dinyatakan diterima. Silakan lanjutkan proses daftar ulang.',
         'ditolak' => 'Mohon hubungi admin sekolah untuk informasi lebih lanjut terkait hasil pendaftaran.',
     ];
@@ -13,9 +17,21 @@
         'baru' => 'bg-blue-50 text-blue-700 border-blue-200',
         'dihubungi' => 'bg-amber-50 text-amber-800 border-amber-200',
         'observasi' => 'bg-secondary-muted text-secondary border-secondary/20',
+        'lolos_berkas' => 'bg-green-50 text-green-700 border-green-200',
+        'tidak_lolos_berkas' => 'bg-red-50 text-red-700 border-red-200',
+        'tes_akademik' => 'bg-blue-50 text-blue-700 border-blue-200',
+        'wawancara' => 'bg-amber-50 text-amber-800 border-amber-200',
         'diterima' => 'bg-green-50 text-green-700 border-green-200',
         'ditolak' => 'bg-red-50 text-red-700 border-red-200',
     ];
+
+    $lookupRegistrations = $lookupRegistrations ?? collect();
+    $selectedRegistrationNumber = old('registration_number', $statusSearch['registration_number'] ?? session('registration_number'));
+    $selectedLookupRegistration = $lookupRegistrations->firstWhere('registration_number', $selectedRegistrationNumber);
+    $selectedLookupValue = $selectedLookupRegistration
+        ? $selectedLookupRegistration->registration_number . ' - ' . $selectedLookupRegistration->student_name
+        : $selectedRegistrationNumber;
+    $selectedPhone = old('phone', $statusSearch['phone'] ?? optional($selectedLookupRegistration)->phone);
 @endphp
 
 @section('content')
@@ -29,7 +45,7 @@
                 <div>
                     <h1 class="max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Cek hasil dan tindak lanjut pendaftaran.</h1>
                     <p class="mt-4 max-w-2xl text-base leading-8 text-white/80">
-                        Masukkan nomor pendaftaran dan nomor WhatsApp yang sama dengan data formulir PPDB.
+                        Cari nama atau nomor pendaftaran untuk melihat status dan data formulir PPDB.
                     </p>
                 </div>
                 <x-ui.button href="{{ route('ppdb') }}" variant="muted" size="lg">Kembali ke PPDB</x-ui.button>
@@ -44,7 +60,7 @@
                     <div class="mb-6 rounded-lg border-2 border-green-200 bg-green-50 p-4 text-green-700">
                         <p class="text-xs font-black uppercase tracking-wide">Pendaftaran berhasil dikirim</p>
                         <p class="mt-2 text-sm font-bold">Nomor pendaftaran: {{ session('registration_number') }}</p>
-                        <p class="mt-1 text-xs font-semibold">Isi nomor WhatsApp untuk melihat status terbaru.</p>
+                        <p class="mt-1 text-xs font-semibold">Cari nama atau nomor pendaftaran untuk melihat status terbaru.</p>
                     </div>
                 @endif
 
@@ -53,14 +69,35 @@
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Cek Data</p>
                         <h2 class="mt-3 text-2xl font-black leading-tight text-primary">Status pendaftaran</h2>
                         <p class="mt-3 text-sm leading-7 text-slate-600">
-                            Nomor pendaftaran diberikan setelah formulir berhasil dikirim.
+                            Pilih data pendaftar dari kolom pencarian, lalu sistem akan mengisi nomor WhatsApp secara otomatis.
                         </p>
                     </div>
 
-                    <form action="{{ route('ppdb.status') }}" method="GET" class="grid gap-4">
+                    <form action="{{ route('ppdb.status') }}" method="GET" class="grid gap-4" data-ppdb-status-form>
                         <div>
-                            <label for="registration_number" class="text-xs font-black uppercase tracking-wide text-primary">Nomor Pendaftaran</label>
-                            <input id="registration_number" name="registration_number" value="{{ old('registration_number', $statusSearch['registration_number'] ?? session('registration_number')) }}" type="text" class="mt-2 w-full rounded-lg border-2 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-primary {{ $errors->statusLookup->has('registration_number') ? 'border-red-300 bg-red-50' : 'border-primary/15 bg-surface' }}" placeholder="PPDB-2026-0001" required>
+                            <label for="registration_lookup" class="text-xs font-black uppercase tracking-wide text-primary">Cari Pendaftar</label>
+                            <div class="relative mt-2" data-ppdb-combobox>
+                                <input id="registration_lookup" value="{{ $selectedLookupValue }}" type="text" class="w-full rounded-lg border-2 px-4 py-3 pr-11 text-sm text-slate-700 outline-none transition focus:border-primary {{ $errors->statusLookup->has('registration_number') ? 'border-red-300 bg-red-50' : 'border-primary/15 bg-surface' }}" placeholder="Ketik nomor pendaftaran atau nama siswa" autocomplete="off" required data-ppdb-registration-lookup>
+                                <button type="button" class="absolute right-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-lg text-primary transition hover:bg-secondary-muted" aria-label="Buka pilihan pendaftar" data-ppdb-toggle>
+                                    <x-ui.icon name="chevron-down" class="size-4" />
+                                </button>
+                                <div class="absolute left-0 right-0 top-[calc(100%+.35rem)] z-30 hidden max-h-64 overflow-y-auto rounded-lg border-2 border-primary/15 bg-white p-2 shadow-[6px_6px_0_rgba(31,92,69,.12)]" data-ppdb-options>
+                                    @forelse ($lookupRegistrations as $registration)
+                                        <button type="button" class="block w-full rounded-md px-3 py-2 text-left transition hover:bg-secondary-muted focus:bg-secondary-muted focus:outline-none" data-ppdb-option data-label="{{ $registration->registration_number }} - {{ $registration->student_name }}" data-registration-number="{{ $registration->registration_number }}" data-phone="{{ $registration->phone }}">
+                                            <span class="block text-sm font-black text-primary">{{ $registration->registration_number }}</span>
+                                            <span class="mt-0.5 block text-xs font-semibold text-slate-500">{{ $registration->student_name }} - {{ $registration->phone }}</span>
+                                        </button>
+                                    @empty
+                                        <div class="px-3 py-2 text-xs font-semibold leading-5 text-slate-500">
+                                            Belum ada data pendaftaran.
+                                        </div>
+                                    @endforelse
+                                    <div class="hidden px-3 py-2 text-xs font-semibold leading-5 text-slate-500" data-ppdb-empty>
+                                        Data pendaftar tidak ditemukan.
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="registration_number" value="{{ $selectedRegistrationNumber }}" data-ppdb-registration-number>
                             @error('registration_number', 'statusLookup')
                                 <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
                             @enderror
@@ -68,7 +105,7 @@
 
                         <div>
                             <label for="status_phone" class="text-xs font-black uppercase tracking-wide text-primary">Nomor WhatsApp</label>
-                            <input id="status_phone" name="phone" value="{{ old('phone', $statusSearch['phone'] ?? '') }}" type="text" class="mt-2 w-full rounded-lg border-2 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-primary {{ $errors->statusLookup->has('phone') ? 'border-red-300 bg-red-50' : 'border-primary/15 bg-surface' }}" placeholder="08123456789" required>
+                            <input id="status_phone" name="phone" value="{{ $selectedPhone }}" type="text" class="mt-2 w-full rounded-lg border-2 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-primary {{ $errors->statusLookup->has('phone') ? 'border-red-300 bg-red-50' : 'border-primary/15 bg-surface' }}" placeholder="Terisi otomatis setelah memilih pendaftar" readonly required data-ppdb-phone>
                             @error('phone', 'statusLookup')
                                 <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
                             @enderror
@@ -97,6 +134,47 @@
                                     {{ $statusMessages[$statusRegistration->status] ?? 'Status pendaftaran sedang diproses oleh admin.' }}
                                 </p>
                             </div>
+
+                            <div class="mt-5 rounded-lg border-2 border-primary/10 bg-white p-4">
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Data pendaftaran</p>
+                                <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                                    <div>
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Nama Orang Tua/Wali</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->parent_name }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Nomor WhatsApp</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->phone }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Tempat, Tanggal Lahir</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">
+                                            {{ $statusRegistration->birth_place }},
+                                            {{ optional($statusRegistration->birth_date)->translatedFormat('d F Y') }}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Jenis Kelamin</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->gender }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Asal Sekolah</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->previous_school ?: '-' }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Email</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->email ?: '-' }}</p>
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Alamat</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->address }}</p>
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Catatan Tambahan</p>
+                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->notes ?: '-' }}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @else
                         <div class="mt-7 rounded-lg border-2 border-red-200 bg-red-50 p-5 text-red-700">
@@ -121,11 +199,11 @@
                         <div class="mt-4 grid gap-3">
                             <div class="flex gap-3 text-sm leading-6 text-slate-600">
                                 <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-accent text-xs font-black text-primary">1</span>
-                                <span>Ambil nomor pendaftaran dari pesan setelah submit formulir.</span>
+                                <span>Cari nomor pendaftaran atau nama siswa pada kolom pencarian.</span>
                             </div>
                             <div class="flex gap-3 text-sm leading-6 text-slate-600">
                                 <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-accent text-xs font-black text-primary">2</span>
-                                <span>Masukkan nomor WhatsApp yang dipakai saat mendaftar.</span>
+                                <span>Pilih data pendaftar yang sesuai dari dropdown.</span>
                             </div>
                             <div class="flex gap-3 text-sm leading-6 text-slate-600">
                                 <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-accent text-xs font-black text-primary">3</span>
@@ -146,4 +224,112 @@
             </aside>
         </div>
     </section>
+
+    <script>
+        document.querySelectorAll('[data-ppdb-status-form]').forEach((form) => {
+            const combobox = form.querySelector('[data-ppdb-combobox]');
+            const lookupInput = form.querySelector('[data-ppdb-registration-lookup]');
+            const registrationInput = form.querySelector('[data-ppdb-registration-number]');
+            const phoneInput = form.querySelector('[data-ppdb-phone]');
+            const optionsPanel = form.querySelector('[data-ppdb-options]');
+            const toggleButton = form.querySelector('[data-ppdb-toggle]');
+            const emptyState = form.querySelector('[data-ppdb-empty]');
+            const optionButtons = Array.from(form.querySelectorAll('[data-ppdb-option]'));
+
+            if (!combobox || !lookupInput || !registrationInput || !phoneInput || !optionsPanel) {
+                return;
+            }
+
+            const normalize = (value) => value.trim().toLowerCase();
+            const showOptions = () => optionsPanel.classList.remove('hidden');
+            const hideOptions = () => optionsPanel.classList.add('hidden');
+
+            const selectOption = (option) => {
+                lookupInput.value = option.dataset.label || '';
+                registrationInput.value = option.dataset.registrationNumber || '';
+                phoneInput.value = option.dataset.phone || '';
+                lookupInput.setCustomValidity('');
+                hideOptions();
+            };
+
+            const findExactOption = () => {
+                const search = normalize(lookupInput.value);
+
+                return optionButtons.find((option) => normalize(option.dataset.label || '') === search)
+                    || optionButtons.find((option) => normalize(option.dataset.registrationNumber || '') === search);
+            };
+
+            const getMatchingOptions = () => {
+                const search = normalize(lookupInput.value);
+
+                return optionButtons.filter((option) => normalize(option.dataset.label || '').includes(search)
+                    || normalize(option.dataset.phone || '').includes(search));
+            };
+
+            const filterOptions = () => {
+                const matchingOptions = getMatchingOptions();
+
+                optionButtons.forEach((option) => {
+                    option.classList.toggle('hidden', !matchingOptions.includes(option));
+                });
+
+                if (emptyState) {
+                    emptyState.classList.toggle('hidden', matchingOptions.length > 0);
+                }
+
+                showOptions();
+            };
+
+            lookupInput.addEventListener('focus', filterOptions);
+            lookupInput.addEventListener('input', () => {
+                registrationInput.value = '';
+                phoneInput.value = '';
+                filterOptions();
+            });
+
+            toggleButton?.addEventListener('click', () => {
+                if (optionsPanel.classList.contains('hidden')) {
+                    filterOptions();
+                    lookupInput.focus();
+                    return;
+                }
+
+                hideOptions();
+            });
+
+            optionButtons.forEach((option) => {
+                option.addEventListener('click', () => selectOption(option));
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!combobox.contains(event.target)) {
+                    hideOptions();
+                }
+            });
+
+            form.addEventListener('submit', (event) => {
+                const exactOption = findExactOption();
+                const matchingOptions = getMatchingOptions();
+
+                if (exactOption) {
+                    selectOption(exactOption);
+                    return;
+                }
+
+                if (matchingOptions.length === 1) {
+                    selectOption(matchingOptions[0]);
+                    return;
+                }
+
+                if (registrationInput.value && phoneInput.value) {
+                    return;
+                }
+
+                event.preventDefault();
+                lookupInput.setCustomValidity('Pilih data pendaftar dari dropdown.');
+                lookupInput.reportValidity();
+                filterOptions();
+            });
+        });
+    </script>
 @endsection
