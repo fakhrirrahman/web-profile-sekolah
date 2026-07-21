@@ -28,8 +28,29 @@ class PpdbRegistration extends Model
         'baru' => 'Baru',
         'dihubungi' => 'Dihubungi',
         'observasi' => 'Observasi',
+        'lolos_berkas' => 'Lolos Berkas',
+        'tidak_lolos_berkas' => 'Tidak Lolos Berkas',
+        'tes_akademik' => 'Tes Akademik',
+        'wawancara' => 'Wawancara',
         'diterima' => 'Diterima',
         'ditolak' => 'Ditolak',
+    ];
+    public const STATUS_ORDER = [
+        'baru' => 1,
+        'dihubungi' => 2,
+        'observasi' => 3,
+        'lolos_berkas' => 4,
+        'tidak_lolos_berkas' => 4,
+        'tes_akademik' => 5,
+        'wawancara' => 6,
+        'diterima' => 7,
+        'ditolak' => 7,
+    ];
+
+    public const FINAL_STATUSES = [
+        'tidak_lolos_berkas',
+        'diterima',
+        'ditolak',
     ];
 
     protected $casts = [

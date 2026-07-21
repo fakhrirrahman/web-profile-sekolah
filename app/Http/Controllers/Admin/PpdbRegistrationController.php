@@ -29,6 +29,20 @@ class PpdbRegistrationController extends Controller
             'status' => ['required', Rule::in(array_keys(PpdbRegistration::STATUSES))],
         ]);
 
+        if (in_array($ppdbRegistration->status, PpdbRegistration::FINAL_STATUSES)) {
+            flash()->error('Status akhir tidak dapat diubah.');
+            return back();
+        }
+
+        $currentOrder = PpdbRegistration::STATUS_ORDER[$ppdbRegistration->status];
+        $newOrder = PpdbRegistration::STATUS_ORDER[$validated['status']];
+
+        if ($newOrder < $currentOrder) {
+            flash()->error('Status tidak boleh dikembalikan ke tahap sebelumnya.');
+
+            return back();
+        }
+
         $ppdbRegistration->update($validated);
 
         flash()->success('Status pendaftaran berhasil diperbarui.');
