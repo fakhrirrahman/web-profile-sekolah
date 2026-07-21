@@ -31,7 +31,6 @@
     $selectedLookupValue = $selectedLookupRegistration
         ? $selectedLookupRegistration->registration_number . ' - ' . $selectedLookupRegistration->student_name
         : $selectedRegistrationNumber;
-    $selectedPhone = old('phone', $statusSearch['phone'] ?? optional($selectedLookupRegistration)->phone);
 @endphp
 
 @section('content')
@@ -45,7 +44,7 @@
                 <div>
                     <h1 class="max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Cek hasil dan tindak lanjut pendaftaran.</h1>
                     <p class="mt-4 max-w-2xl text-base leading-8 text-white/80">
-                        Cari nama atau nomor pendaftaran untuk melihat status dan data formulir PPDB.
+                        Cari nama atau nomor pendaftaran untuk melihat status PPDB.
                     </p>
                 </div>
                 <x-ui.button href="{{ route('ppdb') }}" variant="muted" size="lg">Kembali ke PPDB</x-ui.button>
@@ -69,7 +68,7 @@
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Cek Data</p>
                         <h2 class="mt-3 text-2xl font-black leading-tight text-primary">Status pendaftaran</h2>
                         <p class="mt-3 text-sm leading-7 text-slate-600">
-                            Pilih data pendaftar dari kolom pencarian, lalu sistem akan mengisi nomor WhatsApp secara otomatis.
+                            Pilih data pendaftar dari kolom pencarian untuk melihat status terbaru.
                         </p>
                     </div>
 
@@ -83,9 +82,9 @@
                                 </button>
                                 <div class="absolute left-0 right-0 top-[calc(100%+.35rem)] z-30 hidden max-h-64 overflow-y-auto rounded-lg border-2 border-primary/15 bg-white p-2 shadow-[6px_6px_0_rgba(31,92,69,.12)]" data-ppdb-options>
                                     @forelse ($lookupRegistrations as $registration)
-                                        <button type="button" class="block w-full rounded-md px-3 py-2 text-left transition hover:bg-secondary-muted focus:bg-secondary-muted focus:outline-none" data-ppdb-option data-label="{{ $registration->registration_number }} - {{ $registration->student_name }}" data-registration-number="{{ $registration->registration_number }}" data-phone="{{ $registration->phone }}">
+                                        <button type="button" class="block w-full rounded-md px-3 py-2 text-left transition hover:bg-secondary-muted focus:bg-secondary-muted focus:outline-none" data-ppdb-option data-label="{{ $registration->registration_number }} - {{ $registration->student_name }}" data-registration-number="{{ $registration->registration_number }}" data-grade="{{ $registration->desired_grade }}">
                                             <span class="block text-sm font-black text-primary">{{ $registration->registration_number }}</span>
-                                            <span class="mt-0.5 block text-xs font-semibold text-slate-500">{{ $registration->student_name }} - {{ $registration->phone }}</span>
+                                            <span class="mt-0.5 block text-xs font-semibold text-slate-500">{{ $registration->student_name }} - {{ $registration->desired_grade }}</span>
                                         </button>
                                     @empty
                                         <div class="px-3 py-2 text-xs font-semibold leading-5 text-slate-500">
@@ -99,14 +98,6 @@
                             </div>
                             <input type="hidden" name="registration_number" value="{{ $selectedRegistrationNumber }}" data-ppdb-registration-number>
                             @error('registration_number', 'statusLookup')
-                                <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label for="status_phone" class="text-xs font-black uppercase tracking-wide text-primary">Nomor WhatsApp</label>
-                            <input id="status_phone" name="phone" value="{{ $selectedPhone }}" type="text" class="mt-2 w-full rounded-lg border-2 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-primary {{ $errors->statusLookup->has('phone') ? 'border-red-300 bg-red-50' : 'border-primary/15 bg-surface' }}" placeholder="Terisi otomatis setelah memilih pendaftar" readonly required data-ppdb-phone>
-                            @error('phone', 'statusLookup')
                                 <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
@@ -134,52 +125,11 @@
                                     {{ $statusMessages[$statusRegistration->status] ?? 'Status pendaftaran sedang diproses oleh admin.' }}
                                 </p>
                             </div>
-
-                            <div class="mt-5 rounded-lg border-2 border-primary/10 bg-white p-4">
-                                <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Data pendaftaran</p>
-                                <div class="mt-4 grid gap-3 sm:grid-cols-2">
-                                    <div>
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Nama Orang Tua/Wali</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->parent_name }}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Nomor WhatsApp</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->phone }}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Tempat, Tanggal Lahir</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">
-                                            {{ $statusRegistration->birth_place }},
-                                            {{ optional($statusRegistration->birth_date)->translatedFormat('d F Y') }}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Jenis Kelamin</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->gender }}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Asal Sekolah</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->previous_school ?: '-' }}</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Email</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->email ?: '-' }}</p>
-                                    </div>
-                                    <div class="sm:col-span-2">
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Alamat</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->address }}</p>
-                                    </div>
-                                    <div class="sm:col-span-2">
-                                        <p class="text-[11px] font-black uppercase tracking-wide text-primary">Catatan Tambahan</p>
-                                        <p class="mt-1 text-sm font-semibold leading-6 text-slate-600">{{ $statusRegistration->notes ?: '-' }}</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     @else
                         <div class="mt-7 rounded-lg border-2 border-red-200 bg-red-50 p-5 text-red-700">
                             <p class="text-sm font-black">Data pendaftaran tidak ditemukan.</p>
-                            <p class="mt-1 text-xs font-semibold leading-6">Pastikan nomor pendaftaran dan nomor WhatsApp sama seperti saat mengisi formulir.</p>
+                            <p class="mt-1 text-xs font-semibold leading-6">Pastikan nomor pendaftaran sama seperti saat mengisi formulir.</p>
                         </div>
                     @endif
                 @else
@@ -230,13 +180,12 @@
             const combobox = form.querySelector('[data-ppdb-combobox]');
             const lookupInput = form.querySelector('[data-ppdb-registration-lookup]');
             const registrationInput = form.querySelector('[data-ppdb-registration-number]');
-            const phoneInput = form.querySelector('[data-ppdb-phone]');
             const optionsPanel = form.querySelector('[data-ppdb-options]');
             const toggleButton = form.querySelector('[data-ppdb-toggle]');
             const emptyState = form.querySelector('[data-ppdb-empty]');
             const optionButtons = Array.from(form.querySelectorAll('[data-ppdb-option]'));
 
-            if (!combobox || !lookupInput || !registrationInput || !phoneInput || !optionsPanel) {
+            if (!combobox || !lookupInput || !registrationInput || !optionsPanel) {
                 return;
             }
 
@@ -247,7 +196,6 @@
             const selectOption = (option) => {
                 lookupInput.value = option.dataset.label || '';
                 registrationInput.value = option.dataset.registrationNumber || '';
-                phoneInput.value = option.dataset.phone || '';
                 lookupInput.setCustomValidity('');
                 hideOptions();
             };
@@ -263,7 +211,8 @@
                 const search = normalize(lookupInput.value);
 
                 return optionButtons.filter((option) => normalize(option.dataset.label || '').includes(search)
-                    || normalize(option.dataset.phone || '').includes(search));
+                    || normalize(option.dataset.registrationNumber || '').includes(search)
+                    || normalize(option.dataset.grade || '').includes(search));
             };
 
             const filterOptions = () => {
@@ -283,7 +232,6 @@
             lookupInput.addEventListener('focus', filterOptions);
             lookupInput.addEventListener('input', () => {
                 registrationInput.value = '';
-                phoneInput.value = '';
                 filterOptions();
             });
 
@@ -321,7 +269,7 @@
                     return;
                 }
 
-                if (registrationInput.value && phoneInput.value) {
+                if (registrationInput.value) {
                     return;
                 }
 

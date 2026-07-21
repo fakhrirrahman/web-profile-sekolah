@@ -4,7 +4,7 @@
         ['label' => 'Profil', 'href' => url('/profile'), 'active' => request()->is('profile')],
         ['label' => 'Berita', 'href' => url('/berita'), 'active' => request()->is('berita')],
         ['label' => 'Pengumuman', 'href' => url('/pengumuman'), 'active' => request()->is('pengumuman*')],
-        ['label' => 'PPDB', 'href' => url('/ppdb'), 'active' => request()->is('ppdb')],
+        // ['label' => 'PPDB', 'href' => url('/ppdb'), 'active' => request()->is('ppdb')],
         ['label' => 'Galeri', 'href' => url('/galeri'), 'active' => request()->is('galeri')],
         ['label' => 'Kontak', 'href' => url('/kontak'), 'active' => request()->is('kontak')],
     ];
@@ -35,7 +35,7 @@
         </nav>
 
         <div class="hidden items-center gap-3 lg:flex">
-            <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="sm">Daftar PPDB</x-ui.button>
+            <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="sm">PPDB</x-ui.button>
             <x-ui.button href="{{ route('login') }}" variant="muted" size="sm">Login</x-ui.button>
         </div>
 
