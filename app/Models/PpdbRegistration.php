@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
     'registration_number',
@@ -71,6 +72,23 @@ class PpdbRegistration extends Model
                 $registration->status = 'baru';
             }
         });
+
+        static::created(function (PpdbRegistration $registration) {
+            $registration->recordStatusHistory($registration->status, $registration->created_at);
+        });
+    }
+
+    public function statusHistories(): HasMany
+    {
+        return $this->hasMany(PpdbRegistrationStatusHistory::class)->oldest('changed_at')->oldest('id');
+    }
+
+    public function recordStatusHistory(string $status, mixed $changedAt = null): void
+    {
+        $this->statusHistories()->create([
+            'status' => $status,
+            'changed_at' => $changedAt ?? now(),
+        ]);
     }
 
     public function getStatusLabelAttribute(): string

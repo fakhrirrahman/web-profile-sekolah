@@ -72,3 +72,22 @@ test('admin can export filtered ppdb registrations to pdf', function () {
 
     expect($response->headers->get('content-disposition'))->toContain('data-ppdb-');
 });
+
+test('admin status updates are stored as registration history', function () {
+    $user = User::factory()->create();
+    $registration = createPpdbRegistration([
+        'status' => 'baru',
+    ]);
+
+    $this->actingAs($user)
+        ->put(route('admin.ppdb-registrations.update', $registration), [
+            'status' => 'observasi',
+        ])
+        ->assertRedirect(route('admin.ppdb-registrations.index'));
+
+    expect($registration->fresh()->status)->toBe('observasi');
+    expect($registration->fresh()->statusHistories()->pluck('status')->all())->toBe([
+        'baru',
+        'observasi',
+    ]);
+});

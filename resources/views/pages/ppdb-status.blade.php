@@ -125,6 +125,44 @@
                                     {{ $statusMessages[$statusRegistration->status] ?? 'Status pendaftaran sedang diproses oleh admin.' }}
                                 </p>
                             </div>
+
+                            <div class="mt-5 rounded-lg border-2 border-primary/10 bg-white p-4">
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Riwayat status</p>
+                                <div class="mt-4 grid gap-3">
+                                    @forelse ($statusRegistration->statusHistories as $history)
+                                        <div class="grid grid-cols-[auto_1fr] gap-3">
+                                            <div class="flex flex-col items-center">
+                                                <span class="grid size-8 place-items-center rounded-full border-2 {{ $loop->last ? ($statusClasses[$history->status] ?? 'border-primary/15 bg-surface text-primary') : 'border-primary/15 bg-surface text-primary' }}">
+                                                    <span class="text-xs font-black">{{ $loop->iteration }}</span>
+                                                </span>
+                                                @unless ($loop->last)
+                                                    <span class="h-full min-h-5 w-0.5 bg-primary/12"></span>
+                                                @endunless
+                                            </div>
+                                            <div class="min-w-0 pb-3">
+                                                <p class="text-sm font-black text-primary">{{ $history->status_label }}</p>
+                                                <p class="mt-1 text-xs font-semibold text-slate-500">
+                                                    {{ optional($history->changed_at)->format('d M Y H:i') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="grid grid-cols-[auto_1fr] gap-3">
+                                            <div class="flex flex-col items-center">
+                                                <span class="grid size-8 place-items-center rounded-full border-2 {{ $statusClasses[$statusRegistration->status] ?? 'border-primary/15 bg-surface text-primary' }}">
+                                                    <span class="text-xs font-black">1</span>
+                                                </span>
+                                            </div>
+                                            <div class="min-w-0">
+                                                <p class="text-sm font-black text-primary">{{ $statusRegistration->status_label }}</p>
+                                                <p class="mt-1 text-xs font-semibold text-slate-500">
+                                                    {{ optional($statusRegistration->created_at)->format('d M Y H:i') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    @endforelse
+                                </div>
+                            </div>
                         </div>
                     @else
                         <div class="mt-7 rounded-lg border-2 border-red-200 bg-red-50 p-5 text-red-700">

@@ -8,6 +8,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +67,15 @@ class PpdbRegistrationController extends Controller
             return back();
         }
 
-        $ppdbRegistration->update($validated);
+        DB::transaction(function () use ($ppdbRegistration, $validated) {
+            $oldStatus = $ppdbRegistration->status;
+
+            $ppdbRegistration->update($validated);
+
+            if ($oldStatus !== $validated['status']) {
+                $ppdbRegistration->recordStatusHistory($validated['status']);
+            }
+        });
 
         flash()->success('Status pendaftaran berhasil diperbarui.');
 

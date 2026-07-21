@@ -26,6 +26,7 @@ class PpdbRegistrationController extends Controller
         ]);
 
         $registration = PpdbRegistration::query()
+            ->with('statusHistories')
             ->where('registration_number', $validated['registration_number'])
             ->first();
 

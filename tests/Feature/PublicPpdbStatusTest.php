@@ -63,3 +63,34 @@ test('public ppdb status dropdown only shows non-private lookup data', function 
         ->assertDontSee('dimas@example.test')
         ->assertDontSee('Jl. Sekolah No. 2');
 });
+
+test('public ppdb status page shows status history steps', function () {
+    $registration = PpdbRegistration::create([
+        'registration_number' => 'PPDB-2026-9999',
+        'student_name' => 'Maya Lestari',
+        'birth_place' => 'Depok',
+        'birth_date' => '2018-08-12',
+        'gender' => 'Perempuan',
+        'desired_grade' => 'SD Kelas 1',
+        'previous_school' => null,
+        'parent_name' => 'Rina Lestari',
+        'phone' => '089900002222',
+        'email' => null,
+        'address' => 'Cluster Rahasia 9',
+        'notes' => null,
+        'status' => 'baru',
+    ]);
+
+    $registration->update(['status' => 'dihubungi']);
+    $registration->recordStatusHistory('dihubungi');
+
+    $this->get(route('ppdb.status', [
+        'registration_number' => $registration->registration_number,
+    ]))
+        ->assertOk()
+        ->assertSee('Riwayat status')
+        ->assertSeeInOrder(['Baru', 'Dihubungi'])
+        ->assertDontSee('Rina Lestari')
+        ->assertDontSee('089900002222')
+        ->assertDontSee('Cluster Rahasia 9');
+});
