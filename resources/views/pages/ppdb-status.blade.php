@@ -126,41 +126,130 @@
                                 </p>
                             </div>
 
-                            <div class="mt-5 rounded-lg border-2 border-primary/10 bg-white p-4">
-                                <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Riwayat status</p>
-                                <div class="mt-4 grid gap-3">
-                                    @forelse ($statusRegistration->statusHistories as $history)
-                                        <div class="grid grid-cols-[auto_1fr] gap-3">
-                                            <div class="flex flex-col items-center">
-                                                <span class="grid size-8 place-items-center rounded-full border-2 {{ $loop->last ? ($statusClasses[$history->status] ?? 'border-primary/15 bg-surface text-primary') : 'border-primary/15 bg-surface text-primary' }}">
-                                                    <span class="text-xs font-black">{{ $loop->iteration }}</span>
-                                                </span>
-                                                @unless ($loop->last)
-                                                    <span class="h-full min-h-5 w-0.5 bg-primary/12"></span>
-                                                @endunless
-                                            </div>
-                                            <div class="min-w-0 pb-3">
-                                                <p class="text-sm font-black text-primary">{{ $history->status_label }}</p>
-                                                <p class="mt-1 text-xs font-semibold text-slate-500">
+                            @php
+                                $statusHistories = $statusRegistration->statusHistories->values();
+                                $historyCount = max($statusHistories->count(), 1);
+                                $currentHistory = $statusHistories->last();
+                            @endphp
+
+                            <div class="mt-5 rounded-lg border-2 border-primary/10 bg-white p-4 sm:p-5">
+                                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                    <div>
+                                        <p class="text-xs font-black uppercase tracking-[0.16em] text-secondary">Riwayat status</p>
+                                        <h4 class="mt-1 text-lg font-black leading-tight text-primary">Progress pendaftaran</h4>
+                                    </div>
+                                    <div class="inline-flex w-fit items-center gap-2 rounded-lg border-2 border-primary/10 bg-surface px-3 py-2">
+                                        <span class="text-xs font-black uppercase tracking-wide text-primary">
+                                            Tahap saat ini
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <ol class="relative mt-6 hidden gap-0 md:grid" style="grid-template-columns: repeat({{ $historyCount }}, minmax(0, 1fr));">
+                                    <span class="absolute left-10 right-10 top-5 h-1 rounded-full bg-primary/10" aria-hidden="true"></span>
+                                    <span class="absolute left-10 right-10 top-5 h-1 rounded-full bg-secondary/40" aria-hidden="true"></span>
+                                    @forelse ($statusHistories as $history)
+                                        @php
+                                            $isCurrent = $loop->last;
+                                        @endphp
+                                        <li class="relative z-10 flex min-w-0 flex-col items-center px-2 text-center">
+                                            <span class="grid size-11 place-items-center rounded-full border-2 shadow-[0_0_0_6px_#fff] {{ $isCurrent ? ($statusClasses[$history->status] ?? 'border-primary/15 bg-white text-primary') : 'border-secondary/25 bg-white text-secondary' }}">
+                                                <span class="text-sm font-black">{{ $loop->iteration }}</span>
+                                            </span>
+                                            <div class="mt-3 min-w-0">
+                                                <p class="truncate text-sm font-black leading-5 text-primary">{{ $history->status_label }}</p>
+                                                <p class="mt-1 text-xs font-semibold leading-5 text-slate-500">
                                                     {{ optional($history->changed_at)->format('d M Y H:i') }}
                                                 </p>
+                                                @if ($isCurrent)
+                                                    <span class="mt-2 inline-flex rounded-full border border-secondary/20 bg-secondary-muted px-2 py-1 text-[10px] font-black uppercase tracking-wide text-secondary">
+                                                        Saat ini
+                                                    </span>
+                                                @endif
                                             </div>
-                                        </div>
+                                        </li>
                                     @empty
-                                        <div class="grid grid-cols-[auto_1fr] gap-3">
+                                        <li class="relative z-10 flex min-w-0 flex-col items-center px-2 text-center">
+                                            <span class="grid size-11 place-items-center rounded-full border-2 shadow-[0_0_0_6px_#fff] {{ $statusClasses[$statusRegistration->status] ?? 'border-primary/15 bg-white text-primary' }}">
+                                                <span class="text-sm font-black">1</span>
+                                            </span>
+                                            <div class="mt-3 min-w-0">
+                                                <p class="truncate text-sm font-black leading-5 text-primary">{{ $statusRegistration->status_label }}</p>
+                                                <p class="mt-1 text-xs font-semibold leading-5 text-slate-500">
+                                                    {{ optional($statusRegistration->created_at)->format('d M Y H:i') }}
+                                                </p>
+                                                <span class="mt-2 inline-flex rounded-full border border-secondary/20 bg-secondary-muted px-2 py-1 text-[10px] font-black uppercase tracking-wide text-secondary">
+                                                    Saat ini
+                                                </span>
+                                            </div>
+                                        </li>
+                                    @endforelse
+                                </ol>
+
+                                <ol class="mt-5 grid gap-0 md:hidden">
+                                    @forelse ($statusHistories as $history)
+                                        @php
+                                            $isCurrent = $loop->last;
+                                        @endphp
+                                        <li class="grid grid-cols-[auto_1fr] gap-3">
                                             <div class="flex flex-col items-center">
-                                                <span class="grid size-8 place-items-center rounded-full border-2 {{ $statusClasses[$statusRegistration->status] ?? 'border-primary/15 bg-surface text-primary' }}">
-                                                    <span class="text-xs font-black">1</span>
+                                                <span class="grid size-10 place-items-center rounded-full border-2 {{ $isCurrent ? ($statusClasses[$history->status] ?? 'border-primary/15 bg-white text-primary') : 'border-secondary/25 bg-white text-secondary' }}">
+                                                    <span class="text-sm font-black">{{ $loop->iteration }}</span>
+                                                </span>
+                                                @unless ($loop->last)
+                                                    <span class="h-full min-h-8 w-1 rounded-full bg-secondary/30"></span>
+                                                @endunless
+                                            </div>
+                                            <div class="min-w-0 pb-5">
+                                                <div class="rounded-lg border-2 {{ $isCurrent ? 'border-primary/20 bg-secondary-muted' : 'border-primary/10 bg-surface' }} px-4 py-3">
+                                                    <div class="flex flex-wrap items-center gap-2">
+                                                        <p class="text-sm font-black leading-5 text-primary">{{ $history->status_label }}</p>
+                                                        @if ($isCurrent)
+                                                            <span class="rounded-full bg-white px-2 py-1 text-[10px] font-black uppercase tracking-wide text-secondary">
+                                                                Saat ini
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                    <p class="mt-2 text-xs font-semibold leading-5 text-slate-500">
+                                                        {{ optional($history->changed_at)->format('d M Y H:i') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <li class="grid grid-cols-[auto_1fr] gap-3">
+                                            <div class="flex flex-col items-center">
+                                                <span class="grid size-10 place-items-center rounded-full border-2 {{ $statusClasses[$statusRegistration->status] ?? 'border-primary/15 bg-white text-primary' }}">
+                                                    <span class="text-sm font-black">1</span>
                                                 </span>
                                             </div>
                                             <div class="min-w-0">
-                                                <p class="text-sm font-black text-primary">{{ $statusRegistration->status_label }}</p>
-                                                <p class="mt-1 text-xs font-semibold text-slate-500">
-                                                    {{ optional($statusRegistration->created_at)->format('d M Y H:i') }}
-                                                </p>
+                                                <div class="rounded-lg border-2 border-primary/20 bg-secondary-muted px-4 py-3">
+                                                    <div class="flex flex-wrap items-center gap-2">
+                                                        <p class="text-sm font-black leading-5 text-primary">{{ $statusRegistration->status_label }}</p>
+                                                        <span class="rounded-full bg-white px-2 py-1 text-[10px] font-black uppercase tracking-wide text-secondary">
+                                                            Saat ini
+                                                        </span>
+                                                    </div>
+                                                    <p class="mt-2 text-xs font-semibold leading-5 text-slate-500">
+                                                        {{ optional($statusRegistration->created_at)->format('d M Y H:i') }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </li>
                                     @endforelse
+                                </ol>
+
+                                <div class="mt-5 rounded-lg border-2 border-primary/10 bg-surface px-4 py-3">
+                                    <p class="text-xs font-black uppercase tracking-wide text-secondary">Status terbaru</p>
+                                    <div class="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                                        <p class="text-base font-black leading-6 text-primary">
+                                            {{ optional($currentHistory)->status_label ?? $statusRegistration->status_label }}
+                                        </p>
+                                        <p class="text-xs font-semibold text-slate-500">
+                                            {{ optional(optional($currentHistory)->changed_at ?? $statusRegistration->created_at)->format('d M Y H:i') }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
