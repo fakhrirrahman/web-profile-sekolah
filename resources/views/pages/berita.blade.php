@@ -1,14 +1,14 @@
-@extends('layouts.app', ['title' => 'Berita - Golden Sierra School'])
+@extends('layouts.app', ['title' => 'Berita - SD Muhammadiyah Pepe'])
 
 @section('content')
     <section class="relative isolate bg-primary py-14 text-white md:py-20">
-        <img src="{{ asset('images/berita.png') }}" alt="Berita Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
+        <img src="{{ asset('images/berita.png') }}" alt="Berita SD Muhammadiyah Pepe" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
         <div class="hero-overlay absolute inset-0 -z-10"></div>
 
         <div class="section-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div class="js-reveal">
                 <p class="inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">Berita Sekolah</p>
-                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Kabar terbaru dari kegiatan dan prestasi Golden Sierra.</h1>
+                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Kabar terbaru dari kegiatan dan prestasi SD Muhammadiyah Pepe.</h1>
                 <p class="mt-5 max-w-2xl text-base leading-8 text-white/80">Temukan pengumuman, agenda, dan cerita kegiatan sekolah dalam format yang mudah dipindai oleh siswa maupun orang tua.</p>
             </div>
 

@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-    <title>{{ $title ?? 'Auth - '.config('app.name', 'Golden Sierra School') }}</title>
+    <title>{{ $title ?? 'Auth - '.config('app.name', 'SD Muhammadiyah Pepe') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -14,7 +14,7 @@
     <main class="relative h-dvh overflow-hidden">
         <img
             src="{{ asset('images/home.jpg') }}"
-            alt="Gedung Golden Sierra School"
+            alt="Gedung SD Muhammadiyah Pepe"
             class="absolute inset-0 size-full object-cover"
         >
         <div class="absolute inset-0 bg-[linear-gradient(115deg,rgba(23,70,52,.96)_0%,rgba(31,92,69,.88)_40%,rgba(31,92,69,.54)_63%,rgba(247,245,239,.96)_63.2%,rgba(247,245,239,.98)_100%)]"></div>
@@ -28,7 +28,7 @@
                     </span>
                     <span class="min-w-0">
                         <span class="brand-wordmark block truncate text-lg text-white sm:text-xl">
-                            Golden Sierra <span class="text-accent">School</span>
+                            SD Muhammadiyah <span class="text-accent">Pepe</span>
                         </span>
                         <span class="brand-tagline text-white/78">
                             Learn. Lead. Serve.
@@ -47,7 +47,7 @@
                         Portal Sekolah
                     </p>
                     <h1 class="mt-6 max-w-2xl text-5xl font-black leading-tight text-white sm:text-6xl lg:text-7xl">
-                        Portal digital Golden Sierra.
+                        Portal digital SD Muhammadiyah Pepe.
                     </h1>
                     <p class="mt-6 max-w-xl text-base leading-8 text-white/84 sm:text-lg">
                         Masuk untuk mengakses informasi akademik, administrasi, dan komunikasi sekolah dengan tampilan yang lebih tertata.

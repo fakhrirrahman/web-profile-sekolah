@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'PPDB - Golden Sierra School'])
+@extends('layouts.app', ['title' => 'PPDB - SD Muhammadiyah Pepe'])
 
 @php
     $steps = [
@@ -22,18 +22,18 @@
         ['label' => 'Pengumuman', 'date' => 'Maksimal 3 hari kerja setelah observasi'],
     ];
 
-    $grades = ['KB/TK', 'SD Kelas 1', 'SD Kelas 2', 'SD Kelas 3', 'SD Kelas 4', 'SD Kelas 5', 'SD Kelas 6'];
+    $grades = ['SD Kelas 1', 'SD Kelas 2', 'SD Kelas 3', 'SD Kelas 4', 'SD Kelas 5', 'SD Kelas 6'];
 @endphp
 
 @section('content')
     <section class="relative isolate bg-primary py-14 text-white md:py-20">
-        <img src="{{ asset('images/kelas-interaktif.png') }}" alt="Kelas interaktif Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
+        <img src="{{ asset('images/kelas-interaktif.png') }}" alt="Kelas interaktif SD Muhammadiyah Pepe" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
         <div class="hero-overlay absolute inset-0 -z-10"></div>
 
         <div class="section-shell grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-center">
             <div class="js-reveal">
                 <p class="inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">PPDB 2026/2027</p>
-                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Siapkan langkah pertama anak bersama Golden Sierra School.</h1>
+                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-white md:text-5xl">Siapkan langkah pertama anak bersama SD Muhammadiyah Pepe</h1>
                 <p class="mt-5 max-w-2xl text-base leading-8 text-white/80">Halaman ini merangkum alur, jadwal, dan persyaratan pendaftaran agar orang tua dapat mengambil keputusan dengan tenang.</p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <x-ui.button href="#form-ppdb" variant="accent" size="lg">Isi Formulir</x-ui.button>

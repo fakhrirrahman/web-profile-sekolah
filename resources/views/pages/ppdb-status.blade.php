@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Cek Status PPDB - Golden Sierra School'])
+@extends('layouts.app', ['title' => 'Cek Status PPDB - SD Muhammadiyah Pepe'])
 
 @php
     $statusMessages = [

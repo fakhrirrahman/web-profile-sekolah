@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => 'Galeri - Golden Sierra School'])
+@extends('layouts.app', ['title' => 'Galeri - SD Muhammadiyah Pepe'])
 
 @section('content')
     <section class="bg-surface py-14 md:py-20">
         <div class="section-shell grid gap-10 lg:grid-cols-[1fr_360px] lg:items-end">
             <div class="js-reveal">
                 <p class="inline-flex rounded-lg border-2 border-primary/20 bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.10)]">Galeri Sekolah</p>
-                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">Potongan keseharian Golden Sierra School.</h1>
+                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">Potongan keseharian SD Muhammadiyah Pepe.</h1>
                 <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">Galeri dibuat sederhana agar orang tua mudah melihat suasana belajar, kegiatan siswa, dan fasilitas sekolah.</p>
             </div>
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'Admin - '.config('app.name', 'Golden Sierra School') }}</title>
+    <title>{{ $title ?? 'Admin - '.config('app.name', 'SD Muhammadiyah Pepe') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -31,7 +31,7 @@
                     </span>
                     <span class="min-w-0">
                         <span class="brand-wordmark block truncate text-lg text-white">Admin Sekolah</span>
-                        <span class="brand-tagline text-white/72">Golden Sierra</span>
+                        <span class="brand-tagline text-white/72">SD Muhammadiyah Pepe</span>
                     </span>
                 </a>
 

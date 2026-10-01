@@ -1,10 +1,10 @@
-@extends('layouts.app', ['title' => 'Kontak - Golden Sierra School'])
+@extends('layouts.app', ['title' => 'Kontak - SD Muhammadiyah Pepe'])
 
 @php
     $contacts = [
-        ['title' => 'Alamat', 'value' => 'Jl. Pendidikan No. 12, Jakarta', 'copy' => 'Kunjungan sekolah dapat dijadwalkan pada hari kerja.'],
+        ['title' => 'Alamat', 'value' => 'Trirenggo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55714', 'copy' => 'Kunjungan sekolah dapat dijadwalkan pada hari kerja.'],
         ['title' => 'Telepon', 'value' => '(021) 1234 5678', 'copy' => 'Admin siap membantu pukul 08.00 - 15.00 WIB.'],
-        ['title' => 'Email', 'value' => 'info@goldensierra.sch.id', 'copy' => 'Untuk kebutuhan dokumen dan informasi resmi sekolah.'],
+        ['title' => 'Email', 'value' => 'sdmuhammadiyahpepe90@gmail.com ', 'copy' => 'Untuk kebutuhan dokumen dan informasi resmi sekolah.'],
     ];
 
     $faqs = [
@@ -19,7 +19,7 @@
         <div class="section-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
             <div class="js-reveal">
                 <p class="inline-flex rounded-lg border-2 border-primary/20 bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.10)]">Kontak Kami</p>
-                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">Hubungi Golden Sierra dengan cara yang paling nyaman.</h1>
+                <h1 class="mt-5 max-w-3xl text-4xl font-black leading-tight text-primary md:text-5xl">Hubungi SD Muhammadiyah Pepe dengan cara yang paling nyaman.</h1>
                 <p class="mt-5 max-w-2xl text-base leading-8 text-slate-600">Untuk kunjungan sekolah, informasi PPDB, atau pertanyaan orang tua, admin sekolah siap membantu dengan alur yang jelas.</p>
             </div>
 
@@ -39,7 +39,7 @@
                 @foreach ($contacts as $contact)
                     <article class="motion-card js-card rounded-lg border-2 border-primary/15 bg-surface p-5 shadow-[4px_4px_0_rgba(31,92,69,.08)]">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">{{ $contact['title'] }}</p>
-                        <h2 class="mt-4 text-xl font-black text-primary">{{ $contact['value'] }}</h2>
+                        <h2 class="mt-4 text-l font-black text-primary">{{ $contact['value'] }}</h2>
                         <p class="mt-3 text-sm leading-7 text-slate-600">{{ $contact['copy'] }}</p>
                     </article>
                 @endforeach
@@ -109,7 +109,7 @@
                     <div class="motion-card js-card rounded-lg border-2 border-primary/15 bg-surface p-6 shadow-[5px_5px_0_rgba(31,92,69,.08)]">
                         <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Lokasi</p>
                         <div class="mt-5 overflow-hidden rounded-lg border-2 border-primary/10 bg-white">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15778.121783137614!2d115.2082925!3d-8.6409939!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23f68233a43f3%3A0x1459dbee1b7b8b90!2sLumintang%20Extreme%20Park!5e0!3m2!1sid!2sid!4v1784270587028!5m2!1sid!2sid" class="aspect-[4/3] w-full" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                            <iframe src="https://maps.app.goo.gl/D7UwdnPYs4A2g6bs9" class="aspect-[4/3] w-full" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                         </div>
                         <p class="mt-4 text-sm leading-7 text-slate-600">Lokasi sekolah dapat dilihat melalui peta ini. Hubungi admin untuk jadwal kunjungan.</p>
                     </div>

@@ -13,16 +13,12 @@
 <header data-site-header class="sticky top-0 z-50 border-b-2 border-primary/12 bg-surface/95 text-primary shadow-sm backdrop-blur transition duration-300 data-[scrolled]:bg-surface data-[scrolled]:shadow-[0_4px_0_rgba(31,92,69,.12)]">
     <div class="section-shell flex h-18 items-center justify-between gap-4 py-3">
         <a href="{{ url('/') }}" class="flex min-w-0 items-center gap-3 focus-ring rounded-lg">
-            <span class="neo-surface grid size-12 shrink-0 place-items-center rounded-lg bg-white text-sm font-black text-primary">
-                GS
-            </span>
+            <img src="{{ asset('images/logo.png') }}" alt="Logo SD Muhammadiyah Pepe" class="size-15 shrink-0 rounded-lg object-contain">
             <span class="min-w-0">
-                <span class="brand-wordmark block truncate text-lg text-primary sm:text-xl">
-                    Golden Sierra <span class="brand-accent">School</span>
+                <span class="brand-wordmark block truncate text-lg text-primary sm:text-2xl">
+                    SD Muhammadiyah <span class="brand-accent">Pepe</span>
                 </span>
-                <span class="brand-tagline hidden sm:block">
-                    Learn. Lead. Serve.
-                </span>
+                
             </span>
         </a>
 

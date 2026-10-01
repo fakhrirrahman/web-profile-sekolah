@@ -1,9 +1,9 @@
-@extends('layouts.app', ['title' => 'Golden Sierra School'])
+@extends('layouts.app', ['title' => 'SD Muhammadiyah Pepe'])
 
 @php
     $quickLinks = [
-        ['title' => 'Profil Sekolah', 'copy' => 'Kenali visi, misi, dan budaya belajar Golden Sierra.', 'href' => url('/profile'), 'icon' => '01'],
-        ['title' => 'PPDB 2026', 'copy' => 'Informasi jadwal, alur pendaftaran, dan persyaratan.', 'href' => url('/ppdb'), 'icon' => '02'],
+        ['title' => 'Profil Sekolah', 'copy' => 'Kenali visi, misi, dan budaya belajar SD Muhammadiyah Pepe.', 'href' => url('/profile'), 'icon' => '01'],
+        ['title' => 'SPMB 2026/2027', 'copy' => 'Informasi jadwal, alur pendaftaran, dan persyaratan.', 'href' => url('/ppdb'), 'icon' => '02'],
         ['title' => 'Prestasi', 'copy' => 'Lihat pencapaian siswa di bidang akademik dan minat bakat.', 'href' => '#prestasi', 'icon' => '03'],
         ['title' => 'Galeri', 'copy' => 'Dokumentasi kegiatan belajar, lomba, dan keseharian sekolah.', 'href' => url('/galeri'), 'icon' => '04'],
     ];
@@ -25,23 +25,23 @@
 
 @section('content')
     <section id="beranda" class="relative isolate bg-primary text-white">
-        <img src="{{ asset('images/home.jpg') }}" alt="Gedung Golden Sierra School" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
+        <img src="{{ asset('images/HW.jpeg') }}" alt="Gedung SD Muhammadiyah Pepe" class="js-hero-image absolute inset-0 -z-20 h-full w-full object-cover">
         <div class="hero-overlay absolute inset-0 -z-10"></div>
 
         <div class="section-shell grid min-h-[560px] items-center gap-10 pb-28 pt-14 md:min-h-[620px] lg:min-h-[660px] lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-32 lg:pt-16">
             <div class="max-w-3xl">
                 <p class="js-hero-item inline-flex rounded-lg border-2 border-primary/35 bg-accent px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[4px_4px_0_rgba(255,255,255,.20)]">
-                    PPDB 2026/2027 sudah dibuka
+                    SPMB 2026/2027 Sudah Dibuka
                 </p>
                 <h1 class="js-hero-item mt-6 text-4xl font-black leading-tight text-white md:text-5xl xl:text-6xl">
-                    Sekolah yang membantu anak belajar percaya diri, tertib, dan berani bertumbuh.
+                    Sekolah Insan Berprestasi
                 </h1>
                 <p class="js-hero-item mt-6 max-w-2xl text-base leading-8 text-white/78 md:text-lg">
-                    Golden Sierra School menghadirkan pengalaman belajar yang hangat, terarah, dan dekat dengan kebutuhan siswa serta orang tua.
+                    SD Muhammadiyah Pepe menghadirkan pengalaman belajar yang hangat, terarah, dan dekat dengan kebutuhan siswa serta orang tua.
                 </p>
 
                 <div class="js-hero-item mt-8 flex flex-col gap-3 sm:flex-row">
-                    <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="lg">Daftar PPDB</x-ui.button>
+                    <x-ui.button href="{{ url('/ppdb') }}" variant="accent" size="lg">Daftar SPMB</x-ui.button>
                     <x-ui.button href="{{ url('/profile') }}" variant="muted" size="lg">Lihat Profil Sekolah</x-ui.button>
                 </div>
 
@@ -55,11 +55,15 @@
             </div>
 
             <div class="js-hero-panel hidden rounded-lg border-2 border-white/45 bg-primary/35 p-5 shadow-[6px_6px_0_rgba(217,180,92,.20)] backdrop-blur lg:block">
-                <p class="inline-flex rounded-md border border-primary/25 bg-accent px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.16)]">Info Hari Ini</p>
+                <p class="inline-flex rounded-md border border-primary/25 bg-accent px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-primary shadow-[3px_3px_0_rgba(31,92,69,.16)]">Info SPMB</p>
                 <div class="mt-5 grid gap-4">
                     <div class="rounded-lg bg-white p-4 text-foreground">
-                        <p class="text-sm font-black text-primary">Jalur pendaftaran reguler</p>
-                        <p class="mt-2 text-sm leading-6 text-slate-600">Konsultasi dan pendaftaran tersedia setiap hari kerja pukul 08.00 - 15.00 WIB.</p>
+                        <p class="text-sm font-black text-primary">SPMB Gelombang 1</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-600">1 Juli - 31 Desember 2026</p>
+                    </div>
+                    <div class="rounded-lg bg-white p-4 text-foreground">
+                        <p class="text-sm font-black text-primary">SPMB Gelombang 2</p>
+                        <p class="mt-2 text-sm leading-6 text-slate-600">1 Januari - 1 Juni 2027</p>
                     </div>
                     <div class="grid grid-cols-3 gap-3 text-center">
                         <div class="rounded-lg bg-white/12 p-3">
@@ -103,11 +107,11 @@
                 </x-ui.section-heading>
 
                 <div class="mt-10 grid gap-6 md:grid-cols-2">
-                    <x-ui.media-placeholder label="Tentang Golden Sierra" ratio="aspect-[4/3]" />
+                    <x-ui.media-placeholder label="Tentang SD Muhammadiyah Pepe" ratio="aspect-[4/3]" />
                     <div class="motion-card js-card neo-surface-soft rounded-lg bg-white p-6">
                         <h3 class="text-lg font-black text-primary">Belajar dengan ritme yang jelas.</h3>
                         <p class="mt-4 text-sm leading-7 text-slate-600">
-                            Golden Sierra School menyusun kegiatan akademik, pembiasaan karakter, dan eksplorasi minat dalam alur harian yang mudah diikuti siswa.
+                            SD Muhammadiyah Pepe menyusun kegiatan akademik, pembiasaan karakter, dan eksplorasi minat dalam alur harian yang mudah diikuti siswa.
                         </p>
                         <x-ui.button href="#" variant="outline" size="sm" class="mt-6">Baca Profil</x-ui.button>
                     </div>
@@ -139,7 +143,7 @@
 
     <section class="js-reveal bg-white py-16 md:py-24">
         <div class="section-shell">
-            <x-ui.section-heading eyebrow="Kenapa Golden Sierra" title="Detail kecil yang membuat kegiatan sekolah terasa nyaman." />
+            <x-ui.section-heading eyebrow="Kenapa SD Muhammadiyah Pepe" title="Detail kecil yang membuat kegiatan sekolah terasa nyaman." />
 
             <div class="js-stagger mt-12 grid gap-5 md:grid-cols-3">
                 @foreach ($features as $feature)
@@ -202,7 +206,7 @@
     <section id="galeri" class="js-reveal bg-white py-16 md:py-24">
         <div class="section-shell">
             <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-                <x-ui.section-heading eyebrow="Galeri Sekolah" title="Potongan keseharian Golden Sierra School." align="left">
+                <x-ui.section-heading eyebrow="Galeri Sekolah" title="Potongan keseharian SD Muhammadiyah Pepe." align="left">
                     Tampilkan dokumentasi kegiatan belajar, lomba, pentas seni, kunjungan, dan momen penting sekolah di area ini.
                 </x-ui.section-heading>
                 <div class="flex justify-start lg:justify-end">
@@ -233,7 +237,7 @@
                 @empty
                     <div class="lg:col-span-2 lg:row-span-2">
                         <div class="motion-card js-card neo-surface-soft group relative aspect-[4/3] h-full overflow-hidden rounded-lg">
-                            <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah Golden Sierra" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                            <img src="{{ asset('images/home.jpg') }}" alt="Area sekolah SD Muhammadiyah Pepe" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
                             <div class="absolute inset-x-5 bottom-5 rounded-lg bg-white/90 p-4 shadow-sm backdrop-blur">
                                 <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">Highlight</p>
                                 <h3 class="mt-2 text-lg font-black text-primary">Lingkungan sekolah yang terbuka dan aktif.</h3>
@@ -273,8 +277,8 @@
         <div class="motion-card js-reveal section-shell rounded-lg border-2 border-primary/15 bg-gradient-to-br from-white via-surface to-secondary-muted p-8 text-primary shadow-[6px_6px_0_rgba(31,92,69,.10)] md:p-10">
             <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
                 <div>
-                    <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">PPDB Golden Sierra</p>
-                    <h2 class="mt-3 text-2xl font-black leading-tight md:text-4xl">Siapkan langkah pertama anak bersama Golden Sierra School.</h2>
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-secondary">SPMB SD Muhammadiyah Pepe</p>
+                    <h2 class="mt-3 text-2xl font-black leading-tight md:text-4xl">Siapkan langkah pertama anak bersama SD Muhammadiyah Pepe.</h2>
                     <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
                         Hubungi admin sekolah untuk konsultasi kelas, jadwal kunjungan, dan alur pendaftaran terbaru.
                     </p>

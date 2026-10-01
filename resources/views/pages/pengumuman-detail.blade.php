@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => $announcement->title . ' - Golden Sierra School'])
+@extends('layouts.app', ['title' => $announcement->title . ' - SD Muhammadiyah Pepe'])
 
 @section('content')
     @php
